@@ -1,0 +1,15 @@
+[{
+  "modid": "bestmazesbymauro",
+  "name": "BestMazes",
+  "description": "New 3D dynamic mazes! And trees too XD",
+  "version": "",
+  "credits": "Created by Mauro",
+  "logoFile": "/gfx/buildcraft/logo.png",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [ "Mauro", "ArmaDio"],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": []
+}]
