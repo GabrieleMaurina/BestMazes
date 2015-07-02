@@ -16,17 +16,20 @@ import java.util.Random;
 
 public class Dungeon {
 
+    private static final double MOB_PROB = 0.02;
+
     private Maze3D m;
     private Block[][][] maze;
     private Block[][][] stairs;
     private World world;
     private int x, y, z, x1, y1, z1;
+    private Random random;
 
     public Dungeon(World world, Random r, Block block, int x, int y, int z, int xMax, int yMax, int zMax){
         this.x = x;
         this.y = y;
         this.z = z;
-
+        this.random = r;
         this.world = world;
 
         m = new Maze3D(xMax, yMax, zMax, Maze3D.X, Maze3D.Y, Maze3D.Z, r);
@@ -51,8 +54,8 @@ public class Dungeon {
     }
 
     public void generate(){
-        StructureGenerator.createModel(world, maze, x, y, z);
-        StructureGenerator.createModel(world, stairs, x1, y1, z1);
+        StructureGenerator.createModel(world, maze, x, y, z, random);
+        StructureGenerator.createModel(world, stairs, x1, y1, z1, random);
     }
 
     private Block[][][] genStairs(World world, int x, int y, int z, Block b){
@@ -189,11 +192,48 @@ public class Dungeon {
         int z =  b[0][0].length - m.deltas[m.zSize - 1][2] - m.deltas[m.zSize - 2][2];
 
         altar(model, block, x, y, z);
-
+        spawners(model);
         return model;
     }
 
+
+    private void spawners(Block[][][] model){
+        int x = 0;
+        int y = 0;
+        int z = 0;
+        for(int i = 0; i < m.xSize; i++){
+            y = 0;
+            if(i % 2 == 0){
+                for (int e = 0; e < m.ySize; e++){
+                    z = 0;
+                    if(e % 2 == 0){
+                        for (int o = 0; o < m.zSize; o++){
+                            if(o % 2 == 0 && random.nextDouble() < MOB_PROB && posOK(model, x, y, z)){
+                                model[x][y][z] = Blocks.mob_spawner;
+                            }
+                            z += m.deltas[o][2];
+                        }
+                    }
+                    y += m.deltas[e][1];
+                }
+            }
+            x += m.deltas[i][0];
+        }
+    }
+
+    private boolean posOK(Block[][][] model, int x, int y, int z){
+        if(model[x][y][z] == Blocks.air) return false;
+        if(x + 1 < model.length && model[x + 1][y][z] == Blocks.air) return false;
+        if(y + 1 < model[0].length && model[x][y + 1][z] == Blocks.air) return false;
+        if(z + 1 < model[0][0].length && model[x][y][z + 1] == Blocks.air) return false;
+        if(x - 1 > 0 && model[x - 1][y][z] == Blocks.air) return false;
+        if(y - 1 > 0 && model[x][y - 1][z] == Blocks.air) return false;
+        if(z - 1 > 0 && model[x][y][z - 1] == Blocks.air) return false;
+        return true;
+    }
+
     private void altar(Block[][][] model, Block block, int x, int y, int z){
+
         Drawer.fillParallelepipedon1(model, x - 1, y, z - 1, 3, 1, 3, block);
 
         model[x][y + 1][z] = Blocks.chest;
