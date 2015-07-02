@@ -10,9 +10,9 @@ import java.util.Random;
 public class Maze3D
 {
     public static final double PROB = 0.005;
-    public static final int X_SIZE = 10;
+    public static final int X_SIZE = 8;
     public static final int Y_SIZE = 5;
-    public static final int Z_SIZE = 10;
+    public static final int Z_SIZE = 8;
     public static final int X_DELTA = 2;
     public static final int Y_DELTA = 3;
     public static final int Z_DELTA = 2;

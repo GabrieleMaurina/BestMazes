@@ -23,7 +23,7 @@ import java.util.Random;
  */
 public class StructureGenerator implements IWorldGenerator {
 
-    private static final double DUNGEON_PROB = 0.01;
+    private static final double DUNGEON_PROB = 0.005;
     private static final int Y_DUNGEON = 5;
 
     public static void setBlock(World world, int x, int y, int z, Block b){
@@ -44,14 +44,18 @@ public class StructureGenerator implements IWorldGenerator {
             for(int e = 0; e < blocks[i].length; e++){
                 for(int o = 0; o < blocks[i][e].length; o++){
                     if(blocks[i][e][o] != null) {
-                        if (Blocks.torch.equals(blocks[i][e][o])){
+                        if (Blocks.torch == blocks[i][e][o]){
                             int[] t = new int[3];
                             t[0] = i;
                             t[1] = e;
                             t[2] = o;
                             torches.add(t);
-                        } else {
-                            setBlock(world, x + i, y + e, z + o, blocks[i][e][o]);
+                        }
+                        else if(Blocks.chest == blocks[i][e][o]){
+                            fillChest(world, x + i, y + e, z + o);
+                        }
+                        else{
+                                setBlock(world, x + i, y + e, z + o, blocks[i][e][o]);
                         }
                     }
                 }
@@ -76,17 +80,16 @@ public class StructureGenerator implements IWorldGenerator {
             Dungeon d = new Dungeon(world, random, PiselliteBricks.piselliteBricks, x, Y_DUNGEON, z);
             if(d.available()) {
                 d.generate();
-                //Tree t = new Tree(Tree.WIDTH, Tree.LENGTH, Tree.SPREAD, Tree.SIZE, new Random(), Tree.N_SONS, Tree.CHILD_PROB, Tree.K_LENGTH, Tree.K_WIDTH);
-                //Block[][][] model = new Block[10][10][10];
-                //Drawer.line(model, 0, 0, 0, 3, 9, 5, Blocks.log);
-                //createModel(world, model, x, 100, z);
-                setBlock(world, x, 100, z, Blocks.chest);
-
-
-                TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, 100, z);
-
-                tileentitychest.setInventorySlotContents(1, new ItemStack(Items.chainmail_chestplate, 1));
             }
         }
+    }
+
+    public static void fillChest(World world, int x, int y, int z){
+        setBlock(world, x, y, z, Blocks.chest);
+        TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, y, z);
+        tileentitychest.setInventorySlotContents(0, new ItemStack(Items.chainmail_boots, 1));
+        tileentitychest.setInventorySlotContents(1, new ItemStack(Items.chainmail_leggings, 1));
+        tileentitychest.setInventorySlotContents(2, new ItemStack(Items.chainmail_chestplate, 1));
+        tileentitychest.setInventorySlotContents(3, new ItemStack(Items.chainmail_helmet, 1));
     }
 }
