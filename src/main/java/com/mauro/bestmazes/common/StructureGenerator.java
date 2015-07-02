@@ -3,6 +3,7 @@ package com.mauro.bestmazes.common;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.PiselliteBricksSlab;
 import com.mauro.bestmazes.dungeon.Dungeon;
+import com.mauro.bestmazes.dungeon.Maze3D;
 import com.mauro.bestmazes.tree.Tree;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
@@ -77,7 +78,7 @@ public class StructureGenerator implements IWorldGenerator {
 
             //System.out.println("DUNGEON: x " + x + " z " + z + " ######################");
 
-            Dungeon d = new Dungeon(world, random, PiselliteBricks.piselliteBricks, x, Y_DUNGEON, z);
+            Dungeon d = new Dungeon(world, random, PiselliteBricks.piselliteBricks, x, Y_DUNGEON, z, Maze3D.X_SIZE, Maze3D.Y_SIZE, Maze3D.Z_SIZE);
             if(d.available()) {
                 d.generate();
             }

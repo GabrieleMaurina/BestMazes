@@ -22,14 +22,14 @@ public class Dungeon {
     private World world;
     private int x, y, z, x1, y1, z1;
 
-    public Dungeon(World world, Random r, Block block, int x, int y, int z){
+    public Dungeon(World world, Random r, Block block, int x, int y, int z, int xMax, int yMax, int zMax){
         this.x = x;
         this.y = y;
         this.z = z;
 
         this.world = world;
 
-        m = new Maze3D(Maze3D.X_SIZE, Maze3D.Y_SIZE, Maze3D.Z_SIZE, Maze3D.X, Maze3D.Y, Maze3D.Z, r);
+        m = new Maze3D(xMax, yMax, zMax, Maze3D.X, Maze3D.Y, Maze3D.Z, r);
         maze = genMaze(block);
 
         x1 = x + m.deltas[0][0] - 2;
@@ -164,7 +164,8 @@ public class Dungeon {
         deltas[1][0] = 3;
         deltas[1][2] = 3;
 
-        boolean[][][] b = m.getMaze(deltas);
+        m.getMaze(deltas);
+        boolean[][][] b = m.maze;
         Block[][][] model = new Block[b.length][b[0].length][b[0][0].length];
 
         for(int i = 0; i < b.length; i++)

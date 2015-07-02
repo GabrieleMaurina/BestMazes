@@ -25,6 +25,7 @@ public class Maze3D
     private static final double K_PROB = 0.7;
 
     public boolean[][][] m;
+    public boolean[][][] maze;
     private ArrayList<Point3D> w = new ArrayList<Point3D>();
     private Random r;
     public int[][] deltas;
@@ -171,7 +172,7 @@ public class Maze3D
         return deltas;
     }
 
-    public boolean[][][] getMaze(int[][] deltas)
+    public void getMaze(int[][] deltas)
     {
         if(deltas == null)
         {
@@ -191,7 +192,7 @@ public class Maze3D
             if(i < zSize) zMSize += deltas[i][2];
         }
 
-        boolean[][][] maze = new boolean[xMSize][yMSize][zMSize];
+        maze = new boolean[xMSize][yMSize][zMSize];
 
         for(int x = 0; x < xMSize; x++)
         {
@@ -203,8 +204,6 @@ public class Maze3D
                 }
             }
         }
-
-        return maze;
     }
 
     public void open(int x1, int y1, int z1, int x2, int y2, int z2)
