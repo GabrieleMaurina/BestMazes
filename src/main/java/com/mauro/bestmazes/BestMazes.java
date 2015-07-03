@@ -6,8 +6,7 @@ package com.mauro.bestmazes;
 
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.common.StructureGenerator;
-import com.mauro.bestmazes.dungeon.DungeonConfiguration;
-import com.mauro.bestmazes.handler.ConfigurationHandler;
+import com.mauro.bestmazes.utility.dungeon.DungeonConfiguration;
 import com.mauro.bestmazes.proxy.IProxy;
 import com.mauro.bestmazes.reference.Reference;
 import cpw.mods.fml.common.Mod;

@@ -2,16 +2,16 @@ package com.mauro.bestmazes.common;
 
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.SpecialBlock;
-import com.mauro.bestmazes.dungeon.Dungeon;
-import com.mauro.bestmazes.dungeon.DungeonConfiguration;
+import com.mauro.bestmazes.utility.dungeon.Dungeon;
+import com.mauro.bestmazes.utility.dungeon.DungeonConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.DungeonHooks;
 
@@ -78,12 +78,12 @@ public class StructureGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-        if(world.provider.dimensionId == 0 && random.nextDouble() < DUNGEON_PROB){
+        int x = chunkX * 16;
+        int z = chunkZ * 16;
 
-            int x = chunkX * 16;
-            int z = chunkZ * 16;
-
-            Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, DungeonConfiguration.getRandomDungeonConfiguration(random));
+        DungeonConfiguration dC = DungeonConfiguration.getConfByBiome(world.getBiomeGenForCoords(x, z));
+        if(dC != null && random.nextDouble() < dC.prob){
+            Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, dC);
             if(d.available()) {
                 d.generate();
             }
@@ -93,7 +93,6 @@ public class StructureGenerator implements IWorldGenerator {
     public static void fillChest(World world, int x, int y, int z, Chest chest){
         TileEntityChest tileEntityChest = (TileEntityChest)world.getTileEntity(x, y, z);
         ArrayList<ItemStack> items = chest.items;
-        if(tileEntityChest == null) System.out.println("###########");
         for(int i = 0; i < items.size(); i++){
             tileEntityChest.setInventorySlotContents(i, items.get(i));
         }

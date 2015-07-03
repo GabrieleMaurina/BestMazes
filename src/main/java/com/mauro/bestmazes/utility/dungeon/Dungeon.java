@@ -1,9 +1,9 @@
-package com.mauro.bestmazes.dungeon;
+package com.mauro.bestmazes.utility.dungeon;
 
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.common.Drawer;
+import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.common.StructureGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

@@ -1,4 +1,4 @@
-package com.mauro.bestmazes.common;
+package com.mauro.bestmazes.utility;
 
 import net.minecraft.block.Block;
 

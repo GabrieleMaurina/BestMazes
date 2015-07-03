@@ -1,4 +1,4 @@
-package com.mauro.bestmazes.dungeon;
+package com.mauro.bestmazes.utility.dungeon;
 
 /**
  * Created by Gabriele on 6/25/2015.
