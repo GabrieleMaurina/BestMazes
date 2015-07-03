@@ -34,7 +34,7 @@ public class Dungeon {
 
     public Dungeon(World world, Random r, int x, int y, int z, DungeonConfiguration dC){
         this.crazy = dC.crazy;
-        this.itemStack = dC.item;
+        this.itemStack = new ItemStack(dC.item, 1);
 
         this.x = x;
         this.y = y;

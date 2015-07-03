@@ -35,14 +35,17 @@ public class StructureGenerator implements IWorldGenerator {
             world.setBlock(x, y, z, sB.block, sB.first, sB.second);
         }
         else{
-            world.setBlock(x, y, z, block);
-
             if(block instanceof Chest){
+                world.setBlock(x, y, z, Blocks.chest);
                 fillChest(world, x, y, z, (Chest) block);
             }
             else if(Blocks.mob_spawner == block){
+                world.setBlock(x, y, z, block);
                 fillSpawner(world, x, y, z, random);
             }
+            else{
+                world.setBlock(x, y, z, block);
+            };
         }
     }
 
@@ -90,6 +93,7 @@ public class StructureGenerator implements IWorldGenerator {
     public static void fillChest(World world, int x, int y, int z, Chest chest){
         TileEntityChest tileEntityChest = (TileEntityChest)world.getTileEntity(x, y, z);
         ArrayList<ItemStack> items = chest.items;
+        if(tileEntityChest == null) System.out.println("###########");
         for(int i = 0; i < items.size(); i++){
             tileEntityChest.setInventorySlotContents(i, items.get(i));
         }

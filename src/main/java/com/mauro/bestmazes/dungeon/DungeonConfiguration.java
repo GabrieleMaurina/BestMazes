@@ -3,8 +3,8 @@ package com.mauro.bestmazes.dungeon;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -25,7 +25,7 @@ public class DungeonConfiguration {
     public Block block;
     public Block block1;
     public String name;
-    public ItemStack item;
+    public Item item;
 
     public int xStart;
     public int yStart;
@@ -56,7 +56,7 @@ public class DungeonConfiguration {
         classic.block = PiselliteBricks.piselliteBricks;
         classic.block1 = SpecialBlocks.oakWoodPlanks;
         classic.name = "classic";
-        classic.item = new ItemStack(Items.diamond_boots, 1);
+        classic.item = Items.diamond_boots;
 
         classic.xStart = 0;
         classic.yStart = 4;
@@ -84,7 +84,7 @@ public class DungeonConfiguration {
         narrow.block = PiselliteBricks.piselliteBricks;
         narrow.block1 = SpecialBlocks.spruceWoodPlanks;
         narrow.name = "narrow";
-        narrow.item = new ItemStack(Items.diamond_chestplate, 1);
+        narrow.item = Items.diamond_chestplate;
 
         narrow.xStart = 0;
         narrow.yStart = 4;
@@ -112,7 +112,7 @@ public class DungeonConfiguration {
         wide.block = PiselliteBricks.piselliteBricks;
         wide.block1 = SpecialBlocks.acaciaWoodPlanks;
         wide.name = "wide";
-        wide.item = new ItemStack(Items.diamond_leggings, 1);
+        wide.item = Items.diamond_leggings;
 
         wide.xStart = 0;
         wide.yStart = 4;
@@ -140,7 +140,7 @@ public class DungeonConfiguration {
         expanded.block = PiselliteBricks.piselliteBricks;
         expanded.block1 = SpecialBlocks.jungleWoodPlanks;
         expanded.name = "expanded";
-        expanded.item = new ItemStack(Items.diamond_helmet, 1);
+        expanded.item = Items.diamond_helmet;
 
         expanded.xStart = 0;
         expanded.yStart = 4;
@@ -168,7 +168,7 @@ public class DungeonConfiguration {
         crazy.block = PiselliteBricks.piselliteBricks;
         crazy.block1 = SpecialBlocks.britchWoodPlanks;
         crazy.name = "crazy";
-        crazy.item = new ItemStack(Items.diamond_sword, 1);
+        crazy.item = Items.diamond_sword;
 
         crazy.xStart = 0;
         crazy.yStart = 4;
@@ -190,7 +190,7 @@ public class DungeonConfiguration {
         dC.block = block;
         dC.block1 = block1;
         dC.name = name;
-        dC.item = item.copy();
+        dC.item = item;
 
         dC.xStart = xStart;
         dC.yStart = yStart;
