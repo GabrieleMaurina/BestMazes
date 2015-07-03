@@ -31,7 +31,7 @@ public class BestMazes
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+        //ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         DungeonConfiguration.initConfigurations();
         structureGenerator = new StructureGenerator();

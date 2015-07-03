@@ -15,7 +15,7 @@ public class PiselliteBricks extends Block {
     public PiselliteBricks(){
 
         super(Material.anvil);
-        setBlockTextureName(Reference.MOD_ID + ":pisellite2");
+        setBlockTextureName(Reference.MOD_ID + ":pisellite1");
         setHardness(-1F);
         setResistance(18000000);
 

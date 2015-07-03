@@ -54,8 +54,8 @@ public class Dungeon {
         m = new Maze3D(dC);
         maze = genMaze();
 
-        x1 = x + m.deltas[0][0] - 2;
-        y1 = y + m.yMSize - m.deltas[m.ySize - 1][1] - m.deltas[m.ySize - 2][1];
+        x1 = x - 5;
+        y1 = y + m.yMSize - m.deltas[m.ySize - 1][1] - m.deltas[m.ySize - 2][1] - 1;
         z1 = z + m.deltas[0][2] - 2;
 
         stairs = genStairs();
@@ -82,7 +82,7 @@ public class Dungeon {
         for(int i = 0; i < 7; i++){
             for(int e = 0; e < 7; e++){
                 for(int o = 255; o > k; o--){
-                    if(world.getBlock(x + i, o, z + e) != Blocks.air)
+                    if(world.getBlock(x1 + i, o, z1 + e) != Blocks.air)
                     {
                         k = o;
                     }
@@ -96,7 +96,7 @@ public class Dungeon {
             for(int e = -1; e < 8; e++){
                 if(i == -1 || e == -1 || i == 7 || e == 7)
                 for(int o = 255; o > k1; o--){
-                    if(world.getBlock(x + i, o, z + e) != Blocks.air)
+                    if(world.getBlock(x1 + i, o, z1 + e) != Blocks.air)
                     {
                         k1 = o;
                     }
@@ -105,7 +105,7 @@ public class Dungeon {
         }
         k1 += 2;
 
-        if(k1 > k){
+        if(true){//k1 > k){
             k = k1;
         }
 
@@ -117,11 +117,10 @@ public class Dungeon {
 
         Drawer.fillParallelepipedon(model, 1, 0, 1, 5, k, 5, block);
         Drawer.fillParallelepipedon(model, 0, k, 0, 6, k, 6, block);
-        Drawer.fillParallelepipedon(model, 2, 0, 2, 4, k, 4, Blocks.air);
-        Drawer.fillParallelepipedon(model, 3, 0, 3, 3, k + 1, 3, block);
+        Drawer.fillParallelepipedon(model, 2, 1, 2, 4, k, 4, Blocks.air);
+        Drawer.fillParallelepipedon(model, 3, 1, 3, 3, k + 1, 3, block);
 
-        Drawer.fillParallelepipedon(model, 3, 0, 5, 3, 1, 5, null);
-        Drawer.fillParallelepipedon(model, 5, 0, 3, 5, 1, 3, null);
+        Drawer.fillParallelepipedon(model, 5, 1, 2, 5, 3, 4, null);
 
         Drawer.fillParallelepipedon(model, 1, k + 1, 1, 1, k + 3, 1, block);
         Drawer.fillParallelepipedon(model, 1, k + 1, 5, 1, k + 3, 5, block);
@@ -147,7 +146,7 @@ public class Dungeon {
         int dx = 1;
         int dy = 2;
 
-        for(int i = 0; i < (k + 1) * 2; i++)
+        for(int i = 2; i < (k + 1) * 2; i++)
         {
             e++;
             e %= 2;
@@ -184,14 +183,12 @@ public class Dungeon {
         m.m[m.xSize - 5][1][m.zSize - 6] = false;
 
         //genMaze entrance
-        m.m[1][m.ySize - 1][1] = false;
+        m.m[0][m.ySize - 2][1] = false;
 
         int[][] deltas = null;
 
         if(!crazy){
             deltas = m.initDeltas(xDelta, yDelta, zDelta, x1Delta, y1Delta, z1Delta);
-            deltas[1][0] = 3;
-            deltas[1][2] = 3;
         }
 
         m.getMaze(deltas);

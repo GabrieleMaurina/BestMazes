@@ -116,9 +116,9 @@ public class DungeonConfiguration {
         wide.ySize = 5;
         wide.zSize = 8;
 
-        wide.xDelta = 4;
-        wide.yDelta = 4;
-        wide.zDelta = 4;
+        wide.xDelta = 3;
+        wide.yDelta = 3;
+        wide.zDelta = 3;
 
         wide.x1Delta = 1;
         wide.y1Delta = 1;
@@ -126,13 +126,40 @@ public class DungeonConfiguration {
 
         configurations.put("wide", wide);
 
+        DungeonConfiguration expanded = new DungeonConfiguration();
+
+        expanded.branchesProb = 0.7;
+        expanded.joinProb = 0.005;
+        expanded.crazy = false;
+        expanded.block = PiselliteBricks.piselliteBricks;
+        expanded.block1 = SpecialBlocks.jungleWoodPlanks;
+        expanded.name = "wide";
+
+        expanded.xStart = 0;
+        expanded.yStart = 4;
+        expanded.zStart = 0;
+
+        expanded.xSize = 8;
+        expanded.ySize = 5;
+        expanded.zSize = 8;
+
+        expanded.xDelta = 4;
+        expanded.yDelta = 4;
+        expanded.zDelta = 4;
+
+        expanded.x1Delta = 2;
+        expanded.y1Delta = 1;
+        expanded.z1Delta = 2;
+
+        configurations.put("expanded", expanded);
+
         DungeonConfiguration crazy = new DungeonConfiguration();
 
         crazy.branchesProb = 0.7;
         crazy.joinProb = 0.005;
         crazy.crazy = true;
         crazy.block = PiselliteBricks.piselliteBricks;
-        crazy.block1 = SpecialBlocks.acaciaWoodPlanks;
+        crazy.block1 = SpecialBlocks.britchWoodPlanks;
         crazy.name = "crazy";
 
         crazy.xStart = 0;
