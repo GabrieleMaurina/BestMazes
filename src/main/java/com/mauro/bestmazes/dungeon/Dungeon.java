@@ -1,13 +1,16 @@
 package com.mauro.bestmazes.dungeon;
 
+import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.common.Drawer;
 import com.mauro.bestmazes.common.StructureGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -27,9 +30,11 @@ public class Dungeon {
     private Block block;
     private Block block1;
     private boolean crazy;
+    private ItemStack itemStack;
 
     public Dungeon(World world, Random r, int x, int y, int z, DungeonConfiguration dC){
         this.crazy = dC.crazy;
+        this.itemStack = dC.item;
 
         this.x = x;
         this.y = y;
@@ -259,7 +264,9 @@ public class Dungeon {
 
         Drawer.fillParallelepipedon1(model, x - 1, y, z - 1, 3, 1, 3, block);
 
-        model[x][y + 1][z] = Blocks.chest;
+        ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+        items.add(itemStack);
+        model[x][y + 1][z] = new Chest(items);
         model[x + 1][y + 1][z] = Blocks.torch;
         model[x - 1][y + 1][z] = Blocks.torch;
     }

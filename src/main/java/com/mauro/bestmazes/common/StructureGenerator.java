@@ -1,7 +1,7 @@
 package com.mauro.bestmazes.common;
 
+import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.SpecialBlock;
-import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.dungeon.Dungeon;
 import com.mauro.bestmazes.dungeon.DungeonConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -37,8 +37,8 @@ public class StructureGenerator implements IWorldGenerator {
         else{
             world.setBlock(x, y, z, block);
 
-            if(Blocks.chest == block){
-                fillChest(world, x, y, z);
+            if(block instanceof Chest){
+                fillChest(world, x, y, z, (Chest) block);
             }
             else if(Blocks.mob_spawner == block){
                 fillSpawner(world, x, y, z, random);
@@ -87,13 +87,12 @@ public class StructureGenerator implements IWorldGenerator {
         }
     }
 
-    public static void fillChest(World world, int x, int y, int z){
+    public static void fillChest(World world, int x, int y, int z, Chest chest){
         TileEntityChest tileEntityChest = (TileEntityChest)world.getTileEntity(x, y, z);
-        tileEntityChest.setInventorySlotContents(0, new ItemStack(Items.diamond_boots, 1));
-        tileEntityChest.setInventorySlotContents(1, new ItemStack(Items.diamond_leggings, 1));
-        tileEntityChest.setInventorySlotContents(2, new ItemStack(Items.diamond_chestplate, 1));
-        tileEntityChest.setInventorySlotContents(3, new ItemStack(Items.diamond_helmet, 1));
-        tileEntityChest.setInventorySlotContents(4, new ItemStack(Items.diamond_sword, 1));
+        ArrayList<ItemStack> items = chest.items;
+        for(int i = 0; i < items.size(); i++){
+            tileEntityChest.setInventorySlotContents(i, items.get(i));
+        }
     }
 
     public static void fillSpawner(World world, int x, int y, int z, Random random){

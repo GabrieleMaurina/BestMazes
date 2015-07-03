@@ -4,6 +4,8 @@ import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
@@ -23,6 +25,7 @@ public class DungeonConfiguration {
     public Block block;
     public Block block1;
     public String name;
+    public ItemStack item;
 
     public int xStart;
     public int yStart;
@@ -53,6 +56,7 @@ public class DungeonConfiguration {
         classic.block = PiselliteBricks.piselliteBricks;
         classic.block1 = SpecialBlocks.oakWoodPlanks;
         classic.name = "classic";
+        classic.item = new ItemStack(Items.diamond_boots, 1);
 
         classic.xStart = 0;
         classic.yStart = 4;
@@ -80,6 +84,7 @@ public class DungeonConfiguration {
         narrow.block = PiselliteBricks.piselliteBricks;
         narrow.block1 = SpecialBlocks.spruceWoodPlanks;
         narrow.name = "narrow";
+        narrow.item = new ItemStack(Items.diamond_chestplate, 1);
 
         narrow.xStart = 0;
         narrow.yStart = 4;
@@ -107,6 +112,7 @@ public class DungeonConfiguration {
         wide.block = PiselliteBricks.piselliteBricks;
         wide.block1 = SpecialBlocks.acaciaWoodPlanks;
         wide.name = "wide";
+        wide.item = new ItemStack(Items.diamond_leggings, 1);
 
         wide.xStart = 0;
         wide.yStart = 4;
@@ -133,7 +139,8 @@ public class DungeonConfiguration {
         expanded.crazy = false;
         expanded.block = PiselliteBricks.piselliteBricks;
         expanded.block1 = SpecialBlocks.jungleWoodPlanks;
-        expanded.name = "wide";
+        expanded.name = "expanded";
+        expanded.item = new ItemStack(Items.diamond_helmet, 1);
 
         expanded.xStart = 0;
         expanded.yStart = 4;
@@ -161,6 +168,7 @@ public class DungeonConfiguration {
         crazy.block = PiselliteBricks.piselliteBricks;
         crazy.block1 = SpecialBlocks.britchWoodPlanks;
         crazy.name = "crazy";
+        crazy.item = new ItemStack(Items.diamond_sword, 1);
 
         crazy.xStart = 0;
         crazy.yStart = 4;
@@ -180,6 +188,9 @@ public class DungeonConfiguration {
         dC.joinProb = joinProb;
         dC.crazy = crazy;
         dC.block = block;
+        dC.block1 = block1;
+        dC.name = name;
+        dC.item = item.copy();
 
         dC.xStart = xStart;
         dC.yStart = yStart;
@@ -205,7 +216,7 @@ public class DungeonConfiguration {
     }
 
     public static DungeonConfiguration getRandomDungeonConfiguration(Random random){
-        Object[] values = configurations.values().toArray();
-        return (DungeonConfiguration) values[random.nextInt(values.length)];
+        Object[] keys = configurations.keySet().toArray();
+        return getConfiguration((String) keys[random.nextInt(keys.length)]);
     }
 }
