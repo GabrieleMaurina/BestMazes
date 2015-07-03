@@ -22,24 +22,39 @@ public class Dungeon {
     private Block[][][] maze;
     private Block[][][] stairs;
     private World world;
-    private int x, y, z, x1, y1, z1;
+    private int x, y, z, x1, y1, z1, xDelta, yDelta, zDelta, x1Delta, y1Delta, z1Delta;
     private Random random;
+    private Block block;
 
-    public Dungeon(World world, Random r, Block block, int x, int y, int z, int xMax, int yMax, int zMax){
+    public Dungeon(World world, Random r, int x, int y, int z, DungeonConfiguration dC){
+
         this.x = x;
         this.y = y;
         this.z = z;
+
+        this.xDelta = dC.xDelta;
+        this.yDelta = dC.yDelta;
+        this.zDelta = dC.zDelta;
+
+        this.x1Delta = dC.x1Delta;
+        this.y1Delta = dC.y1Delta;
+        this.z1Delta = dC.z1Delta;
+
         this.random = r;
         this.world = world;
+        this.block = dC.block;
 
-        m = new Maze3D(xMax, yMax, zMax, Maze3D.X, Maze3D.Y, Maze3D.Z, r);
-        maze = genMaze(block);
+        dC.world = world;
+        dC.random = random;
+
+        m = new Maze3D(dC);
+        maze = genMaze();
 
         x1 = x + m.deltas[0][0] - 2;
         y1 = y + m.yMSize - m.deltas[m.ySize - 1][1] - m.deltas[m.ySize - 2][1];
         z1 = z + m.deltas[0][2] - 2;
 
-        stairs = genStairs(world, x1, y1, z1, block);
+        stairs = genStairs();
     }
 
     public boolean available(){
@@ -58,7 +73,7 @@ public class Dungeon {
         StructureGenerator.createModel(world, stairs, x1, y1, z1, random);
     }
 
-    private Block[][][] genStairs(World world, int x, int y, int z, Block b){
+    private Block[][][] genStairs(){
         int k = 0;
         for(int i = 0; i < 7; i++){
             for(int e = 0; e < 7; e++){
@@ -90,32 +105,32 @@ public class Dungeon {
             k = k1;
         }
 
-        k -= y;
+        k -= y1;
 
         Block[][][] model = new Block[7][k + 8][7];
 
         Drawer.fillParallelepipedon(model, 0, k - 1, 0, 6, k + 6, 6, Blocks.air);
 
-        Drawer.fillParallelepipedon(model, 1, 0, 1, 5, k, 5, b);
-        Drawer.fillParallelepipedon(model, 0, k, 0, 6, k, 6, b);
+        Drawer.fillParallelepipedon(model, 1, 0, 1, 5, k, 5, block);
+        Drawer.fillParallelepipedon(model, 0, k, 0, 6, k, 6, block);
         Drawer.fillParallelepipedon(model, 2, 0, 2, 4, k, 4, Blocks.air);
-        Drawer.fillParallelepipedon(model, 3, 0, 3, 3, k + 1, 3, b);
+        Drawer.fillParallelepipedon(model, 3, 0, 3, 3, k + 1, 3, block);
 
         Drawer.fillParallelepipedon(model, 3, 0, 5, 3, 1, 5, null);
         Drawer.fillParallelepipedon(model, 5, 0, 3, 5, 1, 3, null);
 
-        Drawer.fillParallelepipedon(model, 1, k + 1, 1, 1, k + 3, 1, b);
-        Drawer.fillParallelepipedon(model, 1, k + 1, 5, 1, k + 3, 5, b);
-        Drawer.fillParallelepipedon(model, 5, k + 1, 1, 5, k + 3, 1, b);
-        Drawer.fillParallelepipedon(model, 5, k + 1, 5, 5, k + 3, 5, b);
+        Drawer.fillParallelepipedon(model, 1, k + 1, 1, 1, k + 3, 1, block);
+        Drawer.fillParallelepipedon(model, 1, k + 1, 5, 1, k + 3, 5, block);
+        Drawer.fillParallelepipedon(model, 5, k + 1, 1, 5, k + 3, 1, block);
+        Drawer.fillParallelepipedon(model, 5, k + 1, 5, 5, k + 3, 5, block);
 
-        Drawer.fillParallelepipedon(model, 1, k + 4, 1, 5, k + 4, 5, b);
+        Drawer.fillParallelepipedon(model, 1, k + 4, 1, 5, k + 4, 5, block);
         Drawer.fillParallelepipedon(model, 2, k + 4, 2, 4, k + 4, 4, Blocks.air);
-        Drawer.fillParallelepipedon(model, 0, k + 5, 0, 6, k + 5, 6, b);
+        Drawer.fillParallelepipedon(model, 0, k + 5, 0, 6, k + 5, 6, block);
         model[3][k+5][3] = Blocks.air;
-        Drawer.fillParallelepipedon(model, 2, k + 6, 2, 4, k + 6, 4, b);
+        Drawer.fillParallelepipedon(model, 2, k + 6, 2, 4, k + 6, 4, block);
 
-        model[3][k + 7][3] = b;
+        model[3][k + 7][3] = block;
         model[3][k + 2][3] = Blocks.torch;
 
         int e = 0;
@@ -149,7 +164,7 @@ public class Dungeon {
         return model;
     }
 
-    private Block[][][] genMaze(Block block){
+    private Block[][][] genMaze(){
         //room
         m.open(m.xVSize - 2, 0, m.zVSize - 3, m.xVSize - 1, 1, m.zVSize - 1);
 
@@ -162,7 +177,7 @@ public class Dungeon {
         //genMaze entrance
         m.m[1][m.ySize - 1][1] = false;
 
-        int[][] deltas = m.initDeltas(Maze3D.X_DELTA, Maze3D.Y_DELTA, Maze3D.Z_DELTA, Maze3D.X1_DELTA, Maze3D.Y1_DELTA, Maze3D.Z1_DELTA);
+        int[][] deltas = m.initDeltas(xDelta, yDelta, zDelta, x1Delta, y1Delta, z1Delta);
 
         deltas[1][0] = 3;
         deltas[1][2] = 3;
@@ -195,7 +210,6 @@ public class Dungeon {
         spawners(model);
         return model;
     }
-
 
     private void spawners(Block[][][] model){
         int x = 0;

@@ -1,10 +1,8 @@
 package com.mauro.bestmazes.common;
 
-import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.PiselliteBricksSlab;
 import com.mauro.bestmazes.dungeon.Dungeon;
-import com.mauro.bestmazes.dungeon.Maze3D;
-import com.mauro.bestmazes.tree.Tree;
+import com.mauro.bestmazes.dungeon.DungeonConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -12,10 +10,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 
 import java.util.ArrayList;
@@ -81,10 +77,9 @@ public class StructureGenerator implements IWorldGenerator {
             int x = chunkX * 16;
             int z = chunkZ * 16;
 
-            Dungeon d = new Dungeon(world, random, PiselliteBricks.piselliteBricks, x, Y_DUNGEON, z, Maze3D.X_SIZE, Maze3D.Y_SIZE, Maze3D.Z_SIZE);
+            Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, DungeonConfiguration.getRandomDungeonConfiguration(random));
             if(d.available()) {
                 d.generate();
-                setBlock(world, x, 100, z, Blocks.mob_spawner, random);
             }
         }
     }

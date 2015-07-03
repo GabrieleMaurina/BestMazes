@@ -9,25 +9,12 @@ import java.util.Random;
 
 public class Maze3D
 {
-    public static final double PROB = 0.005;
-    public static final int X_SIZE = 8;
-    public static final int Y_SIZE = 5;
-    public static final int Z_SIZE = 8;
-    public static final int X_DELTA = 2;
-    public static final int Y_DELTA = 3;
-    public static final int Z_DELTA = 2;
-    public static final int X1_DELTA = 1;
-    public static final int Y1_DELTA = 1;
-    public static final int Z1_DELTA = 1;
-    public static final int X = 0;
-    public static final int Y = 4;
-    public static final int Z = 0;
-    private static final double K_PROB = 0.7;
-
     public boolean[][][] m;
     public boolean[][][] maze;
     private ArrayList<Point3D> w = new ArrayList<Point3D>();
-    private Random r;
+    private Random random;
+    private double joinProb;
+    private double branchesProb;
     public int[][] deltas;
 
     public int xSize;
@@ -53,17 +40,19 @@ public class Maze3D
         }
     }
 
-    public Maze3D(int xMax, int yMax, int zMax, int x, int y, int z, Random r)
+    public Maze3D(DungeonConfiguration dC)
     {
-        this.r = r;
+        this.random = dC.random;
+        this.joinProb = dC.joinProb;
+        this.branchesProb = dC.branchesProb;
 
-        xVSize = xMax;
-        yVSize = yMax;
-        zVSize = zMax;
+        xVSize = dC.xSize;
+        yVSize = dC.ySize;
+        zVSize = dC.zSize;
 
-        xSize = xMax * 2 + 1;
-        ySize = yMax * 2 + 1;
-        zSize = zMax * 2 + 1;
+        xSize = dC.xSize * 2 + 1;
+        ySize = dC.ySize * 2 + 1;
+        zSize = dC.zSize * 2 + 1;
 
         m = new boolean[xSize][ySize][zSize];
 
@@ -78,8 +67,8 @@ public class Maze3D
             }
         }
 
-        addCell(x * 2 + 1, y * 2 + 1, z * 2 + 1);
-        removeCell(x * 2 + 1, y * 2, z * 2 + 1);
+        addCell(dC.xStart * 2 + 1, dC.yStart * 2 + 1, dC.zStart * 2 + 1);
+        removeCell(dC.xStart * 2 + 1, dC.yStart * 2, dC.zStart * 2 + 1);
     }
 
     private void removeCell(int x, int y, int z){
@@ -158,15 +147,15 @@ public class Maze3D
         {
             if(i % 2 == 0)
             {
-                deltas[i][0] = r.nextInt(3) + 3;
-                deltas[i][1] = r.nextInt(2) + 2;
-                deltas[i][2] = r.nextInt(3) + 3;
+                deltas[i][0] = random.nextInt(3) + 3;
+                deltas[i][1] = random.nextInt(2) + 2;
+                deltas[i][2] = random.nextInt(3) + 3;
             }
             else
             {
-                deltas[i][0] = r.nextInt(3) + 1;
-                deltas[i][1] = r.nextInt(2) + 2;
-                deltas[i][2] = r.nextInt(3) + 1;
+                deltas[i][0] = random.nextInt(3) + 1;
+                deltas[i][1] = random.nextInt(2) + 2;
+                deltas[i][2] = random.nextInt(3) + 1;
             }
         }
         return deltas;
@@ -372,7 +361,7 @@ public class Maze3D
         }
         else
         {
-            if(r.nextDouble() < K_PROB)
+            if(random.nextDouble() < branchesProb)
             {
                 p = getPoint(w1);
             }
@@ -391,7 +380,7 @@ public class Maze3D
 
     private Point3D getPoint(ArrayList<Point3D> w)
     {
-        int index = r.nextInt(w.size());
+        int index = random.nextInt(w.size());
         Collections.shuffle(w);
         Point3D p = w.get(index);
         w.remove(index);
@@ -420,7 +409,7 @@ public class Maze3D
                     m[x][y][z] = false;
                     addCell(x - 1, y, z);
                 }
-                else if(r.nextDouble() < PROB)
+                else if(random.nextDouble() < joinProb)
                 {
                     m[x][y][z] = false;
                 }
@@ -437,7 +426,7 @@ public class Maze3D
                     m[x][y][z] = false;
                     addCell(x, y - 1, z);
                 }
-                else if(r.nextDouble() < PROB)
+                else if(random.nextDouble() < joinProb)
                 {
                     m[x][y][z] = false;
                 }
@@ -454,7 +443,7 @@ public class Maze3D
                     m[x][y][z] = false;
                     addCell(x, y, z - 1);
                 }
-                else if(r.nextDouble() < PROB)
+                else if(random.nextDouble() < joinProb)
                 {
                     m[x][y][z] = false;
                 }
