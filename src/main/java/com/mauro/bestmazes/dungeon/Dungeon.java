@@ -1,7 +1,7 @@
 package com.mauro.bestmazes.dungeon;
 
 import com.mauro.bestmazes.blocks.PiselliteBricks;
-import com.mauro.bestmazes.blocks.PiselliteBricksSlab;
+import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.common.Drawer;
 import com.mauro.bestmazes.common.StructureGenerator;
 import net.minecraft.block.Block;
@@ -25,8 +25,11 @@ public class Dungeon {
     private int x, y, z, x1, y1, z1, xDelta, yDelta, zDelta, x1Delta, y1Delta, z1Delta;
     private Random random;
     private Block block;
+    private Block block1;
+    private boolean crazy;
 
     public Dungeon(World world, Random r, int x, int y, int z, DungeonConfiguration dC){
+        this.crazy = dC.crazy;
 
         this.x = x;
         this.y = y;
@@ -43,6 +46,7 @@ public class Dungeon {
         this.random = r;
         this.world = world;
         this.block = dC.block;
+        this.block1 = dC.block1;
 
         dC.world = world;
         dC.random = random;
@@ -85,7 +89,7 @@ public class Dungeon {
                 }
             }
         }
-        k -= 3;
+        k -= 5;
 
         int k1 = 0;
         for(int i = -1; i < 8; i++){
@@ -124,13 +128,18 @@ public class Dungeon {
         Drawer.fillParallelepipedon(model, 5, k + 1, 1, 5, k + 3, 1, block);
         Drawer.fillParallelepipedon(model, 5, k + 1, 5, 5, k + 3, 5, block);
 
+        model[1][k + 2][1] = block1;
+        model[1][k + 2][5] = block1;
+        model[5][k + 2][1] = block1;
+        model[5][k + 2][5] = block1;
+
         Drawer.fillParallelepipedon(model, 1, k + 4, 1, 5, k + 4, 5, block);
         Drawer.fillParallelepipedon(model, 2, k + 4, 2, 4, k + 4, 4, Blocks.air);
-        Drawer.fillParallelepipedon(model, 0, k + 5, 0, 6, k + 5, 6, block);
+        Drawer.fillParallelepipedon(model, 0, k + 5, 0, 6, k + 5, 6, block1);
         model[3][k+5][3] = Blocks.air;
-        Drawer.fillParallelepipedon(model, 2, k + 6, 2, 4, k + 6, 4, block);
+        Drawer.fillParallelepipedon(model, 2, k + 6, 2, 4, k + 6, 4, block1);
 
-        model[3][k + 7][3] = block;
+        model[3][k + 7][3] = block1;
         model[3][k + 2][3] = Blocks.torch;
 
         int e = 0;
@@ -150,10 +159,10 @@ public class Dungeon {
             dy += (int)Math.round(Math.sin(dir));
 
             if(i % 2 == 0){
-                model[2 + dx][i / 2][2 + dy] = PiselliteBricksSlab.pbs;
+                model[2 + dx][i / 2][2 + dy] = SpecialBlocks.stoneBricksSlabDown;
             }
             else{
-                model[2 + dx][i / 2][2 + dy] = PiselliteBricksSlab.upbs;
+                model[2 + dx][i / 2][2 + dy] = SpecialBlocks.stoneBricksSlabUp;
             }
 
             if(i % 8 == 0 && i < k * 2){
@@ -177,10 +186,13 @@ public class Dungeon {
         //genMaze entrance
         m.m[1][m.ySize - 1][1] = false;
 
-        int[][] deltas = m.initDeltas(xDelta, yDelta, zDelta, x1Delta, y1Delta, z1Delta);
+        int[][] deltas = null;
 
-        deltas[1][0] = 3;
-        deltas[1][2] = 3;
+        if(!crazy){
+            deltas = m.initDeltas(xDelta, yDelta, zDelta, x1Delta, y1Delta, z1Delta);
+            deltas[1][0] = 3;
+            deltas[1][2] = 3;
+        }
 
         m.getMaze(deltas);
         boolean[][][] b = m.maze;

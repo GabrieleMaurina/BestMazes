@@ -1,7 +1,9 @@
 package com.mauro.bestmazes.dungeon;
 
 import com.mauro.bestmazes.blocks.PiselliteBricks;
+import com.mauro.bestmazes.blocks.SpecialBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
@@ -19,6 +21,8 @@ public class DungeonConfiguration {
     public double joinProb;
     public boolean crazy;
     public Block block;
+    public Block block1;
+    public String name;
 
     public int xStart;
     public int yStart;
@@ -47,6 +51,8 @@ public class DungeonConfiguration {
         classic.joinProb = 0.005;
         classic.crazy = false;
         classic.block = PiselliteBricks.piselliteBricks;
+        classic.block1 = SpecialBlocks.oakWoodPlanks;
+        classic.name = "classic";
 
         classic.xStart = 0;
         classic.yStart = 4;
@@ -72,6 +78,8 @@ public class DungeonConfiguration {
         narrow.joinProb = 0.005;
         narrow.crazy = false;
         narrow.block = PiselliteBricks.piselliteBricks;
+        narrow.block1 = SpecialBlocks.spruceWoodPlanks;
+        narrow.name = "narrow";
 
         narrow.xStart = 0;
         narrow.yStart = 4;
@@ -97,6 +105,8 @@ public class DungeonConfiguration {
         wide.joinProb = 0.005;
         wide.crazy = false;
         wide.block = PiselliteBricks.piselliteBricks;
+        wide.block1 = SpecialBlocks.acaciaWoodPlanks;
+        wide.name = "wide";
 
         wide.xStart = 0;
         wide.yStart = 4;
@@ -115,6 +125,25 @@ public class DungeonConfiguration {
         wide.z1Delta = 1;
 
         configurations.put("wide", wide);
+
+        DungeonConfiguration crazy = new DungeonConfiguration();
+
+        crazy.branchesProb = 0.7;
+        crazy.joinProb = 0.005;
+        crazy.crazy = true;
+        crazy.block = PiselliteBricks.piselliteBricks;
+        crazy.block1 = SpecialBlocks.acaciaWoodPlanks;
+        crazy.name = "crazy";
+
+        crazy.xStart = 0;
+        crazy.yStart = 4;
+        crazy.zStart = 0;
+
+        crazy.xSize = 8;
+        crazy.ySize = 5;
+        crazy.zSize = 8;
+
+        configurations.put("crazy", crazy);
     }
 
     public DungeonConfiguration clone(){

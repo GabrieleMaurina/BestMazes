@@ -147,15 +147,15 @@ public class Maze3D
         {
             if(i % 2 == 0)
             {
-                deltas[i][0] = random.nextInt(3) + 3;
-                deltas[i][1] = random.nextInt(2) + 2;
-                deltas[i][2] = random.nextInt(3) + 3;
+                deltas[i][0] = random.nextInt(4) + 1;
+                deltas[i][1] = random.nextInt(2) + 1;
+                deltas[i][2] = random.nextInt(4) + 1;
             }
             else
             {
-                deltas[i][0] = random.nextInt(3) + 1;
-                deltas[i][1] = random.nextInt(2) + 2;
-                deltas[i][2] = random.nextInt(3) + 1;
+                deltas[i][0] = random.nextInt(4) + 1;
+                deltas[i][1] = random.nextInt(3) + 2;
+                deltas[i][2] = random.nextInt(4) + 1;
             }
         }
         return deltas;

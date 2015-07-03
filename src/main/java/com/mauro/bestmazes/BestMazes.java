@@ -5,7 +5,6 @@ package com.mauro.bestmazes;
  */
 
 import com.mauro.bestmazes.blocks.PiselliteBricks;
-import com.mauro.bestmazes.blocks.PiselliteBricksSlab;
 import com.mauro.bestmazes.common.StructureGenerator;
 import com.mauro.bestmazes.dungeon.DungeonConfiguration;
 import com.mauro.bestmazes.handler.ConfigurationHandler;
@@ -37,7 +36,6 @@ public class BestMazes
         DungeonConfiguration.initConfigurations();
         structureGenerator = new StructureGenerator();
         GameRegistry.registerBlock(PiselliteBricks.piselliteBricks, "PiselliteBricks");
-        GameRegistry.registerBlock(PiselliteBricksSlab.pbs, "PiselliteBricksSlab");
     }
 
     @Mod.EventHandler

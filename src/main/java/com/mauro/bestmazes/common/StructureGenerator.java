@@ -1,6 +1,7 @@
 package com.mauro.bestmazes.common;
 
-import com.mauro.bestmazes.blocks.PiselliteBricksSlab;
+import com.mauro.bestmazes.blocks.SpecialBlock;
+import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.dungeon.Dungeon;
 import com.mauro.bestmazes.dungeon.DungeonConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -25,19 +26,21 @@ public class StructureGenerator implements IWorldGenerator {
     private static final double DUNGEON_PROB = 0.05;
     private static final int Y_DUNGEON = 5;
 
-    public static void setBlock(World world, int x, int y, int z, Block b, Random random){
+    public static void setBlock(World world, int x, int y, int z, Block block, Random random){
+
         world.setBlockToAir(x, y, z);
 
-        if(b instanceof PiselliteBricksSlab){
-            PiselliteBricksSlab pbs = (PiselliteBricksSlab) b;
-            world.setBlock(x, y, z, Blocks.stone_slab, pbs.state ? 13 : 5, 3);
+        if(block instanceof SpecialBlock){
+            SpecialBlock sB = (SpecialBlock)block;
+            world.setBlock(x, y, z, sB.block, sB.first, sB.second);
         }
         else{
-            world.setBlock(x, y, z, b);
-            if(Blocks.chest == b){
+            world.setBlock(x, y, z, block);
+
+            if(Blocks.chest == block){
                 fillChest(world, x, y, z);
             }
-            else if(Blocks.mob_spawner == b){
+            else if(Blocks.mob_spawner == block){
                 fillSpawner(world, x, y, z, random);
             }
         }
