@@ -96,7 +96,7 @@ public class DungeonConfiguration {
             narrow.block1 = SpecialBlocks.spruceWoodPlanks;
             narrow.name = "narrow";
             narrow.item = Items.diamond_chestplate;
-            narrow.prob = 0.005;
+            narrow.prob = 0.01;
 
             narrow.xStart = 0;
             narrow.yStart = 4;
@@ -134,7 +134,7 @@ public class DungeonConfiguration {
             wide.block1 = SpecialBlocks.acaciaWoodPlanks;
             wide.name = "wide";
             wide.item = Items.diamond_leggings;
-            wide.prob = 0.01;
+            wide.prob = 0.008;
 
             wide.xStart = 0;
             wide.yStart = 4;
@@ -168,7 +168,7 @@ public class DungeonConfiguration {
             expanded.block1 = SpecialBlocks.jungleWoodPlanks;
             expanded.name = "expanded";
             expanded.item = Items.diamond_helmet;
-            expanded.prob = 0.005;
+            expanded.prob = 0.01;
 
             expanded.xStart = 0;
             expanded.yStart = 4;
@@ -202,7 +202,7 @@ public class DungeonConfiguration {
             crazy.block1 = SpecialBlocks.britchWoodPlanks;
             crazy.name = "crazy";
             crazy.item = Items.diamond_sword;
-            crazy.prob = 0.005;
+            crazy.prob = 0.008;
 
             crazy.xStart = 0;
             crazy.yStart = 4;
