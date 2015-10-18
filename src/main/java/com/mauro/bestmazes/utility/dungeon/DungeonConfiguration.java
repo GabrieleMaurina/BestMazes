@@ -68,9 +68,9 @@ public class DungeonConfiguration {
             classic.yStart = 4;
             classic.zStart = 0;
 
-            classic.xSize = 8;
+            classic.xSize = 5;
             classic.ySize = 5;
-            classic.zSize = 8;
+            classic.zSize = 5;
 
             classic.xDelta = 2;
             classic.yDelta = 3;
@@ -102,9 +102,9 @@ public class DungeonConfiguration {
             narrow.yStart = 4;
             narrow.zStart = 0;
 
-            narrow.xSize = 8;
+            narrow.xSize = 5;
             narrow.ySize = 5;
-            narrow.zSize = 8;
+            narrow.zSize = 5;
 
             narrow.xDelta = 1;
             narrow.yDelta = 2;
@@ -140,9 +140,9 @@ public class DungeonConfiguration {
             wide.yStart = 4;
             wide.zStart = 0;
 
-            wide.xSize = 8;
+            wide.xSize = 5;
             wide.ySize = 5;
-            wide.zSize = 8;
+            wide.zSize = 5;
 
             wide.xDelta = 3;
             wide.yDelta = 3;
@@ -174,9 +174,9 @@ public class DungeonConfiguration {
             expanded.yStart = 4;
             expanded.zStart = 0;
 
-            expanded.xSize = 8;
+            expanded.xSize = 5;
             expanded.ySize = 5;
-            expanded.zSize = 8;
+            expanded.zSize = 5;
 
             expanded.xDelta = 4;
             expanded.yDelta = 4;
@@ -208,9 +208,9 @@ public class DungeonConfiguration {
             crazy.yStart = 4;
             crazy.zStart = 0;
 
-            crazy.xSize = 8;
+            crazy.xSize = 5;
             crazy.ySize = 5;
-            crazy.zSize = 8;
+            crazy.zSize = 5;
 
             biomConf.put(BiomeGenBase.birchForest, crazy);
             biomConf.put(BiomeGenBase.birchForestHills, crazy);
