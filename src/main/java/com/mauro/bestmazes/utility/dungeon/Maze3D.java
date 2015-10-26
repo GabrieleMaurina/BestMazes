@@ -3,6 +3,8 @@ package com.mauro.bestmazes.utility.dungeon;
 /**
  * Created by Gabriele on 6/25/2015.
  */
+import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -40,9 +42,9 @@ public class Maze3D
         }
     }
 
-    public Maze3D(DungeonConfiguration dC)
+    public Maze3D(DungeonConfiguration dC, Random r)
     {
-        this.random = dC.random;
+        this.random = r;
         this.joinProb = dC.joinProb;
         this.branchesProb = dC.branchesProb;
 
@@ -478,6 +480,33 @@ public class Maze3D
         {
             w.add(new Point3D(x, y, z - 1));
         }
+    }
+
+    public int getXCoor(int x){
+        int toRtn = 0;
+        for(int i = 0; i < x; i++)
+        {
+            toRtn += deltas[i][0];
+        }
+        return toRtn - 1;
+    }
+
+    public int getYCoor(int y){
+        int toRtn = 0;
+        for(int i = 0; i < y; i++)
+        {
+            toRtn += deltas[i][1];
+        }
+        return toRtn - 1;
+    }
+
+    public int getZCoor(int z){
+        int toRtn = 0;
+        for(int i = 0; i < z; i++)
+        {
+            toRtn += deltas[i][2];
+        }
+        return toRtn - 1;
     }
 }
 

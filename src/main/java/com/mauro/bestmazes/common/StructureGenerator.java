@@ -3,7 +3,8 @@ package com.mauro.bestmazes.common;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.SpecialBlock;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
-import com.mauro.bestmazes.utility.dungeon.DungeonConfiguration;
+import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
+import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -11,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.DungeonHooks;
 
@@ -23,7 +23,6 @@ import java.util.Random;
  */
 public class StructureGenerator implements IWorldGenerator {
 
-    private static final double DUNGEON_PROB = 0.05;
     private static final int Y_DUNGEON = 5;
 
     public static void setBlock(World world, int x, int y, int z, Block block, Random random){
@@ -38,6 +37,7 @@ public class StructureGenerator implements IWorldGenerator {
             if(block instanceof Chest){
                 world.setBlock(x, y, z, Blocks.chest);
                 fillChest(world, x, y, z, (Chest) block);
+                world.setBlockMetadataWithNotify(x, y, z, ((Chest) block).dir, 0);
             }
             else if(Blocks.mob_spawner == block){
                 world.setBlock(x, y, z, block);
@@ -52,7 +52,7 @@ public class StructureGenerator implements IWorldGenerator {
     public static void createModel(World world, Block[][][] blocks, int x, int y, int z, Random random){
         ArrayList<int[]> torches = new ArrayList<int[]>();
         for(int i = 0; i < blocks.length; i++){
-            for(int e = 0; e < blocks[i].length; e++){
+            for(int e = blocks[i].length - 1; e >= 0 ; e--){
                 for(int o = 0; o < blocks[i][e].length; o++){
                     if(blocks[i][e][o] != null) {
                         if (Blocks.torch == blocks[i][e][o]){
@@ -78,21 +78,21 @@ public class StructureGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-        int x = chunkX * 16;
-        int z = chunkZ * 16;
+        int x = chunkX * 16 + random.nextInt(16);
+        int z = chunkZ * 16 + random.nextInt(16);
 
-        DungeonConfiguration dC = DungeonConfiguration.getConfByBiome(world.getBiomeGenForCoords(x, z));
-        if(dC != null && random.nextDouble() < dC.prob){
+        DungeonConfiguration dC = DungeonConfigurations.getConfByBiome(world.getBiomeGenForCoords(x, z));
+        if(dC != null && random.nextDouble() < dC.prob && Dungeon.available(world, x, Y_DUNGEON, z, dC)){
             Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, dC);
-            if(d.available()) {
-                d.generate();
-            }
+            d.generate();
+            System.out.println("######  " + x + " " + z + "  " + dC.name + " #####");
         }
     }
 
     public static void fillChest(World world, int x, int y, int z, Chest chest){
         TileEntityChest tileEntityChest = (TileEntityChest)world.getTileEntity(x, y, z);
         ArrayList<ItemStack> items = chest.items;
+        tileEntityChest.getBlockMetadata();
         for(int i = 0; i < items.size(); i++){
             tileEntityChest.setInventorySlotContents(i, items.get(i));
         }

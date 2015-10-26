@@ -6,7 +6,33 @@ import net.minecraft.block.Block;
  * Created by Gabriele on 7/1/2015.
  */
 public class Drawer {
+
+    public static void drawParallelepipedon(Block[][][] model, int x, int y, int z, int x1, int y1, int z1, Block b) {
+        fillParallelepipedon(model, x, y, z, x1, y, z1, b);
+        fillParallelepipedon(model, x, y1, z, x1, y1, z1, b);
+        fillParallelepipedon(model, x, y + 1, z, x, y1 - 1, z1, b);
+        fillParallelepipedon(model, x1, y + 1, z, x1, y1 - 1, z1, b);
+        fillParallelepipedon(model, x + 1, y + 1, z, x1 - 1, y1 - 1, z, b);
+        fillParallelepipedon(model, x + 1, y + 1, z1, x1 - 1, y1 - 1, z1, b);
+    }
+
     public static void fillParallelepipedon(Block[][][] model, int x, int y, int z, int x1, int y1, int z1, Block b){
+        if(x1 < x){
+            int tmp = x1;
+            x1 = x;
+            x = tmp;
+        }
+        if(y1 < y){
+            int tmp = y1;
+            y1 = y;
+            y = tmp;
+        }
+        if(z1 < z){
+            int tmp = z1;
+            z1 = z;
+            z = tmp;
+        }
+
         for(int i = x; i < x1 + 1; i++)
         {
             for(int e = y; e < y1 + 1; e++)
@@ -94,5 +120,11 @@ public class Drawer {
                 model[x][y][z] = b;
             }
         }
+    }
+
+    public static void column(Block[][][] model, int x, int y, int z, Block b1, Block b2){
+        fillParallelepipedon1(model, x, y, z, 1, 4, 1, b1);
+        model[x][y + 4][z] = b2;
+        fillParallelepipedon1(model, x, y + 5, z, 1, 2, 1, b1);
     }
 }

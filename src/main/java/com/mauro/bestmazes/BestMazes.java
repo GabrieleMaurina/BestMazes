@@ -6,7 +6,7 @@ package com.mauro.bestmazes;
 
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.common.StructureGenerator;
-import com.mauro.bestmazes.utility.dungeon.DungeonConfiguration;
+import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
 import com.mauro.bestmazes.proxy.IProxy;
 import com.mauro.bestmazes.reference.Reference;
 import cpw.mods.fml.common.Mod;
@@ -30,9 +30,6 @@ public class BestMazes
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        //ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-
-        DungeonConfiguration.initConfigurations();
         structureGenerator = new StructureGenerator();
         GameRegistry.registerBlock(PiselliteBricks.piselliteBricks, "PiselliteBricks");
     }
@@ -40,7 +37,7 @@ public class BestMazes
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        GameRegistry.registerWorldGenerator(structureGenerator, 50);
+        GameRegistry.registerWorldGenerator(structureGenerator, 0);
     }
 
     @Mod.EventHandler
