@@ -42,6 +42,8 @@ public class Dungeon {
         this.random = r;
         this.world = world;
 
+        this.xEntrance = dC.xStart * 2 + 1;
+
         m = new Maze3D(dC, r);
         maze = genMaze();
 
@@ -167,8 +169,6 @@ public class Dungeon {
     private Block[][][] genMaze(){
         m.generate();
 
-        xEntrance = m.xSize / 2;
-        xEntrance = xEntrance % 2 != 0 ? xEntrance : xEntrance - 1;
         m.m[xEntrance][m.ySize - 2][0] = false;
         m.m[xEntrance][1][m.zSize - 1] = false;
 

@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -26,23 +27,23 @@ public class SwampConfiguration extends DungeonConfiguration{
         walls = PiselliteBricks.piselliteBricks;
         roof = SpecialBlocks.oakWoodPlanks;
         content = Blocks.air;
-        name = "swamp";
-        prob = 0.004;
+        name = DungeonReferences.SWAMP;
+        prob = 0.005;
 
-        xStart = 2;
-        yStart = 4;
+        xStart = 0;
+        yStart = 6;
         zStart = 0;
 
-        xSize = 5;
-        ySize = 5;
-        zSize = 5;
+        xSize = 1;
+        ySize = 7;
+        zSize = 7;
 
-        xDelta = 2;
+        xDelta = 1;
         yDelta = 3;
         zDelta = 2;
 
         x1Delta = 1;
-        y1Delta = 1;
+        y1Delta = 2;
         z1Delta = 1;
 
         xLootRoom = 7;

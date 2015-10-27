@@ -21,15 +21,34 @@ public class DungeonConfigurations {
 
     private static void initConfigurations()
     {
-        configurations.put("classic", new ClassicConfiguration());
-        configurations.put("narrow", new NarrowConfiguration());
-        configurations.put("wide", new WideConfiguration());
-        configurations.put("expanded", new ExpandedConfiguration());
-        configurations.put("crazy", new CrazyConfiguration());
-        configurations.put("hell", new HellConfiguration());
-        configurations.put("desert", new DesertConfiguration());
-        configurations.put("ocean", new OceanConfiguration());
-        configurations.put("dark", new DarkConfiguration());
+        DungeonConfiguration dC;
+
+        dC = new ClassicConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new NarrowConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new WideConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new ExpandedConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new CrazyConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new HellConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new DesertConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new OceanConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new DarkConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new IceConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new PlainConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new ExtremeConfiguration();
+        configurations.put(dC.name, dC);
+        dC = new SwampConfiguration();
+        configurations.put(dC.name, dC);
 
         for (Map.Entry<String, DungeonConfiguration> entry : configurations.entrySet())
         {

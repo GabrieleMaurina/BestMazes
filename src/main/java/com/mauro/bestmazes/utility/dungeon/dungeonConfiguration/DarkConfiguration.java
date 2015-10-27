@@ -5,6 +5,7 @@ import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlock;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -27,7 +28,7 @@ public class DarkConfiguration extends DungeonConfiguration {
         walls = PiselliteBricks.piselliteBricks;
         roof = SpecialBlocks.darkWoodPlanks;
         content = Blocks.air;
-        name = "dark";
+        name = DungeonReferences.DARK;
         prob = 0.105;
 
         xStart = 2;
@@ -66,10 +67,10 @@ public class DarkConfiguration extends DungeonConfiguration {
     }
 
     public Block[][][] genLootRoom(Random random){
-        Block[][][] model = new Block[16][12][16];
+        Block[][][] model = new Block[17][12][17];
 
-        Drawer.fillParallelepipedon(model, 1, 1, 1, 14, 10, 14, content);
-        Drawer.drawParallelepipedon(model, 0, 0, 0, 15, 11, 15, walls);
+        Drawer.fillParallelepipedon(model, 1, 1, 1, 15, 10, 15, content);
+        Drawer.drawParallelepipedon(model, 0, 0, 0, 16, 11, 16, walls);
 
         model[4][1][4] = SpecialBlocks.stoneBricksSlabDown;
         model[4][1][5] = SpecialBlocks.stoneBricksSlabUp;
@@ -111,17 +112,17 @@ public class DarkConfiguration extends DungeonConfiguration {
         model[12][4][11] = SpecialBlocks.stoneBricksSlabUp;
         model[12][5][12] = SpecialBlocks.stoneBricksSlabDown;
 
-        Drawer.column(model, 3, 1, 4, walls, roof);
-        Drawer.column(model, 3, 1, 8, walls, roof);
-        Drawer.column(model, 3, 1, 12, walls, roof);
+        Drawer.column(model, 2, 1, 4, walls, roof);
+        Drawer.column(model, 2, 1, 8, walls, roof);
+        Drawer.column(model, 2, 1, 12, walls, roof);
 
         Drawer.column(model, 14, 1, 4, walls, roof);
         Drawer.column(model, 14, 1, 8, walls, roof);
         Drawer.column(model, 14, 1, 12, walls, roof);
 
-        Drawer.fillParallelepipedon1(model, 3, 8, 4, 1, 3, 1, walls);
-        Drawer.fillParallelepipedon1(model, 3, 8, 8, 1, 3, 1, walls);
-        Drawer.fillParallelepipedon1(model, 3, 8, 12, 1, 3, 1, walls);
+        Drawer.fillParallelepipedon1(model, 2, 8, 4, 1, 3, 1, walls);
+        Drawer.fillParallelepipedon1(model, 2, 8, 8, 1, 3, 1, walls);
+        Drawer.fillParallelepipedon1(model, 2, 8, 12, 1, 3, 1, walls);
 
         Drawer.fillParallelepipedon1(model, 14, 8, 4, 1, 3, 1, walls);
         Drawer.fillParallelepipedon1(model, 14, 8, 8, 1, 3, 1, walls);
@@ -131,7 +132,7 @@ public class DarkConfiguration extends DungeonConfiguration {
         Drawer.fillParallelepipedon1(model, 7, 7, 7, 3, 1, 3, walls);
 
         Drawer.fillParallelepipedon1(model, 7, 6, 12, 3, 1, 1, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 7, 6, 11, 3, 1, 1, SpecialBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 6, 11, 3, 1, 1, SpecialBlocks.stoneBricksSlabUp);
         Drawer.fillParallelepipedon1(model, 7, 7, 10, 3, 1, 1, SpecialBlocks.stoneBricksSlabDown);
 
         Drawer.fillParallelepipedon1(model, 7, 3, 1, 3, 1, 2, walls);

@@ -24,6 +24,7 @@ import java.util.Random;
 public class StructureGenerator implements IWorldGenerator {
 
     private static final int Y_DUNGEON = 5;
+    private static boolean asdf = true;
 
     public static void setBlock(World world, int x, int y, int z, Block block, Random random){
 
@@ -78,6 +79,9 @@ public class StructureGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
+        if(asdf){
+            asdf = false;
+        }
         int x = chunkX * 16 + random.nextInt(16);
         int z = chunkZ * 16 + random.nextInt(16);
 

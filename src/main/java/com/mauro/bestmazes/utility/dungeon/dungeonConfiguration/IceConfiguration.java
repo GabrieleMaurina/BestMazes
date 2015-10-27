@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -26,7 +27,7 @@ public class IceConfiguration extends DungeonConfiguration {
         walls = PiselliteBricks.piselliteBricks;
         roof = Blocks.packed_ice;
         content = Blocks.air;
-        name = "ice";
+        name = DungeonReferences.ICE;
         prob = 0.005;
 
         xStart = 2;

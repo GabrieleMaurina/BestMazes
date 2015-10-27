@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,7 +27,7 @@ public class HellConfiguration extends DungeonConfiguration{
         walls = PiselliteBricks.piselliteBricks;
         roof = Blocks.nether_brick;
         content = Blocks.air;
-        name = "hell";
+        name = DungeonReferences.HELL;
         prob = 0.004;
 
         xStart = 2;

@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -24,26 +25,26 @@ public class PlainConfiguration extends DungeonConfiguration {
         joinProb = 0.005;
         crazy = false;
         walls = PiselliteBricks.piselliteBricks;
-        roof = SpecialBlocks.oakWoodPlanks;
+        roof = Blocks.grass;
         content = Blocks.air;
-        name = "plain";
+        name = DungeonReferences.PLAIN;
         prob = 0.004;
 
         xStart = 2;
-        yStart = 4;
+        yStart = 1;
         zStart = 0;
 
-        xSize = 5;
-        ySize = 5;
-        zSize = 5;
+        xSize = 6;
+        ySize = 2;
+        zSize = 6;
 
         xDelta = 2;
-        yDelta = 3;
+        yDelta = 4;
         zDelta = 2;
 
-        x1Delta = 1;
-        y1Delta = 1;
-        z1Delta = 1;
+        x1Delta = 3;
+        y1Delta = 3;
+        z1Delta = 3;
 
         xLootRoom = 7;
         yLootRoom = 1;
@@ -55,9 +56,10 @@ public class PlainConfiguration extends DungeonConfiguration {
 
     public ArrayList<ItemStack> getLoot(Random r){
         ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack boots = new ItemStack(Items.diamond_boots, 1);
-        boots.addEnchantment(Enchantment.featherFalling, 10);
-        loot.add(boots);
+        ItemStack saddles = new ItemStack(Items.saddle, 2);
+        ItemStack armors = new ItemStack(Items.diamond_horse_armor, 2);
+        loot.add(saddles);
+        loot.add(armors);
         return loot;
     }
 

@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -27,7 +28,7 @@ public class CrazyConfiguration extends DungeonConfiguration{
         walls = PiselliteBricks.piselliteBricks;
         roof = SpecialBlocks.britchWoodPlanks;
         content = Blocks.air;
-        name = "crazy";
+        name = DungeonReferences.CRAZY;
         prob = 0.005;
 
         xStart = 2;
