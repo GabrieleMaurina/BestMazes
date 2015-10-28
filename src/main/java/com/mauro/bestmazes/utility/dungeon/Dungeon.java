@@ -1,19 +1,14 @@
 package com.mauro.bestmazes.utility.dungeon;
 
-import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
+import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.common.StructureGenerator;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -48,15 +43,15 @@ public class Dungeon {
         maze = genMaze();
 
         xStairs = xDungeon - 3;
-        yStairs = yDungeon + m.getYCoor(m.ySize - 2);;
+        yStairs = yDungeon + m.getYCoor(m.ySize - 2) - 1;
         zStairs = zDungeon - 3;
 
-        xMaze = xStairs - m.getXCoor(xEntrance) + 1;
+        xMaze = xStairs + 2 - m.getXCoor(xEntrance);
         yMaze = yDungeon;
         zMaze = zDungeon + 2;
 
-        xLootRoom = xMaze + m.getXCoor(xEntrance) - dC.xLootRoom + 1;
-        yLootRoom = yDungeon + m.getYCoor(1) - dC.yLootRoom + 1;
+        xLootRoom = xMaze + m.getXCoor(xEntrance) - dC.xLootRoom;
+        yLootRoom = yDungeon + m.getYCoor(1) - dC.yLootRoom;
         zLootRoom = zMaze + m.zMSize - 1;
 
         stairs = genStairs();
@@ -72,7 +67,7 @@ public class Dungeon {
 
         for(int i = -10; i < 11; i++){
             for(int e = -10; e < 11; e++){
-                if(world.getBlock(x + (i * 10), y, z + (e * 10)) == PiselliteBricks.piselliteBricks) return false;
+                if(world.getBlock(x + (i * 10), y, z + (e * 10)) == BestMazesItemsBlocksTabs.piselliteBricks) return false;
             }
         }
 
@@ -199,28 +194,92 @@ public class Dungeon {
         }
 
         spawners(model);
+        passages(model);
+
         return model;
     }
 
+    private void passages(Block[][][] model){
+        for(int i = 0; i < m.m.length; i += 2){
+            for(int e = 1; e < m.m[i].length; e += 2){
+                for(int o = 1; o < m.m[i][e].length; o += 2){
+                    if(random.nextDouble() < dC.passageProb && m.m[i][e][o]){
+                        int x = m.getXCoor(i);
+                        int y = m.getYCoor(e);
+                        int z = m.getZCoor(o) + random.nextInt(m.deltas[o][2]);
+                        for(int d = 0; d < m.deltas[i][0]; d++){
+                            model[x + d][y][z] = Blocks.stonebrick;
+                            model[x + d][y + 1][z] = Blocks.stonebrick;
+                        }
+                    }
+                }
+            }
+        }
+        for(int i = 1; i < m.m.length; i += 2){
+            for(int e = 0; e < m.m[i].length; e += 2){
+                for(int o = 1; o < m.m[i][e].length; o += 2){
+                    if(random.nextDouble() < dC.passageProb && m.m[i][e][o]){
+                        int x = m.getXCoor(i) + random.nextInt(m.deltas[i][0]);
+                        int y = m.getYCoor(e);
+                        int z = m.getZCoor(o) + random.nextInt(m.deltas[o][2]);
+                        for(int d = 0; d < m.deltas[e][1]; d++){
+                            model[x][y + d][z] = Blocks.stonebrick;
+                        }
+                    }
+                }
+            }
+        }
+        for(int i = 1; i < m.m.length; i += 2){
+            for(int e = 1; e < m.m[i].length; e += 2){
+                for(int o = 0; o < m.m[i][e].length; o += 2){
+                    if(random.nextDouble() < dC.passageProb && m.m[i][e][o]){
+                        int x = m.getXCoor(i) + random.nextInt(m.deltas[i][0]);
+                        int y = m.getYCoor(e);
+                        int z = m.getZCoor(o);
+                        for(int d = 0; d < m.deltas[o][2]; d++){
+                            model[x][y][z + d] = Blocks.stonebrick;
+                            model[x][y + 1][z + d] = Blocks.stonebrick;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private void spawners(Block[][][] model){
+        if(dC.name.equals(DungeonReferences.OCEAN)) return;
         int x = 0;
         int y = 0;
         int z = 0;
         for(int i = 0; i < m.xSize; i++){
             y = 0;
-            if(i % 2 == 0){
-                for (int e = 0; e < m.ySize; e++){
-                    z = 0;
-                    if(e % 2 == 0){
-                        for (int o = 0; o < m.zSize; o++){
-                            if(o % 2 == 0 && random.nextDouble() < dC.mobProb && posOK(model, x, y, z)){
-                                model[x][y][z] = Blocks.mob_spawner;
-                            }
-                            z += m.deltas[o][2];
-                        }
+            for (int e = 0; e < m.ySize; e++) {
+                z = 0;
+                for (int o = 0; o < m.zSize; o++) {
+                    if (random.nextDouble() < dC.mobProb && x > 0 && y > 0 && z > 0 && x < m.xMSize - 1 && y < m.yMSize - 1 && z < m.zMSize - 1 && posOK(model, x, y, z)) {
+                        model[x][y][z] = Blocks.mob_spawner;
                     }
-                    y += m.deltas[e][1];
+                    if(o % 2 == 1){
+                        z++;
+                    }
+                    else{
+                        z--;
+                    }
+                    z += m.deltas[o][2];
                 }
+                if(e % 2 == 1){
+                    y++;
+                }
+                else{
+                    y--;
+                }
+                y += m.deltas[e][1];
+            }
+            if(i % 2 == 1){
+                x++;
+            }
+            else{
+                x--;
             }
             x += m.deltas[i][0];
         }

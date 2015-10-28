@@ -15,6 +15,7 @@ import java.util.Random;
 public abstract class DungeonConfiguration {
 
     public double mobProb;
+    public double passageProb;
     public double branchesProb;
     public double joinProb;
     public boolean crazy;

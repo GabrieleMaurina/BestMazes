@@ -1,15 +1,13 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
+import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -22,11 +20,12 @@ import java.util.Random;
 public class DesertConfiguration extends DungeonConfiguration{
 
     public DesertConfiguration(){
-        mobProb = 0.02;
+        passageProb = 0.005;
+        mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
         crazy = false;
-        walls = PiselliteBricks.piselliteBricks;
+        walls = BestMazesItemsBlocksTabs.piselliteBricks;
         roof = Blocks.sandstone;
         content = Blocks.air;
         name = DungeonReferences.DESERT;

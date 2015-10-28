@@ -1,8 +1,8 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.blocks.SpecialBlocks;
+import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -21,11 +21,12 @@ import java.util.Random;
 public class CrazyConfiguration extends DungeonConfiguration{
 
     public CrazyConfiguration(){
-        mobProb = 0.02;
+        passageProb = 0.005;
+        mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
         crazy = true;
-        walls = PiselliteBricks.piselliteBricks;
+        walls = BestMazesItemsBlocksTabs.piselliteBricks;
         roof = SpecialBlocks.britchWoodPlanks;
         content = Blocks.air;
         name = DungeonReferences.CRAZY;

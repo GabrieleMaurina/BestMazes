@@ -488,7 +488,7 @@ public class Maze3D
         {
             toRtn += deltas[i][0];
         }
-        return toRtn - 1;
+        return toRtn;
     }
 
     public int getYCoor(int y){
@@ -497,7 +497,7 @@ public class Maze3D
         {
             toRtn += deltas[i][1];
         }
-        return toRtn - 1;
+        return toRtn;
     }
 
     public int getZCoor(int z){
@@ -506,7 +506,7 @@ public class Maze3D
         {
             toRtn += deltas[i][2];
         }
-        return toRtn - 1;
+        return toRtn;
     }
 }
 

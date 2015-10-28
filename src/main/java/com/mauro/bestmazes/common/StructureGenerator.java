@@ -82,6 +82,7 @@ public class StructureGenerator implements IWorldGenerator {
         if(asdf){
             asdf = false;
         }
+
         int x = chunkX * 16 + random.nextInt(16);
         int z = chunkZ * 16 + random.nextInt(16);
 

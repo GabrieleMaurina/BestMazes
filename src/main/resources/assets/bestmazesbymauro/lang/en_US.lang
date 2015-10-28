@@ -1,0 +1,23 @@
+#Items
+
+item.classicKey.name=Classic Key
+item.crazyKey.name=Crazy Key
+item.darkKey.name=Dark Key
+item.desertKey.name=Desert Key
+item.expandedKey.name=Expanded Key
+item.extremeKey.name=Extreme Key
+item.hellKey.name=Hell Key
+item.iceKey.name=Ice Key
+item.narrowKey.name=Narrow Key
+item.oceanKey.name=Ocean Key
+item.plainKey.name=Plain Key
+item.swampKey.name=Swamp Key
+item.wideKey.name=Wide Key
+
+#Blocks
+
+tile.piselliteBricks.name=PiselliteBricks
+
+#Creative Tabs
+
+itemGroup.bestMazesTab=Best Mazes
