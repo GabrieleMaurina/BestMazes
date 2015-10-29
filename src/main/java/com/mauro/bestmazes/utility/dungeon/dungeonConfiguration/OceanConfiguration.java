@@ -1,13 +1,16 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.entities.minotaurs.OceanMinotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -20,11 +23,14 @@ public class OceanConfiguration extends DungeonConfiguration{
 
     public OceanConfiguration(){
         passageProb = 0.005;
+        lavaProb = 0.005;
+        waterProb = 0.005;
+        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
         crazy = false;
-        walls = BestMazesItemsBlocksTabs.piselliteBricks;
+        walls = BestMazesBlocks.piselliteBricks;
         roof = Blocks.glowstone;
         content = Blocks.water;
         name = DungeonReferences.OCEAN;
@@ -97,5 +103,9 @@ public class OceanConfiguration extends DungeonConfiguration{
         model[7][5][7] = new Chest(getLoot(random), Chest.NORTH);
 
         return model;
+    }
+
+    public Minotaur getMinotaur(World world){
+        return new OceanMinotaur(world);
     }
 }

@@ -1,8 +1,9 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.entities.minotaurs.ExpandedMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -10,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -22,12 +24,15 @@ public class ExpandedConfiguration extends DungeonConfiguration{
 
     public ExpandedConfiguration(){
         passageProb = 0.005;
+        lavaProb = 0.005;
+        waterProb = 0.005;
+        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
         crazy = false;
-        walls = BestMazesItemsBlocksTabs.piselliteBricks;
-        roof = SpecialBlocks.jungleWoodPlanks;
+        walls = BestMazesBlocks.piselliteBricks;
+        roof = BestMazesBlocks.jungleWoodPlanks;
         content = Blocks.air;
         name = DungeonReferences.EXPANDED;
         prob = 0.005;
@@ -76,10 +81,10 @@ public class ExpandedConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon(model, 1, 1, 1, 13, 7, 13, content);
         Drawer.drawParallelepipedon(model, 0, 0, 0, 14, 8, 14, walls);
 
-        Drawer.fillParallelepipedon1(model, 3, 1, 3, 9, 1, 9, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 4, 7, 1, 7, SpecialBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 5, 2, 5, 5, 1, 5, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 6, 2, 6, 3, 1, 3, SpecialBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 3, 1, 3, 9, 1, 9, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 4, 7, 1, 7, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 5, 2, 5, 5, 1, 5, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 6, 2, 6, 3, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
 
         Drawer.column(model, 5, 1, 2, walls, roof);
         Drawer.column(model, 9, 1, 2, walls, roof);
@@ -98,5 +103,9 @@ public class ExpandedConfiguration extends DungeonConfiguration{
         model[8][3][7] = Blocks.torch;
 
         return model;
+    }
+
+    public Minotaur getMinotaur(World world){
+        return new ExpandedMinotaur(world);
     }
 }

@@ -1,14 +1,16 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.entities.minotaurs.DarkMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -20,12 +22,15 @@ import java.util.Random;
 public class DarkConfiguration extends DungeonConfiguration {
     public DarkConfiguration(){
         passageProb = 0.005;
+        lavaProb = 0.005;
+        waterProb = 0.005;
+        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
         crazy = false;
-        walls = BestMazesItemsBlocksTabs.piselliteBricks;
-        roof = SpecialBlocks.darkWoodPlanks;
+        walls = BestMazesBlocks.piselliteBricks;
+        roof = BestMazesBlocks.darkWoodPlanks;
         content = Blocks.air;
         name = DungeonReferences.DARK;
         prob = 0.005;
@@ -71,45 +76,45 @@ public class DarkConfiguration extends DungeonConfiguration {
         Drawer.fillParallelepipedon(model, 1, 1, 1, 15, 10, 15, content);
         Drawer.drawParallelepipedon(model, 0, 0, 0, 16, 11, 16, walls);
 
-        model[4][1][4] = SpecialBlocks.stoneBricksSlabDown;
-        model[4][1][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[4][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[4][2][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[4][3][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[4][3][9] = SpecialBlocks.stoneBricksSlabUp;
-        model[4][4][10] = SpecialBlocks.stoneBricksSlabDown;
-        model[4][4][11] = SpecialBlocks.stoneBricksSlabUp;
-        model[4][5][12] = SpecialBlocks.stoneBricksSlabDown;
+        model[4][1][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[4][1][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[4][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[4][2][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[4][3][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[4][3][9] = BestMazesBlocks.stoneBricksSlabUp;
+        model[4][4][10] = BestMazesBlocks.stoneBricksSlabDown;
+        model[4][4][11] = BestMazesBlocks.stoneBricksSlabUp;
+        model[4][5][12] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[5][1][4] = SpecialBlocks.stoneBricksSlabDown;
-        model[5][1][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[5][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[5][2][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[5][3][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[5][3][9] = SpecialBlocks.stoneBricksSlabUp;
-        model[5][4][10] = SpecialBlocks.stoneBricksSlabDown;
-        model[5][4][11] = SpecialBlocks.stoneBricksSlabUp;
-        model[5][5][12] = SpecialBlocks.stoneBricksSlabDown;
+        model[5][1][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[5][1][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[5][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[5][2][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[5][3][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[5][3][9] = BestMazesBlocks.stoneBricksSlabUp;
+        model[5][4][10] = BestMazesBlocks.stoneBricksSlabDown;
+        model[5][4][11] = BestMazesBlocks.stoneBricksSlabUp;
+        model[5][5][12] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[11][1][4] = SpecialBlocks.stoneBricksSlabDown;
-        model[11][1][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[11][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[11][2][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[11][3][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[11][3][9] = SpecialBlocks.stoneBricksSlabUp;
-        model[11][4][10] = SpecialBlocks.stoneBricksSlabDown;
-        model[11][4][11] = SpecialBlocks.stoneBricksSlabUp;
-        model[11][5][12] = SpecialBlocks.stoneBricksSlabDown;
+        model[11][1][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[11][1][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[11][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[11][2][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[11][3][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[11][3][9] = BestMazesBlocks.stoneBricksSlabUp;
+        model[11][4][10] = BestMazesBlocks.stoneBricksSlabDown;
+        model[11][4][11] = BestMazesBlocks.stoneBricksSlabUp;
+        model[11][5][12] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[12][1][4] = SpecialBlocks.stoneBricksSlabDown;
-        model[12][1][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[12][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[12][2][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[12][3][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[12][3][9] = SpecialBlocks.stoneBricksSlabUp;
-        model[12][4][10] = SpecialBlocks.stoneBricksSlabDown;
-        model[12][4][11] = SpecialBlocks.stoneBricksSlabUp;
-        model[12][5][12] = SpecialBlocks.stoneBricksSlabDown;
+        model[12][1][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[12][1][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[12][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[12][2][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[12][3][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[12][3][9] = BestMazesBlocks.stoneBricksSlabUp;
+        model[12][4][10] = BestMazesBlocks.stoneBricksSlabDown;
+        model[12][4][11] = BestMazesBlocks.stoneBricksSlabUp;
+        model[12][5][12] = BestMazesBlocks.stoneBricksSlabDown;
 
         Drawer.column(model, 2, 1, 4, walls, roof);
         Drawer.column(model, 2, 1, 8, walls, roof);
@@ -130,9 +135,9 @@ public class DarkConfiguration extends DungeonConfiguration {
         Drawer.fillParallelepipedon1(model, 4, 5, 13, 9, 1, 3, walls);
         Drawer.fillParallelepipedon1(model, 7, 7, 7, 3, 1, 3, walls);
 
-        Drawer.fillParallelepipedon1(model, 7, 6, 12, 3, 1, 1, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 7, 6, 11, 3, 1, 1, SpecialBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 7, 7, 10, 3, 1, 1, SpecialBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 6, 12, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 6, 11, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 7, 7, 10, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
 
         Drawer.fillParallelepipedon1(model, 7, 3, 1, 3, 1, 2, walls);
         Drawer.fillParallelepipedon1(model, 7, 1, 2, 1, 2, 1, walls);
@@ -146,5 +151,9 @@ public class DarkConfiguration extends DungeonConfiguration {
         model[9][8][8] = Blocks.torch;
 
         return model;
+    }
+
+    public Minotaur getMinotaur(World world){
+        return new DarkMinotaur(world);
     }
 }

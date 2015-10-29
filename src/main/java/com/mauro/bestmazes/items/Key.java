@@ -1,8 +1,8 @@
 package com.mauro.bestmazes.items;
 
 import com.mauro.bestmazes.reference.Reference;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
-import net.minecraft.creativetab.CreativeTabs;
+import com.mauro.bestmazes.tabs.BestMazesTabs;
+import com.mauro.bestmazes.utility.BestMazesInitializer;
 import net.minecraft.item.Item;
 
 /**
@@ -18,6 +18,6 @@ public class Key extends Item {
         setUnlocalizedName(name);
         //setTextureName(Reference.MOD_ID + ":keys/" + name);
         setTextureName(Reference.MOD_ID + ":keys/key");
-        setCreativeTab(BestMazesItemsBlocksTabs.bestMazesTab);
+        setCreativeTab(BestMazesTabs.bestMazesTab);
     }
 }

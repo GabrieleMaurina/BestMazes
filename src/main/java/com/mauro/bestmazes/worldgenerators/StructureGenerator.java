@@ -1,4 +1,4 @@
-package com.mauro.bestmazes.common;
+package com.mauro.bestmazes.worldgenerators;
 
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.SpecialBlock;
@@ -23,8 +23,14 @@ import java.util.Random;
  */
 public class StructureGenerator implements IWorldGenerator {
 
-    private static final int Y_DUNGEON = 5;
-    private static boolean asdf = true;
+    @Override
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
+    {
+        int x = chunkX * 16 + random.nextInt(16);
+        int z = chunkZ * 16 + random.nextInt(16);
+
+        Dungeon.generateDungeon(world, x, z, random);
+    }
 
     public static void setBlock(World world, int x, int y, int z, Block block, Random random){
 
@@ -73,24 +79,6 @@ public class StructureGenerator implements IWorldGenerator {
         for(int i = 0; i < torches.size(); i++)
         {
             setBlock(world, x + torches.get(i)[0], y + torches.get(i)[1], z + torches.get(i)[2], Blocks.torch, random);
-        }
-    }
-
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
-    {
-        if(asdf){
-            asdf = false;
-        }
-
-        int x = chunkX * 16 + random.nextInt(16);
-        int z = chunkZ * 16 + random.nextInt(16);
-
-        DungeonConfiguration dC = DungeonConfigurations.getConfByBiome(world.getBiomeGenForCoords(x, z));
-        if(dC != null && random.nextDouble() < dC.prob && Dungeon.available(world, x, Y_DUNGEON, z, dC)){
-            Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, dC);
-            d.generate();
-            System.out.println("######  " + x + " " + z + "  " + dC.name + " #####");
         }
     }
 

@@ -4,11 +4,12 @@ package com.mauro.bestmazes;
  * Created by Gabriele on 6/24/2015.
  */
 
-import com.mauro.bestmazes.common.StructureGenerator;
+import com.mauro.bestmazes.worldgenerators.BestMazesWorldGenerators;
+import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import com.mauro.bestmazes.proxy.IProxy;
 import com.mauro.bestmazes.reference.Reference;
-import com.mauro.bestmazes.tabs.BestMazesTab;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.tabs.BestMazesKeysTab;
+import com.mauro.bestmazes.utility.BestMazesInitializer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -20,9 +21,6 @@ import net.minecraft.creativetab.CreativeTabs;
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class BestMazes
 {
-    public static StructureGenerator structureGenerator;
-    public static BestMazesTab bestMazesTab = new BestMazesTab(CreativeTabs.getNextID(), BestMazesTab.name);
-
     @Mod.Instance(Reference.MOD_ID)
     public static BestMazes instance;
 
@@ -30,15 +28,12 @@ public class BestMazes
     public static IProxy proxy;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        structureGenerator = new StructureGenerator();
-        BestMazesItemsBlocksTabs.init();
+    public void preInit(FMLPreInitializationEvent event){
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
-        GameRegistry.registerWorldGenerator(structureGenerator, 0);
+        BestMazesInitializer.init();
     }
 
     @Mod.EventHandler

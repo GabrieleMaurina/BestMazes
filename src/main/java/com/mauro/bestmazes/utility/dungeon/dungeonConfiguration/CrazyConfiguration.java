@@ -1,8 +1,9 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.entities.minotaurs.CrazyMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -10,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -22,12 +24,15 @@ public class CrazyConfiguration extends DungeonConfiguration{
 
     public CrazyConfiguration(){
         passageProb = 0.005;
+        lavaProb = 0.005;
+        waterProb = 0.005;
+        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
         crazy = true;
-        walls = BestMazesItemsBlocksTabs.piselliteBricks;
-        roof = SpecialBlocks.britchWoodPlanks;
+        walls = BestMazesBlocks.piselliteBricks;
+        roof = BestMazesBlocks.britchWoodPlanks;
         content = Blocks.air;
         name = DungeonReferences.CRAZY;
         prob = 0.005;
@@ -69,25 +74,25 @@ public class CrazyConfiguration extends DungeonConfiguration{
 
         Drawer.fillParallelepipedon1(model, 6, 5, 6, 3, 1, 3, walls);
 
-        model[9][5][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[10][4][8] = SpecialBlocks.stoneBricksSlabUp;
-        model[11][4][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[12][3][8] = SpecialBlocks.stoneBricksSlabUp;
-        model[13][3][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[13][2][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[13][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[13][1][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[13][1][4] = SpecialBlocks.stoneBricksSlabDown;
+        model[9][5][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[10][4][8] = BestMazesBlocks.stoneBricksSlabUp;
+        model[11][4][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[12][3][8] = BestMazesBlocks.stoneBricksSlabUp;
+        model[13][3][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[13][2][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[13][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[13][1][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[13][1][4] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[5][5][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[4][4][8] = SpecialBlocks.stoneBricksSlabUp;
-        model[3][4][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[2][3][8] = SpecialBlocks.stoneBricksSlabUp;
-        model[1][3][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[1][2][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[1][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[1][1][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[1][1][4] = SpecialBlocks.stoneBricksSlabDown;
+        model[5][5][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[4][4][8] = BestMazesBlocks.stoneBricksSlabUp;
+        model[3][4][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[2][3][8] = BestMazesBlocks.stoneBricksSlabUp;
+        model[1][3][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[1][2][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[1][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[1][1][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[1][1][4] = BestMazesBlocks.stoneBricksSlabDown;
 
         Drawer.column(model, 4, 1, 4, walls, roof);
         Drawer.column(model, 10, 1, 4, walls, roof);
@@ -107,5 +112,9 @@ public class CrazyConfiguration extends DungeonConfiguration{
         model[8][3][5] = Blocks.torch;
 
         return model;
+    }
+
+    public Minotaur getMinotaur(World world){
+        return new CrazyMinotaur(world);
     }
 }

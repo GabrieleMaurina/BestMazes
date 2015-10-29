@@ -1,14 +1,16 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.entities.minotaurs.DesertMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -21,11 +23,14 @@ public class DesertConfiguration extends DungeonConfiguration{
 
     public DesertConfiguration(){
         passageProb = 0.005;
+        lavaProb = 0.005;
+        waterProb = 0.005;
+        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
         crazy = false;
-        walls = BestMazesItemsBlocksTabs.piselliteBricks;
+        walls = BestMazesBlocks.piselliteBricks;
         roof = Blocks.sandstone;
         content = Blocks.air;
         name = DungeonReferences.DESERT;
@@ -79,17 +84,17 @@ public class DesertConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon1(model, 7, 1, 10, 1, 3, 1, walls);
         model[7][1][4] = walls;
 
-        model[7][3][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[7][3][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[7][4][8] = SpecialBlocks.stoneBricksSlabDown;
+        model[7][3][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[7][3][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[7][4][8] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[3][1][4] = SpecialBlocks.stoneBricksSlabDown;
-        model[4][1][4] = SpecialBlocks.stoneBricksSlabUp;
-        model[5][2][4] = SpecialBlocks.stoneBricksSlabDown;
+        model[3][1][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[4][1][4] = BestMazesBlocks.stoneBricksSlabUp;
+        model[5][2][4] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[11][1][4] = SpecialBlocks.stoneBricksSlabDown;
-        model[10][1][4] = SpecialBlocks.stoneBricksSlabUp;
-        model[9][2][4] = SpecialBlocks.stoneBricksSlabDown;
+        model[11][1][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[10][1][4] = BestMazesBlocks.stoneBricksSlabUp;
+        model[9][2][4] = BestMazesBlocks.stoneBricksSlabDown;
 
         Drawer.column(model, 4, 1, 7, walls, roof);
         Drawer.column(model, 10, 1, 7, walls, roof);
@@ -102,5 +107,9 @@ public class DesertConfiguration extends DungeonConfiguration{
         model[8][5][10] = Blocks.torch;
 
         return model;
+    }
+
+    public Minotaur getMinotaur(World world){
+        return new DesertMinotaur(world);
     }
 }

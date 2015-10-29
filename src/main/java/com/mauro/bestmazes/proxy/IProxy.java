@@ -5,4 +5,5 @@ package com.mauro.bestmazes.proxy;
  */
 public interface IProxy
 {
+    public void registerRenderers();
 }

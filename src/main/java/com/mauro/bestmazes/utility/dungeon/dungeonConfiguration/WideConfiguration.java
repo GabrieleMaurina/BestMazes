@@ -1,8 +1,9 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.entities.minotaurs.WideMinotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -10,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -22,12 +24,15 @@ public class WideConfiguration extends DungeonConfiguration{
 
     public WideConfiguration(){
         passageProb = 0.005;
+        lavaProb = 0.005;
+        waterProb = 0.005;
+        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
         crazy = false;
-        walls = BestMazesItemsBlocksTabs.piselliteBricks;
-        roof = SpecialBlocks.acaciaWoodPlanks;
+        walls = BestMazesBlocks.piselliteBricks;
+        roof = BestMazesBlocks.acaciaWoodPlanks;
         content = Blocks.air;
         name = DungeonReferences.WIDE;
         prob = 0.005;
@@ -92,23 +97,23 @@ public class WideConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon1(model, 6, 1, 3, 1, 2, 1, walls);
         Drawer.fillParallelepipedon1(model, 8, 1, 3, 1, 2, 1, walls);
 
-        model[8][1][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[8][1][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[8][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[8][2][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[8][3][4] = SpecialBlocks.stoneBricksSlabDown;
+        model[8][1][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[8][1][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[8][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[8][2][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[8][3][4] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[6][1][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[6][1][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[6][2][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[6][2][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[6][3][4] = SpecialBlocks.stoneBricksSlabDown;
+        model[6][1][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[6][1][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[6][2][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[6][2][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[6][3][4] = BestMazesBlocks.stoneBricksSlabDown;
 
-        model[7][6][8] = SpecialBlocks.stoneBricksSlabDown;
-        model[7][5][7] = SpecialBlocks.stoneBricksSlabUp;
-        model[7][5][6] = SpecialBlocks.stoneBricksSlabDown;
-        model[7][4][5] = SpecialBlocks.stoneBricksSlabUp;
-        model[7][4][4] = SpecialBlocks.stoneBricksSlabDown;
+        model[7][6][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[7][5][7] = BestMazesBlocks.stoneBricksSlabUp;
+        model[7][5][6] = BestMazesBlocks.stoneBricksSlabDown;
+        model[7][4][5] = BestMazesBlocks.stoneBricksSlabUp;
+        model[7][4][4] = BestMazesBlocks.stoneBricksSlabDown;
 
         Drawer.fillParallelepipedon1(model, 7, 1, 0, 1, 2, 1, content);
 
@@ -118,5 +123,9 @@ public class WideConfiguration extends DungeonConfiguration{
         model[8][8][11] = Blocks.torch;
 
         return model;
+    }
+
+    public Minotaur getMinotaur(World world){
+        return new WideMinotaur(world);
     }
 }

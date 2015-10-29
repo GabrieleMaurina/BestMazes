@@ -1,9 +1,12 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.PiselliteBricks;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.utility.dungeon.Dungeon;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -16,6 +19,9 @@ public abstract class DungeonConfiguration {
 
     public double mobProb;
     public double passageProb;
+    public double lavaProb;
+    public double waterProb;
+    public double spiderNetProb;
     public double branchesProb;
     public double joinProb;
     public boolean crazy;
@@ -58,4 +64,6 @@ public abstract class DungeonConfiguration {
         }
         return false;
     }
+
+    public abstract Minotaur getMinotaur(World world);
 }

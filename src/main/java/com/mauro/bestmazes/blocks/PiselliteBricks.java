@@ -1,10 +1,10 @@
 package com.mauro.bestmazes.blocks;
 
 import com.mauro.bestmazes.reference.Reference;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.tabs.BestMazesTabs;
+import com.mauro.bestmazes.utility.BestMazesInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 
 /**
  * Created by Gabriele on 6/26/2015.
@@ -22,6 +22,6 @@ public class PiselliteBricks extends Block {
 
         setBlockName(name);
         setStepSound(soundTypeStone);
-        setCreativeTab(BestMazesItemsBlocksTabs.bestMazesTab);
+        setCreativeTab(BestMazesTabs.bestMazesTab);
     }
 }

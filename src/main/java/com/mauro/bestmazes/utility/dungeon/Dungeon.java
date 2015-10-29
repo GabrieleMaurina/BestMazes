@@ -1,9 +1,10 @@
 package com.mauro.bestmazes.utility.dungeon;
 
-import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
+import com.mauro.bestmazes.entities.minotaurs.ClassicMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
-import com.mauro.bestmazes.common.StructureGenerator;
+import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -26,6 +27,20 @@ public class Dungeon {
     private int xEntrance;
     private Random random;
     private DungeonConfiguration dC;
+
+    private static final int Y_DUNGEON = 5;
+
+    public static void generateDungeon(World world, int x, int z, Random random){
+        DungeonConfiguration dC = DungeonConfigurations.getConfByBiome(world.getBiomeGenForCoords(x, z));
+        if(dC != null && random.nextDouble() < dC.prob && Dungeon.available(world, x, Y_DUNGEON, z, dC)){
+            Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, dC);
+            d.generate();
+            Minotaur minotaur = new ClassicMinotaur(world);
+            minotaur.setPosition(d.xLootRoom + 5.0, Y_DUNGEON + 2.0, d.zLootRoom + 5.0);
+            world.spawnEntityInWorld(minotaur);
+            System.out.println("########  " + x + " " + z + "  " + dC.name + "  ########");
+        }
+    }
 
     public Dungeon(World world, Random r, int x, int y, int z, DungeonConfiguration dC){
         this.dC = dC;
@@ -67,7 +82,7 @@ public class Dungeon {
 
         for(int i = -10; i < 11; i++){
             for(int e = -10; e < 11; e++){
-                if(world.getBlock(x + (i * 10), y, z + (e * 10)) == BestMazesItemsBlocksTabs.piselliteBricks) return false;
+                if(world.getBlock(x + (i * 10), y, z + (e * 10)) == BestMazesBlocks.piselliteBricks) return false;
             }
         }
 
@@ -149,9 +164,9 @@ public class Dungeon {
             dz += (int) Math.round(Math.sin(dir));
 
             if (i % 2 == 0) {
-                model[2 + dx][i / 2][2 + dz] = SpecialBlocks.stoneBricksSlabDown;
+                model[2 + dx][i / 2][2 + dz] = BestMazesBlocks.stoneBricksSlabDown;
             } else {
-                model[2 + dx][i / 2][2 + dz] = SpecialBlocks.stoneBricksSlabUp;
+                model[2 + dx][i / 2][2 + dz] = BestMazesBlocks.stoneBricksSlabUp;
             }
 
             if (!dC.name.equals("ocean") && i % 8 == 0 && i < k * 2) {

@@ -1,14 +1,16 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.SpecialBlocks;
-import com.mauro.bestmazes.utility.BestMazesItemsBlocksTabs;
+import com.mauro.bestmazes.entities.minotaurs.HellMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.ArrayList;
@@ -21,11 +23,14 @@ public class HellConfiguration extends DungeonConfiguration{
 
     public HellConfiguration(){
         passageProb = 0.005;
+        lavaProb = 0.005;
+        waterProb = 0.005;
+        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
         crazy = true;
-        walls = BestMazesItemsBlocksTabs.piselliteBricks;
+        walls = BestMazesBlocks.piselliteBricks;
         roof = Blocks.nether_brick;
         content = Blocks.air;
         name = DungeonReferences.HELL;
@@ -65,17 +70,17 @@ public class HellConfiguration extends DungeonConfiguration{
 
         Drawer.fillParallelepipedon(model, 1, 1, 1, 11, 2, 11, walls);
 
-        Drawer.fillParallelepipedon1(model, 2, 2, 2, 9, 1, 1, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 2, 2, 10, 9, 1, 1, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 2, 2, 3, 1, 1, 7, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 10, 2, 3, 1, 1, 7, SpecialBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 2, 2, 2, 9, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 2, 2, 10, 9, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 2, 2, 3, 1, 1, 7, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 10, 2, 3, 1, 1, 7, BestMazesBlocks.stoneBricksSlabDown);
 
         Drawer.fillParallelepipedon1(model, 3, 2, 3, 7, 1, 7, Blocks.air);
 
-        Drawer.fillParallelepipedon1(model, 4, 1, 4, 5, 1, 1, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 8, 5, 1, 1, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 5, 1, 1, 3, SpecialBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 8, 1, 5, 1, 1, 3, SpecialBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 4, 5, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 8, 5, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 5, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 8, 1, 5, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
 
         Drawer.fillParallelepipedon1(model, 5, 1, 5, 3, 1, 3, Blocks.air);
 
@@ -213,5 +218,9 @@ public class HellConfiguration extends DungeonConfiguration{
         model[7][1][6] = Blocks.torch;
 
         return model;
+    }
+
+    public Minotaur getMinotaur(World world){
+        return new HellMinotaur(world);
     }
 }
