@@ -1,22 +1,20 @@
 package com.mauro.bestmazes.entities.minotaurs;
 
-import net.minecraft.entity.IEntityLivingData;
+import com.mauro.bestmazes.items.Key;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import scala.collection.parallel.ParIterableLike;
 
 /**
  * Created by Gabriele on 10/28/2015.
  */
 public abstract class Minotaur extends EntityMob {
+
+    public Key key;
 
     public Minotaur(World world){
         super(world);
@@ -56,8 +54,7 @@ public abstract class Minotaur extends EntityMob {
     @Override
     public void onDeath(DamageSource damageSource) {
         if (!worldObj.isRemote) {
-            entityDropItem(new ItemStack(Items.diamond_chestplate, 0), 0.0F);
-            //dropItem(BestMazesInitializer.classicKey, 1);
+            entityDropItem(new ItemStack(key, 1), 0.0F);
         }
         super.onDeath(damageSource);
     }

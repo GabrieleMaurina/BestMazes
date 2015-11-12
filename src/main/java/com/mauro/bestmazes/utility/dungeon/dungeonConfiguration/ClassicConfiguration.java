@@ -25,9 +25,9 @@ public class ClassicConfiguration extends DungeonConfiguration{
 
     public ClassicConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
+        lavaProb = 0.001;
+        waterProb = 0.001;
+        spiderNetProb = 0.001;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
@@ -56,6 +56,10 @@ public class ClassicConfiguration extends DungeonConfiguration{
 
         xLootRoom = 7;
         yLootRoom = 1;
+
+        xMinotaurSpawn = 6.5;
+        yMinotaurSpawn = 1.5;
+        zMinotaurSpawn = 5.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 

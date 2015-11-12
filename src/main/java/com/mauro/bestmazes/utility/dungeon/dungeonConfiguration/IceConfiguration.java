@@ -23,9 +23,9 @@ import java.util.Random;
 public class IceConfiguration extends DungeonConfiguration {
     public IceConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
+        lavaProb = 0.001;
+        waterProb = 0.001;
+        spiderNetProb = 0.001;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
@@ -52,8 +52,12 @@ public class IceConfiguration extends DungeonConfiguration {
         y1Delta = 2;
         z1Delta = 2;
 
-        xLootRoom = 7;
+        xLootRoom = 8;
         yLootRoom = 1;
+
+        xMinotaurSpawn = 8.5;
+        yMinotaurSpawn = 5.0;
+        zMinotaurSpawn = 10.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 
@@ -77,35 +81,39 @@ public class IceConfiguration extends DungeonConfiguration {
     }
 
     public Block[][][] genLootRoom(Random random){
-        Block[][][] model = new Block[15][9][16];
+        Block[][][] model = new Block[17][9][16];
 
-        Drawer.fillParallelepipedon(model, 1, 1, 1, 13, 7, 14, content);
-        Drawer.drawParallelepipedon(model, 0, 0, 0, 14, 8, 15, walls);
+        Drawer.fillParallelepipedon(model, 1, 1, 1, 15, 7, 14, content);
+        Drawer.drawParallelepipedon(model, 0, 0, 0, 16, 8, 15, walls);
 
-        Drawer.fillParallelepipedon1(model, 3, 1, 14, 9, 1, -6, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 14, 7, 1, -5, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 5, 2, 14, 5, 1, -4, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 6, 2, 14, 3, 1, -3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 7, 5, 12, 3, 1, 3, walls);
+        Drawer.fillParallelepipedon1(model, 7, 5, 11, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 6, 4, 10, 5, 1, 1, Blocks.stonebrick);
+        Drawer.fillParallelepipedon1(model, 6, 4, 9, 5, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 5, 3, 8, 7, 1, 1, Blocks.stonebrick);
+        Drawer.fillParallelepipedon1(model, 5, 3, 7, 7, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 2, 6, 9, 1, 1, Blocks.stonebrick);
+        Drawer.fillParallelepipedon1(model, 4, 2, 5, 9, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 3, 1, 4, 11, 1, 1, Blocks.stonebrick);
+        Drawer.fillParallelepipedon1(model, 3, 1, 3, 11, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
 
-        Drawer.column(model, 3, 1, 3, walls, roof);
-        Drawer.column(model, 3, 1, 6, walls, roof);
+        Drawer.column(model, 2, 1, 7, walls, roof);
         Drawer.column(model, 3, 1, 9, walls, roof);
-        Drawer.column(model, 3, 1, 12, walls, roof);
-        Drawer.column(model, 11, 1, 3, walls, roof);
-        Drawer.column(model, 11, 1, 6, walls, roof);
-        Drawer.column(model, 11, 1, 9, walls, roof);
-        Drawer.column(model, 11, 1, 12, walls, roof);
+        Drawer.column(model, 4, 1, 11, walls, roof);
+        Drawer.column(model, 5, 1, 13, walls, roof);
+        Drawer.column(model, 14, 1, 7, walls, roof);
+        Drawer.column(model, 13, 1, 9, walls, roof);
+        Drawer.column(model, 12, 1, 11, walls, roof);
+        Drawer.column(model, 11, 1, 13, walls, roof);
 
-        Drawer.fillParallelepipedon1(model, 6, 3, 1, 3, 1, 2, walls);
-        Drawer.fillParallelepipedon1(model, 6, 1, 2, 1, 2, 1, walls);
-        Drawer.fillParallelepipedon1(model, 8, 1, 2, 1, 2, 1, walls);
+        Drawer.fillParallelepipedon1(model, 8, 1, 13, 1, 4, 1, walls);
 
-        Drawer.fillParallelepipedon1(model, 7, 1, 0, 1, 2, 1, content);
+        Drawer.fillParallelepipedon1(model, xLootRoom, yLootRoom, 0, 1, 2, 1, content);
 
-        model[7][3][13] = new Chest(getLoot(random), Chest.NORTH);
+        model[8][6][13] = new Chest(getLoot(random), Chest.NORTH);
 
-        model[6][4][14] = Blocks.torch;
-        model[8][4][14] = Blocks.torch;
+        model[7][7][14] = Blocks.torch;
+        model[9][7][14] = Blocks.torch;
 
         return model;
     }

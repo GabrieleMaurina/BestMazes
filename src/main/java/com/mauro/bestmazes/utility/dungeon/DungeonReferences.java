@@ -17,4 +17,5 @@ public class DungeonReferences {
     public static final String PLAIN = "plain";
     public static final String EXTREME = "extreme";
     public static final String SWAMP = "swamp";
+    public static final String END = "end";
 }

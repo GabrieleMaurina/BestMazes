@@ -22,12 +22,13 @@ import java.util.Random;
 public class PlainConfiguration extends DungeonConfiguration {
     public PlainConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
+        lavaProb = 0.001;
+        waterProb = 0.001;
+        spiderNetProb = 0.001;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
+        tallGrassProb = 0.4;
         crazy = false;
         walls = BestMazesBlocks.piselliteBricks;
         roof = Blocks.grass;
@@ -51,8 +52,15 @@ public class PlainConfiguration extends DungeonConfiguration {
         y1Delta = 3;
         z1Delta = 3;
 
-        xLootRoom = 7;
+        xLootRoom = 8;
         yLootRoom = 1;
+
+        xMinotaurSpawn = 7.5;
+        yMinotaurSpawn = 3.0;
+        zMinotaurSpawn = 12.5;
+
+        xHut = -4;
+        zHut = -4;
 
         biomes = new ArrayList<BiomeGenBase>();
 
@@ -73,40 +81,93 @@ public class PlainConfiguration extends DungeonConfiguration {
     }
 
     public Block[][][] genLootRoom(Random random){
-        Block[][][] model = new Block[15][9][16];
+        Block[][][] model = new Block[17][11][11];
 
-        Drawer.fillParallelepipedon(model, 1, 1, 1, 13, 7, 14, content);
-        Drawer.drawParallelepipedon(model, 0, 0, 0, 14, 8, 15, walls);
+        Drawer.fillParallelepipedon(model, 1, 1, 1, 15, 9, 9, content);
+        Drawer.drawParallelepipedon(model, 0, 0, 0, 16, 10, 10, walls);
 
-        Drawer.fillParallelepipedon1(model, 3, 1, 14, 9, 1, -6, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 14, 7, 1, -5, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 5, 2, 14, 5, 1, -4, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 6, 2, 14, 3, 1, -3, BestMazesBlocks.stoneBricksSlabUp);
 
-        Drawer.column(model, 3, 1, 3, walls, roof);
-        Drawer.column(model, 3, 1, 6, walls, roof);
-        Drawer.column(model, 3, 1, 9, walls, roof);
-        Drawer.column(model, 3, 1, 12, walls, roof);
-        Drawer.column(model, 11, 1, 3, walls, roof);
-        Drawer.column(model, 11, 1, 6, walls, roof);
-        Drawer.column(model, 11, 1, 9, walls, roof);
-        Drawer.column(model, 11, 1, 12, walls, roof);
+        Drawer.fillParallelepipedon1(model, 1, 2, 1, 3, 1, 3, walls);
+        Drawer.fillParallelepipedon1(model, 13, 2, 1, 3, 1, 3, walls);
+        Drawer.fillParallelepipedon1(model, 1, 4, 7, 3, 1, 3, walls);
+        Drawer.fillParallelepipedon1(model, 13, 4, 7, 3, 1, 3, walls);
+        Drawer.fillParallelepipedon1(model, 7, 6, 7, 3, 1, 3, walls);
 
-        Drawer.fillParallelepipedon1(model, 6, 3, 1, 3, 1, 2, walls);
-        Drawer.fillParallelepipedon1(model, 6, 1, 2, 1, 2, 1, walls);
-        Drawer.fillParallelepipedon1(model, 8, 1, 2, 1, 2, 1, walls);
+        model[2][1][2] = walls;
+        model[14][1][2] = walls;
+        Drawer.fillParallelepipedon1(model, 2, 1, 8, 1, 3, 1, walls);
+        Drawer.fillParallelepipedon1(model, 14, 1, 8, 1, 3, 1, walls);
+        Drawer.fillParallelepipedon1(model, 8, 1, 8, 1, 5, 1, walls);
 
-        Drawer.fillParallelepipedon1(model, 7, 1, 0, 1, 2, 1, content);
+        Drawer.column(model, 5, 1, 5, walls, roof);
+        Drawer.column(model, 11, 1, 5, walls, roof);
+        Drawer.fillParallelepipedon1(model, 5, 8, 5, 1, 2, 1, walls);
+        Drawer.fillParallelepipedon1(model, 11, 8, 5, 1, 2, 1, walls);
 
-        model[7][3][13] = new Chest(getLoot(random), Chest.NORTH);
 
-        model[6][4][14] = Blocks.torch;
-        model[8][4][14] = Blocks.torch;
+        Drawer.fillParallelepipedon1(model, 6, 1, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 5, 1, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 4, 2, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+
+        Drawer.fillParallelepipedon1(model, 10, 1, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 11, 1, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 12, 2, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+
+        Drawer.fillParallelepipedon1(model, 1, 3, 4, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 1, 3, 5, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 1, 4, 6, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+
+        Drawer.fillParallelepipedon1(model, 13, 3, 4, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 13, 3, 5, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 13, 4, 6, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+
+        Drawer.fillParallelepipedon1(model, 4, 5, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 5, 5, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 6, 6, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+
+        Drawer.fillParallelepipedon1(model, 12, 5, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 11, 5, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 10, 6, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+
+
+        Drawer.fillParallelepipedon1(model, 7, 4, 1, 3, 1, 3, walls);
+        Drawer.fillParallelepipedon1(model, 7, 1, 3, 1, 3, 1, walls);
+        Drawer.fillParallelepipedon1(model, 9, 1, 3, 1, 3, 1, walls);
+
+        Drawer.fillParallelepipedon1(model, 8, 1, 0, 1, 2, 1, content);
+
+        model[8][7][8] = new Chest(getLoot(random), Chest.NORTH);
+
+        model[7][8][9] = Blocks.torch;
+        model[9][8][9] = Blocks.torch;
 
         return model;
     }
 
     public Minotaur getMinotaur(World world){
         return new PlainMinotaur(world);
+    }
+
+    @Override
+    public Block[][][] genEntranceHut(Random random) {
+        Block[][][] model = new Block[9][9][9];
+        Drawer.printModelOnBase(model, super.genEntranceHut(random), 1, 0, 1);
+
+        int e = 6;
+        for (int i = 1; i < 8; i++) {
+            for (int o = 1; o < 8; o++) {
+                if (random.nextDouble() < tallGrassProb) {
+                    if (i == 4 && o == 4) {
+                        e = 8;
+                    } else if (i > 2 && i < 6 && o > 2 && o < 6) {
+                        e = 7;
+                    } else {
+                        e = 6;
+                    }
+                    model[i][e][o] = BestMazesBlocks.tallGrass;
+                }
+            }
+        }
+        return model;
     }
 }

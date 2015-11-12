@@ -24,9 +24,9 @@ public class CrazyConfiguration extends DungeonConfiguration{
 
     public CrazyConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
+        lavaProb = 0.001;
+        waterProb = 0.001;
+        spiderNetProb = 0.001;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
@@ -47,6 +47,10 @@ public class CrazyConfiguration extends DungeonConfiguration{
 
         xLootRoom = 7;
         yLootRoom = 1;
+
+        xMinotaurSpawn = 7.5;
+        yMinotaurSpawn = 1.0;
+        zMinotaurSpawn = 2.0;
 
         biomes = new ArrayList<BiomeGenBase>();
 

@@ -1,7 +1,6 @@
 package com.mauro.bestmazes.utility.dungeon;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
-import com.mauro.bestmazes.entities.minotaurs.ClassicMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
@@ -9,6 +8,7 @@ import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfigura
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import org.lwjgl.Sys;
 
 import java.util.Random;
 
@@ -22,23 +22,36 @@ public class Dungeon {
     private Block[][][] maze;
     private Block[][][] stairs;
     private Block[][][] lootRoom;
+    private Block[][][] corridor;
+    private Block[][][] hut;
     private World world;
-    private int xDungeon, yDungeon, zDungeon, xMaze, yMaze, zMaze, xStairs, yStairs, zStairs, xLootRoom, yLootRoom, zLootRoom;
+    private int xDungeon, yDungeon, zDungeon, xMaze, yMaze, zMaze, xStairs, yStairs, zStairs, xLootRoom, yLootRoom, zLootRoom, xCorridor, yCorridor, zCorridor, xHut, yHut, zHut;
     private int xEntrance;
     private Random random;
     private DungeonConfiguration dC;
+    private boolean ok = false;
 
     private static final int Y_DUNGEON = 5;
+    private static final int corridorLength = 5;
 
-    public static void generateDungeon(World world, int x, int z, Random random){
+    private static int nLava = 0, nWater = 0, nPassages = 0, nSpawners = 0, nSpiderNets = 0;
+
+    public static void generateDungeon(World world, int xChunk, int zChunk, Random random){
+        int x = xChunk * 16 + random.nextInt(16);
+        int z = zChunk * 16 + random.nextInt(16);
         DungeonConfiguration dC = DungeonConfigurations.getConfByBiome(world.getBiomeGenForCoords(x, z));
-        if(dC != null && random.nextDouble() < dC.prob && Dungeon.available(world, x, Y_DUNGEON, z, dC)){
+        if(dC != null && random.nextDouble() < dC.prob && Dungeon.available(world, x, Y_DUNGEON, z)){
             Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, dC);
             d.generate();
-            Minotaur minotaur = new ClassicMinotaur(world);
-            minotaur.setPosition(d.xLootRoom + 5.0, Y_DUNGEON + 2.0, d.zLootRoom + 5.0);
-            world.spawnEntityInWorld(minotaur);
-            System.out.println("########  " + x + " " + z + "  " + dC.name + "  ########");
+            System.out.println("@@@###***   MAZE   ***###@@@");
+            System.out.println("X: " + x);
+            System.out.println("Z: " + z);
+            System.out.println("TYPE: " + dC.name);
+            System.out.println("SPAWNERS: " + nSpawners);
+            System.out.println("PASSAGES: " + nPassages);
+            System.out.println("LAVA: " + nLava);
+            System.out.println("WATER: " + nWater);
+            System.out.println("NETS: " + nSpiderNets);
         }
     }
 
@@ -57,31 +70,40 @@ public class Dungeon {
         m = new Maze3D(dC, r);
         maze = genMaze();
 
-        xStairs = xDungeon - 3;
+        xStairs = xDungeon - 2;
         yStairs = yDungeon + m.getYCoor(m.ySize - 2) - 1;
-        zStairs = zDungeon - 3;
+        zStairs = zDungeon - 2;
 
-        xMaze = xStairs + 2 - m.getXCoor(xEntrance);
+        xMaze = xStairs + 1 - m.getXCoor(xEntrance);
         yMaze = yDungeon;
         zMaze = zDungeon + 2;
 
+        xCorridor = xMaze + m.getXCoor(xEntrance) - 1;
+        yCorridor = yDungeon + m.getYCoor(1) - 1;
+        zCorridor = zMaze + m.zMSize - m.deltas[m.zSize - 1][2];
+
         xLootRoom = xMaze + m.getXCoor(xEntrance) - dC.xLootRoom;
         yLootRoom = yDungeon + m.getYCoor(1) - dC.yLootRoom;
-        zLootRoom = zMaze + m.zMSize - 1;
+        zLootRoom = zCorridor + corridorLength;
 
         stairs = genStairs();
 
+        if(!ok) return;
+
+        xHut = xDungeon + dC.xHut;
+        yHut = yStairs + stairs[0].length - 1;
+        zHut = zDungeon + dC.zHut;
+
         lootRoom = dC.genLootRoom(random);
+
+        corridor = genCorridor();
+
+        hut = dC.genEntranceHut(random);
     }
 
-    public static boolean available(World world, int x, int y, int z, DungeonConfiguration dC){
-        if(!dC.isBiome(world.getBiomeGenForCoords(x + 20, z + 20))) return false;
-        if(!dC.isBiome(world.getBiomeGenForCoords(x - 20, z + 20))) return false;
-        if(!dC.isBiome(world.getBiomeGenForCoords(x + 20, z - 20))) return false;
-        if(!dC.isBiome(world.getBiomeGenForCoords(x - 20, z - 20))) return false;
-
-        for(int i = -10; i < 11; i++){
-            for(int e = -10; e < 11; e++){
+    public static boolean available(World world, int x, int y, int z){
+        for(int i = -2; i < 3; i++){
+            for(int e = -1; e < 4; e++){
                 if(world.getBlock(x + (i * 10), y, z + (e * 10)) == BestMazesBlocks.piselliteBricks) return false;
             }
         }
@@ -91,25 +113,29 @@ public class Dungeon {
 
     public void generate()
     {
-        if(!dC.name.equals("hell") || stairs[0].length < 120)
+        if(ok)
         {
+            StructureGenerator.createModel(world, hut, xHut, yHut, zHut, random);
             StructureGenerator.createModel(world, maze, xMaze, yMaze, zMaze, random);
             StructureGenerator.createModel(world, stairs, xStairs, yStairs, zStairs, random);
             StructureGenerator.createModel(world, lootRoom, xLootRoom, yLootRoom, zLootRoom, random);
+            StructureGenerator.createModel(world, corridor, xCorridor, yCorridor, zCorridor, random);
+            spawnMinotaur();
         }
     }
 
     private Block[][][] genStairs(){
 
         int k = 0;
-        boolean ok = false;
-        for (k = 30; k < 120 && ok == false; k++) {
+        ok = false;
+        int threshold = dC.name.equals(DungeonReferences.HELL) ? 120 : 220;
+        for (k = yStairs + 10; k < threshold && ok == false; k++) {
             ok = true;
             for (int i = 0; i < 7; i++) {
                 for (int e = 0; e < 7; e++) {
                     if (i == 0 || e == 0 || i == 6 || e == 6) {
                         Block b = world.getBlock(xStairs + i, k, zStairs + e);
-                        if(b.getMaterial().isSolid() || b == Blocks.lava){
+                        if(b.getMaterial().isSolid() || b == Blocks.lava || (!dC.name.equals(DungeonReferences.OCEAN) && b == Blocks.water)){
                         //if (b != Blocks.air && b != Blocks.water && b != Blocks.tallgrass) {
                             ok = false;
                         }
@@ -118,42 +144,24 @@ public class Dungeon {
             }
         }
 
-        k -= yStairs;
+        if(!ok) return null;
 
-        Block[][][] model = new Block[7][k + 9][7];
+        k -= (yStairs - 1);
 
-        Drawer.fillParallelepipedon(model, 1, 0, 1, 5, k, 5, dC.walls);
-        Drawer.fillParallelepipedon(model, 0, k, 0, 6, k, 6, dC.walls);
-        Drawer.fillParallelepipedon(model, 2, 1, 2, 4, k, 4, dC.content);
-        Drawer.fillParallelepipedon(model, 3, 1, 3, 3, k + 1, 3, dC.walls);
+        Block[][][] model = new Block[5][k][5];
 
-        Drawer.fillParallelepipedon1(model, 2, 1, 5, 3, 3, 1, null);
+        Drawer.fillParallelepipedon(model, 0, 0, 0, 4, k - 1, 4, dC.walls);
+        Drawer.fillParallelepipedon(model, 1, 1, 1, 3, k - 1, 3, dC.content);
+        Drawer.fillParallelepipedon(model, 2, 1, 2, 2, k - 1, 2, dC.walls);
 
-        Drawer.fillParallelepipedon(model, 1, k + 1, 1, 1, k + 3, 1, dC.walls);
-        Drawer.fillParallelepipedon(model, 1, k + 1, 5, 1, k + 3, 5, dC.walls);
-        Drawer.fillParallelepipedon(model, 5, k + 1, 1, 5, k + 3, 1, dC.walls);
-        Drawer.fillParallelepipedon(model, 5, k + 1, 5, 5, k + 3, 5, dC.walls);
-
-        model[1][k + 2][1] = dC.roof;
-        model[1][k + 2][5] = dC.roof;
-        model[5][k + 2][1] = dC.roof;
-        model[5][k + 2][5] = dC.roof;
-
-        Drawer.fillParallelepipedon(model, 1, k + 4, 1, 5, k + 4, 5, dC.walls);
-        Drawer.fillParallelepipedon(model, 2, k + 4, 2, 4, k + 4, 4, dC.content);
-        Drawer.fillParallelepipedon(model, 0, k + 5, 0, 6, k + 5, 6, dC.roof);
-        model[3][k + 5][3] = dC.content;
-        Drawer.fillParallelepipedon(model, 2, k + 6, 2, 4, k + 6, 4, dC.roof);
-
-        model[3][k + 7][3] = dC.roof;
-        if(!dC.name.equals("ocean")) model[3][k + 2][3] = Blocks.torch;
+        Drawer.fillParallelepipedon1(model, 1, 1, 4, 3, 3, 1, null);
 
         int e = 0;
         double dir = -Math.PI / 2.0;
         int dx = 0;
         int dz = 1;
 
-        for (int i = 2; i < (k + 1) * 2; i++) {
+        for (int i = 2; i < k * 2; i++) {
             e++;
             e %= 2;
             if (e == 0) {
@@ -164,13 +172,13 @@ public class Dungeon {
             dz += (int) Math.round(Math.sin(dir));
 
             if (i % 2 == 0) {
-                model[2 + dx][i / 2][2 + dz] = BestMazesBlocks.stoneBricksSlabDown;
+                model[1 + dx][i / 2][1 + dz] = BestMazesBlocks.stoneBricksSlabDown;
             } else {
-                model[2 + dx][i / 2][2 + dz] = BestMazesBlocks.stoneBricksSlabUp;
+                model[1 + dx][i / 2][1 + dz] = BestMazesBlocks.stoneBricksSlabUp;
             }
 
-            if (!dC.name.equals("ocean") && i % 8 == 0 && i < k * 2) {
-                model[3][i / 2 + 1][4] = Blocks.torch;
+            if (!dC.name.equals(DungeonReferences.OCEAN) && i % 8 == 0 && i < k * 2 - 8) {
+                model[2][i / 2 + 1][3] = Blocks.torch;
             }
         }
         return model;
@@ -180,7 +188,6 @@ public class Dungeon {
         m.generate();
 
         m.m[xEntrance][m.ySize - 2][0] = false;
-        m.m[xEntrance][1][m.zSize - 1] = false;
 
         int[][] deltas = null;
 
@@ -210,15 +217,48 @@ public class Dungeon {
 
         spawners(model);
         passages(model);
+        lavaWaterNets(model);
 
         return model;
+    }
+
+    private void lavaWaterNets(Block[][][] model){
+        if(dC.name.equals(DungeonReferences.OCEAN)) return;
+
+        for(int i = 1; i < model.length - 1; i++){
+            for(int e = 1; e < model[i].length - 1; e++){
+                for(int o = 1; o < model[i][e].length - 1; o++){
+                    if(model[i][e][o] != dC.content){
+                        boolean lava = random.nextDouble() < dC.lavaProb;
+                        boolean water = random.nextDouble() < dC.waterProb;
+                        if((lava || water) && (model[i + 1][e][o] == dC.content || model[i - 1][e][o] == dC.content || model[i][e][o + 1] == dC.content || model[i][e][o - 1] == dC.content || (model[i][e + 1][o] == dC.content && model[i][e - 1][o] != dC.content) || (model[i][e - 1][o] == dC.content && model[i][e + 1][o] != dC.content))){
+                            if(lava){
+                                model[i][e][o] = Blocks.lava;
+                                nLava++;
+                            }
+                            else{
+                                model[i][e][o] = Blocks.water;
+                                nWater++;
+                            }
+                        }
+                    }
+                    else{
+                        if(random.nextDouble() < dC.spiderNetProb){
+                            Drawer.drawSpiderNet(model, i, e, o, random.nextBoolean() ? 3 : 2, dC.content);
+                            nSpiderNets++;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void passages(Block[][][] model){
         for(int i = 0; i < m.m.length; i += 2){
             for(int e = 1; e < m.m[i].length; e += 2){
                 for(int o = 1; o < m.m[i][e].length; o += 2){
-                    if(random.nextDouble() < dC.passageProb && m.m[i][e][o]){
+                    if(m.m[i][e][o] && random.nextDouble() < dC.passageProb){
+                        nPassages++;
                         int x = m.getXCoor(i);
                         int y = m.getYCoor(e);
                         int z = m.getZCoor(o) + random.nextInt(m.deltas[o][2]);
@@ -233,7 +273,8 @@ public class Dungeon {
         for(int i = 1; i < m.m.length; i += 2){
             for(int e = 0; e < m.m[i].length; e += 2){
                 for(int o = 1; o < m.m[i][e].length; o += 2){
-                    if(random.nextDouble() < dC.passageProb && m.m[i][e][o]){
+                    if(m.m[i][e][o] && random.nextDouble() < dC.passageProb){
+                        nPassages++;
                         int x = m.getXCoor(i) + random.nextInt(m.deltas[i][0]);
                         int y = m.getYCoor(e);
                         int z = m.getZCoor(o) + random.nextInt(m.deltas[o][2]);
@@ -247,7 +288,8 @@ public class Dungeon {
         for(int i = 1; i < m.m.length; i += 2){
             for(int e = 1; e < m.m[i].length; e += 2){
                 for(int o = 0; o < m.m[i][e].length; o += 2){
-                    if(random.nextDouble() < dC.passageProb && m.m[i][e][o]){
+                    if(m.m[i][e][o] && random.nextDouble() < dC.passageProb){
+                        nPassages++;
                         int x = m.getXCoor(i) + random.nextInt(m.deltas[i][0]);
                         int y = m.getYCoor(e);
                         int z = m.getZCoor(o);
@@ -273,6 +315,7 @@ public class Dungeon {
                 for (int o = 0; o < m.zSize; o++) {
                     if (random.nextDouble() < dC.mobProb && x > 0 && y > 0 && z > 0 && x < m.xMSize - 1 && y < m.yMSize - 1 && z < m.zMSize - 1 && posOK(model, x, y, z)) {
                         model[x][y][z] = Blocks.mob_spawner;
+                        nSpawners++;
                     }
                     if(o % 2 == 1){
                         z++;
@@ -315,5 +358,18 @@ public class Dungeon {
         if(model[x][y - 1][z] == Blocks.air) return false;
         if(model[x][y][z - 1] == Blocks.air) return false;
         return true;
+    }
+
+    private void spawnMinotaur(){
+        Minotaur minotaur = dC.getMinotaur(world);
+        minotaur.setPosition(xLootRoom + dC.xMinotaurSpawn, yLootRoom + dC.yMinotaurSpawn, zLootRoom + dC.zMinotaurSpawn);
+        world.spawnEntityInWorld(minotaur);
+    }
+
+    private Block[][][] genCorridor(){
+        Block[][][] model = new Block[3][4][corridorLength];
+        Drawer.fillParallelepipedon(model, 0, 0, 0, 2, 3, corridorLength - 1, dC.walls);
+        Drawer.fillParallelepipedon(model, 1, 1, 0, 1, 2, corridorLength - 1, dC.content);
+        return model;
     }
 }

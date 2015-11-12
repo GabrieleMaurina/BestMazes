@@ -12,10 +12,10 @@ public class SpecialBlock extends Block {
     public int first;
     public int second;
 
-    public SpecialBlock(Block block, int first, int second) {
+    public SpecialBlock(Block block, int meta, int flag) {
         super(Material.anvil);
         this.block = block;
-        this.first = first;
-        this.second = second;
+        this.first = meta;
+        this.second = flag;
     }
 }

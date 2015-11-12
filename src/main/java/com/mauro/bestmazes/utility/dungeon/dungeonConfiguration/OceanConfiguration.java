@@ -23,9 +23,6 @@ public class OceanConfiguration extends DungeonConfiguration{
 
     public OceanConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
@@ -54,6 +51,10 @@ public class OceanConfiguration extends DungeonConfiguration{
 
         xLootRoom = 7;
         yLootRoom = 1;
+
+        xMinotaurSpawn = 7.5;
+        yMinotaurSpawn = 5.0;
+        zMinotaurSpawn = 6.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 

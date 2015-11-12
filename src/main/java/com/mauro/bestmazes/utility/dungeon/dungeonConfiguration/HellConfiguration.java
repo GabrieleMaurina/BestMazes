@@ -23,9 +23,9 @@ public class HellConfiguration extends DungeonConfiguration{
 
     public HellConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
+        lavaProb = 0.001;
+        waterProb = 0.001;
+        spiderNetProb = 0.001;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.01;
@@ -46,6 +46,10 @@ public class HellConfiguration extends DungeonConfiguration{
 
         xLootRoom = 6;
         yLootRoom = 3;
+
+        xMinotaurSpawn = 6.5;
+        yMinotaurSpawn = 1.0;
+        zMinotaurSpawn = 5.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 

@@ -49,6 +49,8 @@ public class DungeonConfigurations {
         configurations.put(dC.name, dC);
         dC = new SwampConfiguration();
         configurations.put(dC.name, dC);
+        dC = new EndConfiguration();
+        configurations.put(dC.name, dC);
 
         for (Map.Entry<String, DungeonConfiguration> entry : configurations.entrySet())
         {

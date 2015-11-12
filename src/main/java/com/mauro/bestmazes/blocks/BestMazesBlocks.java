@@ -16,6 +16,13 @@ public class BestMazesBlocks {
     public static final SpecialBlock jungleWoodPlanks = new SpecialBlock(Blocks.planks, 3, 3);
     public static final SpecialBlock acaciaWoodPlanks = new SpecialBlock(Blocks.planks, 4, 3);
     public static final SpecialBlock darkWoodPlanks = new SpecialBlock(Blocks.planks, 5, 3);
+    public static final SpecialBlock tallGrass = new TallGrass(TallGrass.TALLGRASS);
+    public static final SpecialBlock shrub = new TallGrass(TallGrass.SHRUB);
+    public static final SpecialBlock fern = new TallGrass(TallGrass.FERN);
+    public static final SpecialBlock vineNorth = new Vine(Vine.NORTH);
+    public static final SpecialBlock vineSouth = new Vine(Vine.SOUTH);
+    public static final SpecialBlock vineEast = new Vine(Vine.EAST);
+    public static final SpecialBlock vineWest = new Vine(Vine.WEST);
     static public Block piselliteBricks = new PiselliteBricks();
     public static void initBlocks(){
         GameRegistry.registerBlock(BestMazesBlocks.piselliteBricks, PiselliteBricks.name);

@@ -24,9 +24,9 @@ public class NarrowConfiguration extends DungeonConfiguration {
 
     public NarrowConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
+        lavaProb = 0.002;
+        waterProb = 0.002;
+        spiderNetProb = 0.002;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
@@ -55,6 +55,10 @@ public class NarrowConfiguration extends DungeonConfiguration {
 
         xLootRoom = 6;
         yLootRoom = 1;
+
+        xMinotaurSpawn = 6.5;
+        yMinotaurSpawn = 3.0;
+        zMinotaurSpawn = 5.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 

@@ -2,9 +2,13 @@ package com.mauro.bestmazes.worldgenerators;
 
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.SpecialBlock;
+import com.mauro.bestmazes.blocks.TallGrass;
+import com.mauro.bestmazes.blocks.Vine;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
 import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
+import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.EndConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -26,10 +30,11 @@ public class StructureGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-        int x = chunkX * 16 + random.nextInt(16);
-        int z = chunkZ * 16 + random.nextInt(16);
+        if(chunkX == 0 && chunkZ == 0){
+            ((EndConfiguration)DungeonConfigurations.getConfiguration(DungeonReferences.END)).genFinalRoom(world, 0, 100, 0, random);
+        }
 
-        Dungeon.generateDungeon(world, x, z, random);
+        Dungeon.generateDungeon(world, chunkX, chunkZ, random);
     }
 
     public static void setBlock(World world, int x, int y, int z, Block block, Random random){
@@ -56,29 +61,31 @@ public class StructureGenerator implements IWorldGenerator {
         }
     }
 
-    public static void createModel(World world, Block[][][] blocks, int x, int y, int z, Random random){
-        ArrayList<int[]> torches = new ArrayList<int[]>();
-        for(int i = 0; i < blocks.length; i++){
-            for(int e = blocks[i].length - 1; e >= 0 ; e--){
-                for(int o = 0; o < blocks[i][e].length; o++){
-                    if(blocks[i][e][o] != null) {
-                        if (Blocks.torch == blocks[i][e][o]){
+    public static void createModel(World world, Block[][][] model, int x, int y, int z, Random random){
+        ArrayList<int[]> coor = new ArrayList<int[]>();
+        ArrayList<Block> blocks = new ArrayList<Block>();
+        for(int i = 0; i < model.length; i++){
+            for(int e = model[i].length - 1; e >= 0 ; e--){
+                for(int o = 0; o < model[i][e].length; o++){
+                    if(model[i][e][o] != null) {
+                        if (model[i][e][o] == Blocks.torch || model[i][e][o] instanceof TallGrass || model[i][e][o] instanceof Vine){
                             int[] t = new int[3];
                             t[0] = i;
                             t[1] = e;
                             t[2] = o;
-                            torches.add(t);
+                            coor.add(t);
+                            blocks.add(model[i][e][o]);
                         }
                         else{
-                                setBlock(world, x + i, y + e, z + o, blocks[i][e][o], random);
+                                setBlock(world, x + i, y + e, z + o, model[i][e][o], random);
                         }
                     }
                 }
             }
         }
-        for(int i = 0; i < torches.size(); i++)
+        for(int i = 0; i < coor.size(); i++)
         {
-            setBlock(world, x + torches.get(i)[0], y + torches.get(i)[1], z + torches.get(i)[2], Blocks.torch, random);
+            setBlock(world, x + coor.get(i)[0], y + coor.get(i)[1], z + coor.get(i)[2], blocks.get(i), random);
         }
     }
 

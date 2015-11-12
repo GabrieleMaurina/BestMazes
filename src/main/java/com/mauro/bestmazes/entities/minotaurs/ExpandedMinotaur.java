@@ -1,5 +1,6 @@
 package com.mauro.bestmazes.entities.minotaurs;
 
+import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.world.World;
 
@@ -13,5 +14,6 @@ public class ExpandedMinotaur extends Minotaur{
 
     public ExpandedMinotaur(World world){
         super(world);
+        key = BestMazesItems.expandedKey;
     }
 }

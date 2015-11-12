@@ -24,9 +24,9 @@ public class ExpandedConfiguration extends DungeonConfiguration{
 
     public ExpandedConfiguration(){
         passageProb = 0.005;
-        lavaProb = 0.005;
-        waterProb = 0.005;
-        spiderNetProb = 0.005;
+        lavaProb = 0.001;
+        waterProb = 0.0005;
+        spiderNetProb = 0.001;
         mobProb = 0.01;
         branchesProb = 0.7;
         joinProb = 0.005;
@@ -56,6 +56,10 @@ public class ExpandedConfiguration extends DungeonConfiguration{
         xLootRoom = 7;
         yLootRoom = 1;
 
+        xMinotaurSpawn = 7.5;
+        yMinotaurSpawn = 3.0;
+        zMinotaurSpawn = 6.5;
+
         biomes = new ArrayList<BiomeGenBase>();
 
         biomes.add(BiomeGenBase.jungle);
@@ -66,7 +70,7 @@ public class ExpandedConfiguration extends DungeonConfiguration{
     public ArrayList<ItemStack> getLoot(Random r){
         ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
         ItemStack helmet = new ItemStack(Items.diamond_helmet, 1);
-        helmet.addEnchantment(Enchantment.respiration, 10);
+        helmet.addEnchantment(Enchantment.respiration, 5);
         loot.add(helmet);
         return loot;
     }
