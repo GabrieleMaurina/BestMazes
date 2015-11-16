@@ -2,7 +2,7 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.entities.minotaurs.DarkMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.RoofedMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
@@ -19,8 +19,8 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/25/2015.
  */
-public class DarkConfiguration extends DungeonConfiguration {
-    public DarkConfiguration(){
+public class RoofedConfiguration extends DungeonConfiguration {
+    public RoofedConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.001;
@@ -32,7 +32,7 @@ public class DarkConfiguration extends DungeonConfiguration {
         walls = BestMazesBlocks.piselliteBricks;
         roof = BestMazesBlocks.darkWoodPlanks;
         content = Blocks.air;
-        name = DungeonReferences.DARK;
+        name = DungeonReferences.ROOFED;
         prob = 0.005;
 
         xStart = 2;
@@ -71,7 +71,7 @@ public class DarkConfiguration extends DungeonConfiguration {
     }
 
     public DungeonConfiguration clone(){
-        return new DarkConfiguration();
+        return new RoofedConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -126,6 +126,6 @@ public class DarkConfiguration extends DungeonConfiguration {
     }
 
     public Minotaur getMinotaur(World world){
-        return new DarkMinotaur(world);
+        return new RoofedMinotaur(world);
     }
 }

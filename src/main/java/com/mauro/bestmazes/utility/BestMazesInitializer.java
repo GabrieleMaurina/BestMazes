@@ -6,6 +6,7 @@ import com.mauro.bestmazes.entities.BestMazesEntities;
 import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.tabs.BestMazesKeysTab;
 import com.mauro.bestmazes.tabs.BestMazesTabs;
+import com.mauro.bestmazes.tileEntities.BestMazesTileEntities;
 import com.mauro.bestmazes.worldgenerators.BestMazesWorldGenerators;
 
 /**
@@ -19,6 +20,7 @@ public class BestMazesInitializer {
         BestMazesItems.initItems();
         BestMazesBlocks.initBlocks();
         BestMazesEntities.initEntities();
+        BestMazesTileEntities.initTileEntities();
         BestMazes.proxy.registerRenderers();
     }
 }

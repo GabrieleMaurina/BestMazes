@@ -2,14 +2,14 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.entities.minotaurs.CrazyMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.BirchMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -20,9 +20,9 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class CrazyConfiguration extends DungeonConfiguration{
+public class BirchConfiguration extends DungeonConfiguration{
 
-    public CrazyConfiguration(){
+    public BirchConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.001;
@@ -34,7 +34,7 @@ public class CrazyConfiguration extends DungeonConfiguration{
         walls = BestMazesBlocks.piselliteBricks;
         roof = BestMazesBlocks.britchWoodPlanks;
         content = Blocks.air;
-        name = DungeonReferences.CRAZY;
+        name = DungeonReferences.BIRCH;
         prob = 0.005;
 
         xStart = 2;
@@ -60,14 +60,14 @@ public class CrazyConfiguration extends DungeonConfiguration{
 
     public ArrayList<ItemStack> getLoot(Random r){
         ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack sword = new ItemStack(Items.diamond_sword, 1);
+        ItemStack sword = new ItemStack(BestMazesItems.minotaurIvorySword, 1);
         sword.addEnchantment(Enchantment.sharpness, 10);
         loot.add(sword);
         return loot;
     }
 
     public DungeonConfiguration clone(){
-        return new CrazyConfiguration();
+        return new BirchConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -119,6 +119,6 @@ public class CrazyConfiguration extends DungeonConfiguration{
     }
 
     public Minotaur getMinotaur(World world){
-        return new CrazyMinotaur(world);
+        return new BirchMinotaur(world);
     }
 }

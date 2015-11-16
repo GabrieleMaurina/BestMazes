@@ -7,7 +7,7 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.Spawner;
-import com.mauro.bestmazes.entities.minotaurs.ClassicMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.ForestMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
@@ -27,12 +27,12 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class EndConfiguration extends DungeonConfiguration{
+public class SkyConfiguration extends DungeonConfiguration{
 
     public Block roof1;
     public double finalRoomSpawnerProb;
 
-    public EndConfiguration(){
+    public SkyConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.001;
@@ -86,7 +86,7 @@ public class EndConfiguration extends DungeonConfiguration{
     }
 
     public DungeonConfiguration clone(){
-        return new EndConfiguration();
+        return new SkyConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -133,7 +133,7 @@ public class EndConfiguration extends DungeonConfiguration{
     }
 
     public Minotaur getMinotaur(World world){
-        return new ClassicMinotaur(world);
+        return new ForestMinotaur(world);
     }
 
     private void genRoomFrame(World world, int x, int y, int z){
@@ -485,6 +485,7 @@ public class EndConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon1(world, x + 7, y + 13, z, 6, 1, 1, walls);
         Drawer.fillParallelepipedon1(world, x + 9, y + 14, z, 2, 1, 1, walls);
 
+        genLocksEntrance(world, x, y, z);
         genLightsEntrance(world, x, y, z);
     }
 
@@ -551,10 +552,17 @@ public class EndConfiguration extends DungeonConfiguration{
     }
 
     private void genLightsEntrance(World world, int x, int y, int z){
-        StructureGenerator.setBlock(world, x + 8, y + 2, z + 2, Blocks.torch);
-        StructureGenerator.setBlock(world, x + 8, y + 7, z + 2, Blocks.torch);
-        StructureGenerator.setBlock(world, x + 11, y + 2, z + 2, Blocks.torch);
-        StructureGenerator.setBlock(world, x + 11, y + 7, z + 2, Blocks.torch);
+        StructureGenerator.setBlock(world, x + 8, y + 3, z + 2, Blocks.torch);
+        StructureGenerator.setBlock(world, x + 8, y + 8, z + 2, Blocks.torch);
+        StructureGenerator.setBlock(world, x + 11, y + 3, z + 2, Blocks.torch);
+        StructureGenerator.setBlock(world, x + 11, y + 8, z + 2, Blocks.torch);
+    }
+
+    private void genLocksEntrance(World world, int x, int y, int z) {
+        StructureGenerator.setBlock(world, x + 8, y + 2, z + 1, BestMazesBlocks.mazeLock);
+        StructureGenerator.setBlock(world, x + 8, y + 7, z + 1, BestMazesBlocks.mazeLock);
+        StructureGenerator.setBlock(world, x + 11, y + 2, z + 1, BestMazesBlocks.mazeLock);
+        StructureGenerator.setBlock(world, x + 11, y + 7, z + 1, BestMazesBlocks.mazeLock);
     }
 
     public Block[][][] genFinalConnection() {

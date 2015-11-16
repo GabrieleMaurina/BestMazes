@@ -23,23 +23,23 @@ public class DungeonConfigurations {
     {
         DungeonConfiguration dC;
 
-        dC = new ClassicConfiguration();
+        dC = new ForestConfiguration();
         configurations.put(dC.name, dC);
-        dC = new NarrowConfiguration();
+        dC = new TaigaConfiguration();
         configurations.put(dC.name, dC);
-        dC = new WideConfiguration();
+        dC = new SavannaConfiguration();
         configurations.put(dC.name, dC);
-        dC = new ExpandedConfiguration();
+        dC = new JungleConfiguration();
         configurations.put(dC.name, dC);
-        dC = new CrazyConfiguration();
+        dC = new BirchConfiguration();
         configurations.put(dC.name, dC);
-        dC = new HellConfiguration();
+        dC = new NetherConfiguration();
         configurations.put(dC.name, dC);
         dC = new DesertConfiguration();
         configurations.put(dC.name, dC);
         dC = new OceanConfiguration();
         configurations.put(dC.name, dC);
-        dC = new DarkConfiguration();
+        dC = new RoofedConfiguration();
         configurations.put(dC.name, dC);
         dC = new IceConfiguration();
         configurations.put(dC.name, dC);
@@ -49,7 +49,7 @@ public class DungeonConfigurations {
         configurations.put(dC.name, dC);
         dC = new SwampConfiguration();
         configurations.put(dC.name, dC);
-        dC = new EndConfiguration();
+        dC = new SkyConfiguration();
         configurations.put(dC.name, dC);
 
         for (Map.Entry<String, DungeonConfiguration> entry : configurations.entrySet())

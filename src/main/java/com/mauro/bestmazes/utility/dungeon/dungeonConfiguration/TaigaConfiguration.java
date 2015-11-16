@@ -3,14 +3,13 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
-import com.mauro.bestmazes.entities.minotaurs.NarrowMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.TaigaMinotaur;
 import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -21,9 +20,9 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class NarrowConfiguration extends DungeonConfiguration {
+public class TaigaConfiguration extends DungeonConfiguration {
 
-    public NarrowConfiguration(){
+    public TaigaConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.002;
         waterProb = 0.002;
@@ -35,7 +34,7 @@ public class NarrowConfiguration extends DungeonConfiguration {
         walls = BestMazesBlocks.piselliteBricks;
         roof = BestMazesBlocks.spruceWoodPlanks;
         content = Blocks.air;
-        name = DungeonReferences.NARROW;
+        name = DungeonReferences.TAIGA;
         prob = 0.005;
 
         xStart = 2;
@@ -80,7 +79,7 @@ public class NarrowConfiguration extends DungeonConfiguration {
     }
 
     public DungeonConfiguration clone(){
-        return new NarrowConfiguration();
+        return new TaigaConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -118,7 +117,7 @@ public class NarrowConfiguration extends DungeonConfiguration {
     }
 
     public Minotaur getMinotaur(World world){
-        return new NarrowMinotaur(world);
+        return new TaigaMinotaur(world);
     }
 }
 

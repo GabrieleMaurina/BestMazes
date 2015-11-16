@@ -4,14 +4,14 @@ import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Spawner;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
-import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.EndConfiguration;
+import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.SkyConfiguration;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DungeonHooks;
-import org.lwjgl.Sys;
 
 import java.util.Random;
 
@@ -78,7 +78,7 @@ public class Dungeon {
 
         if(dC.name.equals(DungeonReferences.END)){
             xStairs = xDungeon - 9;
-            yStairs = yDungeon + 10;
+            yStairs = yDungeon + 20;
             zStairs = zDungeon - 5;
 
             xMaze = xDungeon - m.getXCoor(xEntrance);
@@ -99,7 +99,7 @@ public class Dungeon {
 
             corridor = genCorridor(4, 5, 4);
 
-            connection = ((EndConfiguration)dC).genFinalConnection();
+            connection = ((SkyConfiguration)dC).genFinalConnection();
         }
         else {
 
@@ -159,7 +159,7 @@ public class Dungeon {
     {
         if(dC.name.equals(DungeonReferences.END))
         {
-            EndConfiguration eC = (EndConfiguration) dC;
+            SkyConfiguration eC = (SkyConfiguration) dC;
             StructureGenerator.createModel(world, maze, xMaze, yMaze, zMaze);
             eC.genFinalEntrance(world, xStairs, yStairs, zStairs);
             eC.genFinalRoom(world, xLootRoom, yLootRoom, zLootRoom, random);
@@ -179,18 +179,16 @@ public class Dungeon {
     }
 
     private Block[][][] genStairs(){
-
         int k = 0;
         ok = false;
-        int threshold = dC.name.equals(DungeonReferences.HELL) ? 120 : 220;
+        int threshold = dC.name.equals(DungeonReferences.NETHER) ? 120 : 220;
         for (k = yStairs + 10; k < threshold && ok == false; k++) {
             ok = true;
             for (int i = 0; i < 7; i++) {
                 for (int e = 0; e < 7; e++) {
                     if (i == 0 || e == 0 || i == 6 || e == 6) {
                         Block b = world.getBlock(xStairs + i, k, zStairs + e);
-                        if(b.getMaterial().isSolid() || b == Blocks.lava || (!dC.name.equals(DungeonReferences.OCEAN) && b == Blocks.water)){
-                        //if (b != Blocks.air && b != Blocks.water && b != Blocks.tallgrass) {
+                        if((b.getMaterial().isSolid() && b.getMaterial() != Material.leaves && b.getMaterial() != Material.wood) || b == Blocks.lava || (!dC.name.equals(DungeonReferences.OCEAN) && b == Blocks.water)){
                             ok = false;
                         }
                     }

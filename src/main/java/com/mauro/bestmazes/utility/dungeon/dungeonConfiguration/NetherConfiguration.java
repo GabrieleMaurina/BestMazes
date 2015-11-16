@@ -2,7 +2,7 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.entities.minotaurs.HellMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.NetherMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
@@ -19,9 +19,9 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class HellConfiguration extends DungeonConfiguration{
+public class NetherConfiguration extends DungeonConfiguration{
 
-    public HellConfiguration(){
+    public NetherConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.001;
@@ -33,7 +33,7 @@ public class HellConfiguration extends DungeonConfiguration{
         walls = BestMazesBlocks.piselliteBricks;
         roof = Blocks.nether_brick;
         content = Blocks.air;
-        name = DungeonReferences.HELL;
+        name = DungeonReferences.NETHER;
         prob = 0.004;
 
         xStart = 2;
@@ -63,7 +63,7 @@ public class HellConfiguration extends DungeonConfiguration{
     }
 
     public DungeonConfiguration clone(){
-        return new HellConfiguration();
+        return new NetherConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -225,6 +225,6 @@ public class HellConfiguration extends DungeonConfiguration{
     }
 
     public Minotaur getMinotaur(World world){
-        return new HellMinotaur(world);
+        return new NetherMinotaur(world);
     }
 }

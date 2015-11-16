@@ -2,6 +2,7 @@ package com.mauro.bestmazes.entities.minotaurs;
 
 import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
@@ -14,6 +15,6 @@ public class ExtremeMinotaur extends Minotaur{
 
     public ExtremeMinotaur(World world){
         super(world);
-        key = BestMazesItems.extremeKey;
+        drop = new ItemStack(BestMazesItems.extremeKey, 1);
     }
 }

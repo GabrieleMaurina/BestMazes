@@ -19,6 +19,6 @@ public class BestMazesKeysTab extends CreativeTabs {
     @Override
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem(){
-        return BestMazesItems.classicKey;
+        return BestMazesItems.forestKey;
     }
 }

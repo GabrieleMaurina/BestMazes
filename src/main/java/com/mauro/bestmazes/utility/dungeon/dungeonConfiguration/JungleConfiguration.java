@@ -2,7 +2,7 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.entities.minotaurs.ExpandedMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.JungleMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
@@ -10,7 +10,6 @@ import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -21,9 +20,9 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class ExpandedConfiguration extends DungeonConfiguration{
+public class JungleConfiguration extends DungeonConfiguration{
 
-    public ExpandedConfiguration(){
+    public JungleConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.0005;
@@ -35,7 +34,7 @@ public class ExpandedConfiguration extends DungeonConfiguration{
         walls = BestMazesBlocks.piselliteBricks;
         roof = BestMazesBlocks.jungleWoodPlanks;
         content = Blocks.air;
-        name = DungeonReferences.EXPANDED;
+        name = DungeonReferences.JUNGLE;
         prob = 0.005;
 
         xStart = 2;
@@ -77,7 +76,7 @@ public class ExpandedConfiguration extends DungeonConfiguration{
     }
 
     public DungeonConfiguration clone(){
-        return new ExpandedConfiguration();
+        return new JungleConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -111,6 +110,6 @@ public class ExpandedConfiguration extends DungeonConfiguration{
     }
 
     public Minotaur getMinotaur(World world){
-        return new ExpandedMinotaur(world);
+        return new JungleMinotaur(world);
     }
 }

@@ -1,30 +1,33 @@
 #Items
 
-item.classicKey.name=Classic Key
-item.crazyKey.name=Crazy Key
-item.darkKey.name=Dark Key
+item.forestKey.name=Forest Key
+item.birchKey.name=Birch Key
+item.roofedKey.name=Roofed Key
 item.desertKey.name=Desert Key
-item.expandedKey.name=Expanded Key
+item.jungleKey.name=Jungle Key
 item.extremeKey.name=Extreme Key
-item.hellKey.name=Hell Key
+item.netherKey.name=Nether Key
 item.iceKey.name=Ice Key
-item.narrowKey.name=Narrow Key
+item.taigaKey.name=Taiga Key
 item.oceanKey.name=Ocean Key
 item.plainKey.name=Plain Key
 item.swampKey.name=Swamp Key
-item.wideKey.name=Wide Key
+item.savannaKey.name=Savanna Key
 
 item.minotaurIvoryHelmet.name=Minotaur Ivory Helmet
 item.minotaurIvoryChestplate.name=Minotaur Ivory Chestplate
 item.minotaurIvoryLeggins.name=Minotaur Ivory Leggins
 item.minotaurIvoryBoots.name=Minotaur Ivory Boots
 
+item.minotaurIvorySword.name=Minotaur Ivory Sword
+
 
 
 #Blocks
 
-tile.piselliteBricks.name=PiselliteBricks
-tile.piselliteBricksSlab.name=PiselliteBricksSlab
+tile.piselliteBricks.name=Pisellite Bricks
+tile.piselliteBricksSlab.name=Pisellite Bricks Slab
+tile.mazeLock.name=Maze Lock
 
 
 
@@ -33,19 +36,19 @@ tile.piselliteBricksSlab.name=PiselliteBricksSlab
 itemGroup.bestMazesTab=Best Mazes
 
 
-
 #Entities
 
-entity.classicMinotaur.name=Classic Minotaur
-entity.crazyMinotaur.name=Crazy Minotaur
-entity.darkMinotaur.name=Dark Minotaur
+entity.forestMinotaur.name=Forest Minotaur
+entity.birchMinotaur.name=Birch Minotaur
+entity.roofedMinotaur.name=Roofed Minotaur
 entity.desertMinotaur.name=Desert Minotaur
-entity.expandedMinotaur.name=Expanded Minotaur
+entity.jungleMinotaur.name=Jungle Minotaur
 entity.extremeMinotaur.name=Extreme Minotaur
-entity.hellMinotaur.name=Hell Minotaur
+entity.netherMinotaur.name=Nether Minotaur
 entity.iceMinotaur.name=Ice Minotaur
-entity.narrowMinotaur.name=Narrow Minotaur
+entity.taigaMinotaur.name=Taiga Minotaur
 entity.oceanMinotaur.name=Ocean Minotaur
 entity.plainMinotaur.name=Plain Minotaur
 entity.swampMinotaur.name=Swamp Minotaur
-entity.wideMinotaur.name=Wide Minotaur
+entity.savannaMinotaur.name=Savanna Minotaur
+entity.endMinotaur.name=End Minotaur

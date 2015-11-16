@@ -2,16 +2,14 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.entities.minotaurs.ClassicMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.ForestMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
-import com.mauro.bestmazes.utility.dungeon.Dungeon;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -22,9 +20,9 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class ClassicConfiguration extends DungeonConfiguration{
+public class ForestConfiguration extends DungeonConfiguration{
 
-    public ClassicConfiguration(){
+    public ForestConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.001;
@@ -36,7 +34,7 @@ public class ClassicConfiguration extends DungeonConfiguration{
         walls = BestMazesBlocks.piselliteBricks;
         roof = BestMazesBlocks.oakWoodPlanks;
         content = Blocks.air;
-        name = DungeonReferences.CLASSIC;
+        name = DungeonReferences.FOREST;
         prob = 0.004;
 
         xStart = 2;
@@ -77,7 +75,7 @@ public class ClassicConfiguration extends DungeonConfiguration{
     }
 
     public DungeonConfiguration clone(){
-        return new ClassicConfiguration();
+        return new ForestConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -115,6 +113,6 @@ public class ClassicConfiguration extends DungeonConfiguration{
     }
 
     public Minotaur getMinotaur(World world){
-        return new ClassicMinotaur(world);
+        return new ForestMinotaur(world);
     }
 }

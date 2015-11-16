@@ -11,6 +11,7 @@ public class BestMazesBlocks {
 
     static public Block piselliteBricks = new PiselliteBricks();
     static private Block piselliteBricksSlab = new PiselliteBricksSlab();
+    public static final Block mazeLock = new MazeLock();
 
     //public static final SpecialBlock stoneBricksSlabDown = new SpecialBlock(Blocks.stone_slab, 5, 3);
     //public static final SpecialBlock stoneBricksSlabUp = new SpecialBlock(Blocks.stone_slab, 13, 3);
@@ -33,5 +34,6 @@ public class BestMazesBlocks {
     public static void initBlocks(){
         GameRegistry.registerBlock(BestMazesBlocks.piselliteBricks, PiselliteBricks.name);
         GameRegistry.registerBlock(BestMazesBlocks.piselliteBricksSlab, PiselliteBricksSlab.name);
+        GameRegistry.registerBlock(BestMazesBlocks.mazeLock, MazeLock.name);
     }
 }

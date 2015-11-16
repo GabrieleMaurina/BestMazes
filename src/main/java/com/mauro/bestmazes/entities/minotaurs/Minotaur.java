@@ -14,7 +14,7 @@ import net.minecraft.world.World;
  */
 public abstract class Minotaur extends EntityMob {
 
-    public Key key;
+    public ItemStack drop;
 
     public Minotaur(World world){
         super(world);
@@ -35,11 +35,11 @@ public abstract class Minotaur extends EntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0);
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0);
-        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(24.0);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0);
+        getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0);
+        getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0);
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(24.0);
     }
 
     public boolean isAIEnabled() {
@@ -53,8 +53,8 @@ public abstract class Minotaur extends EntityMob {
 
     @Override
     public void onDeath(DamageSource damageSource) {
-        if (!worldObj.isRemote) {
-            entityDropItem(new ItemStack(key, 1), 0.0F);
+        if (!worldObj.isRemote && drop != null) {
+            entityDropItem(drop, 0.0F);
         }
         super.onDeath(damageSource);
     }

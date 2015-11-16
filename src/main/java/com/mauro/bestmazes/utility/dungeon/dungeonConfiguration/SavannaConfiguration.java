@@ -3,14 +3,13 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
-import com.mauro.bestmazes.entities.minotaurs.WideMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.SavannaMinotaur;
 import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -21,9 +20,9 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class WideConfiguration extends DungeonConfiguration{
+public class SavannaConfiguration extends DungeonConfiguration{
 
-    public WideConfiguration(){
+    public SavannaConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.0005;
@@ -35,7 +34,7 @@ public class WideConfiguration extends DungeonConfiguration{
         walls = BestMazesBlocks.piselliteBricks;
         roof = BestMazesBlocks.acaciaWoodPlanks;
         content = Blocks.air;
-        name = DungeonReferences.WIDE;
+        name = DungeonReferences.SAVANNA;
         prob = 0.005;
 
         xStart = 2;
@@ -76,7 +75,7 @@ public class WideConfiguration extends DungeonConfiguration{
     }
 
     public DungeonConfiguration clone(){
-        return new WideConfiguration();
+        return new SavannaConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -165,6 +164,6 @@ public class WideConfiguration extends DungeonConfiguration{
     }
 
     public Minotaur getMinotaur(World world){
-        return new WideMinotaur(world);
+        return new SavannaMinotaur(world);
     }
 }
