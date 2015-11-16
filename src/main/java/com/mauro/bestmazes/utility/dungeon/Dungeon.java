@@ -1,13 +1,16 @@
 package com.mauro.bestmazes.utility.dungeon;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
+import com.mauro.bestmazes.blocks.Spawner;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.EndConfiguration;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DungeonHooks;
 import org.lwjgl.Sys;
 
 import java.util.Random;
@@ -23,9 +26,10 @@ public class Dungeon {
     private Block[][][] stairs;
     private Block[][][] lootRoom;
     private Block[][][] corridor;
+    private Block[][][] connection;
     private Block[][][] hut;
     private World world;
-    private int xDungeon, yDungeon, zDungeon, xMaze, yMaze, zMaze, xStairs, yStairs, zStairs, xLootRoom, yLootRoom, zLootRoom, xCorridor, yCorridor, zCorridor, xHut, yHut, zHut;
+    private int xDungeon, yDungeon, zDungeon, xMaze, yMaze, zMaze, xStairs, yStairs, zStairs, xLootRoom, yLootRoom, zLootRoom, xCorridor, yCorridor, zCorridor, xHut, yHut, zHut, xConnection, yConnection, zConnection;
     private int xEntrance;
     private Random random;
     private DungeonConfiguration dC;
@@ -33,6 +37,8 @@ public class Dungeon {
 
     private static final int Y_DUNGEON = 5;
     private static final int corridorLength = 5;
+    private static final int corridorHeight = 4;
+    private static final int corridorWidth = 3;
 
     private static int nLava = 0, nWater = 0, nPassages = 0, nSpawners = 0, nSpiderNets = 0;
 
@@ -40,10 +46,10 @@ public class Dungeon {
         int x = xChunk * 16 + random.nextInt(16);
         int z = zChunk * 16 + random.nextInt(16);
         DungeonConfiguration dC = DungeonConfigurations.getConfByBiome(world.getBiomeGenForCoords(x, z));
-        if(dC != null && random.nextDouble() < dC.prob && Dungeon.available(world, x, Y_DUNGEON, z)){
+        if(dC != null && random.nextDouble() < dC.prob && Dungeon.available(world, x, Y_DUNGEON, z, dC, xChunk, zChunk)){
             Dungeon d = new Dungeon(world, random, x, Y_DUNGEON, z, dC);
             d.generate();
-            System.out.println("@@@###***   MAZE   ***###@@@");
+            System.out.println("@@@ ### ***   MAZE   *** ### @@@");
             System.out.println("X: " + x);
             System.out.println("Z: " + z);
             System.out.println("TYPE: " + dC.name);
@@ -65,61 +71,109 @@ public class Dungeon {
         this.random = r;
         this.world = world;
 
-        this.xEntrance = dC.xStart * 2 + 1;
-
         m = new Maze3D(dC, r);
         maze = genMaze();
 
-        xStairs = xDungeon - 2;
-        yStairs = yDungeon + m.getYCoor(m.ySize - 2) - 1;
-        zStairs = zDungeon - 2;
+        this.xEntrance = dC.xStart * 2 + 1;
 
-        xMaze = xStairs + 1 - m.getXCoor(xEntrance);
-        yMaze = yDungeon;
-        zMaze = zDungeon + 2;
+        if(dC.name.equals(DungeonReferences.END)){
+            xStairs = xDungeon - 9;
+            yStairs = yDungeon + 10;
+            zStairs = zDungeon - 5;
 
-        xCorridor = xMaze + m.getXCoor(xEntrance) - 1;
-        yCorridor = yDungeon + m.getYCoor(1) - 1;
-        zCorridor = zMaze + m.zMSize - m.deltas[m.zSize - 1][2];
+            xMaze = xDungeon - m.getXCoor(xEntrance);
+            yMaze = yStairs + 5;
+            zMaze = zStairs - maze[0][0].length - 3;
 
-        xLootRoom = xMaze + m.getXCoor(xEntrance) - dC.xLootRoom;
-        yLootRoom = yDungeon + m.getYCoor(1) - dC.yLootRoom;
-        zLootRoom = zCorridor + corridorLength;
+            xLootRoom = xMaze + m.getXCoor(xEntrance) - dC.xLootRoom;
+            yLootRoom = yMaze + maze[0].length - 1;
+            zLootRoom = zStairs - 43;
 
-        stairs = genStairs();
+            xCorridor = xDungeon - 1;
+            yCorridor = yMaze;
+            zCorridor = zStairs - 4;
 
-        if(!ok) return;
+            xConnection = xCorridor - 2;
+            yConnection = yCorridor;
+            zConnection = zCorridor - maze[0][0].length - 10;
 
-        xHut = xDungeon + dC.xHut;
-        yHut = yStairs + stairs[0].length - 1;
-        zHut = zDungeon + dC.zHut;
+            corridor = genCorridor(4, 5, 4);
 
-        lootRoom = dC.genLootRoom(random);
+            connection = ((EndConfiguration)dC).genFinalConnection();
+        }
+        else {
 
-        corridor = genCorridor();
+            xStairs = xDungeon - 2;
+            yStairs = yDungeon + m.getYCoor(m.ySize - 2) - 1;
+            zStairs = zDungeon - 2;
 
-        hut = dC.genEntranceHut(random);
+            xMaze = xStairs + 1 - m.getXCoor(xEntrance);
+            yMaze = yDungeon;
+            zMaze = zDungeon + 2;
+
+            xCorridor = xMaze + m.getXCoor(xEntrance) - 1;
+            yCorridor = yDungeon + m.getYCoor(1) - 1;
+            zCorridor = zMaze + m.zMSize - m.deltas[m.zSize - 1][2];
+
+            xLootRoom = xMaze + m.getXCoor(xEntrance) - dC.xLootRoom;
+            yLootRoom = yDungeon + m.getYCoor(1) - dC.yLootRoom;
+            zLootRoom = zCorridor + corridorLength;
+
+            stairs = genStairs();
+
+            if (!ok) return;
+
+            xHut = xDungeon + dC.xHut;
+            yHut = yStairs + stairs[0].length - 1;
+            zHut = zDungeon + dC.zHut;
+
+            lootRoom = dC.genLootRoom(random);
+
+            corridor = genCorridor(corridorWidth, corridorHeight, corridorLength);
+
+            hut = dC.genEntranceHut(random);
+        }
     }
 
-    public static boolean available(World world, int x, int y, int z){
-        for(int i = -2; i < 3; i++){
-            for(int e = -1; e < 4; e++){
-                if(world.getBlock(x + (i * 10), y, z + (e * 10)) == BestMazesBlocks.piselliteBricks) return false;
+    public static boolean available(World world, int x, int y, int z, DungeonConfiguration dC, int xChunk, int zChunk){
+        if(dC.name.equals(DungeonReferences.END)){
+            if(xChunk == 0 && zChunk == 2){
+                return true;
+            }
+            else{
+                return false;
             }
         }
+        else {
+            for (int i = -2; i < 3; i++) {
+                for (int e = -1; e < 4; e++) {
+                    if (world.getBlock(x + (i * 10), y, z + (e * 10)) == BestMazesBlocks.piselliteBricks) return false;
+                }
+            }
 
-        return true;
+            return true;
+        }
     }
 
     public void generate()
     {
-        if(ok)
+        if(dC.name.equals(DungeonReferences.END))
         {
-            StructureGenerator.createModel(world, hut, xHut, yHut, zHut, random);
-            StructureGenerator.createModel(world, maze, xMaze, yMaze, zMaze, random);
-            StructureGenerator.createModel(world, stairs, xStairs, yStairs, zStairs, random);
-            StructureGenerator.createModel(world, lootRoom, xLootRoom, yLootRoom, zLootRoom, random);
-            StructureGenerator.createModel(world, corridor, xCorridor, yCorridor, zCorridor, random);
+            EndConfiguration eC = (EndConfiguration) dC;
+            StructureGenerator.createModel(world, maze, xMaze, yMaze, zMaze);
+            eC.genFinalEntrance(world, xStairs, yStairs, zStairs);
+            eC.genFinalRoom(world, xLootRoom, yLootRoom, zLootRoom, random);
+            StructureGenerator.createModel(world, corridor, xCorridor, yCorridor, zCorridor);
+            StructureGenerator.createModel(world, corridor, xCorridor, yCorridor, zCorridor - maze[0][0].length - 2);
+            StructureGenerator.createModel(world, connection, xConnection, yConnection, zConnection);
+        }
+        else if(ok)
+        {
+            StructureGenerator.createModel(world, hut, xHut, yHut, zHut);
+            StructureGenerator.createModel(world, maze, xMaze, yMaze, zMaze);
+            StructureGenerator.createModel(world, stairs, xStairs, yStairs, zStairs);
+            StructureGenerator.createModel(world, lootRoom, xLootRoom, yLootRoom, zLootRoom);
+            StructureGenerator.createModel(world, corridor, xCorridor, yCorridor, zCorridor);
             spawnMinotaur();
         }
     }
@@ -172,9 +226,9 @@ public class Dungeon {
             dz += (int) Math.round(Math.sin(dir));
 
             if (i % 2 == 0) {
-                model[1 + dx][i / 2][1 + dz] = BestMazesBlocks.stoneBricksSlabDown;
+                model[1 + dx][i / 2][1 + dz] = BestMazesBlocks.piselliteBricksSlabDown;
             } else {
-                model[1 + dx][i / 2][1 + dz] = BestMazesBlocks.stoneBricksSlabUp;
+                model[1 + dx][i / 2][1 + dz] = BestMazesBlocks.piselliteBricksSlabUp;
             }
 
             if (!dC.name.equals(DungeonReferences.OCEAN) && i % 8 == 0 && i < k * 2 - 8) {
@@ -314,7 +368,7 @@ public class Dungeon {
                 z = 0;
                 for (int o = 0; o < m.zSize; o++) {
                     if (random.nextDouble() < dC.mobProb && x > 0 && y > 0 && z > 0 && x < m.xMSize - 1 && y < m.yMSize - 1 && z < m.zMSize - 1 && posOK(model, x, y, z)) {
-                        model[x][y][z] = Blocks.mob_spawner;
+                        model[x][y][z] = new Spawner(DungeonHooks.getRandomDungeonMob(random));
                         nSpawners++;
                     }
                     if(o % 2 == 1){
@@ -366,10 +420,10 @@ public class Dungeon {
         world.spawnEntityInWorld(minotaur);
     }
 
-    private Block[][][] genCorridor(){
-        Block[][][] model = new Block[3][4][corridorLength];
-        Drawer.fillParallelepipedon(model, 0, 0, 0, 2, 3, corridorLength - 1, dC.walls);
-        Drawer.fillParallelepipedon(model, 1, 1, 0, 1, 2, corridorLength - 1, dC.content);
+    private Block[][][] genCorridor(int xSize, int ySize, int zSize){
+        Block[][][] model = new Block[xSize][ySize][zSize];
+        Drawer.fillParallelepipedon1(model, 0, 0, 0, xSize, ySize, zSize, dC.walls);
+        Drawer.fillParallelepipedon1(model, 1, 1, 0, xSize - 2, ySize - 2, zSize, dC.content);
         return model;
     }
 }

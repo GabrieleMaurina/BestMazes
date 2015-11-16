@@ -97,23 +97,23 @@ public class DarkConfiguration extends DungeonConfiguration {
         Drawer.fillParallelepipedon1(model, 6, 1, 3, 1, 2, 1, walls);
         Drawer.fillParallelepipedon1(model, 8, 1, 3, 1, 2, 1, walls);
 
-        model[8][1][8] = BestMazesBlocks.stoneBricksSlabDown;
-        model[8][1][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[8][2][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[8][2][5] = BestMazesBlocks.stoneBricksSlabUp;
-        model[8][3][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[8][1][8] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[8][1][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[8][2][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[8][2][5] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[8][3][4] = BestMazesBlocks.piselliteBricksSlabDown;
 
-        model[6][1][8] = BestMazesBlocks.stoneBricksSlabDown;
-        model[6][1][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[6][2][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[6][2][5] = BestMazesBlocks.stoneBricksSlabUp;
-        model[6][3][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[6][1][8] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[6][1][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[6][2][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[6][2][5] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[6][3][4] = BestMazesBlocks.piselliteBricksSlabDown;
 
-        model[7][6][8] = BestMazesBlocks.stoneBricksSlabDown;
-        model[7][5][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[7][5][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[7][4][5] = BestMazesBlocks.stoneBricksSlabUp;
-        model[7][4][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[7][6][8] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[7][5][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[7][5][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[7][4][5] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[7][4][4] = BestMazesBlocks.piselliteBricksSlabDown;
 
         Drawer.fillParallelepipedon1(model, xLootRoom, yLootRoom, 0, 1, 2, 1, content);
 

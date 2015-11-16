@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.entities.minotaurs.NarrowMinotaur;
+import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -72,7 +73,7 @@ public class NarrowConfiguration extends DungeonConfiguration {
 
     public ArrayList<ItemStack> getLoot(Random r){
         ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack chestplate = new ItemStack(Items.diamond_chestplate, 1);
+        ItemStack chestplate = new ItemStack(BestMazesItems.minotaurIvoryChestplate, 1);
         chestplate.addEnchantment(Enchantment.protection, 10);
         loot.add(chestplate);
         return loot;
@@ -88,10 +89,10 @@ public class NarrowConfiguration extends DungeonConfiguration {
         Drawer.fillParallelepipedon(model, 1, 1, 1, 11, 7, 11, content);
         Drawer.drawParallelepipedon(model, 0, 0, 0, 12, 8, 12, walls);
 
-        Drawer.fillParallelepipedon1(model, 2, 1, 2, 9, 1, 9, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 3, 1, 3, 7, 1, 7, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 4, 2, 4, 5, 1, 5, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 5, 2, 5, 3, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 2, 1, 2, 9, 1, 9, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 3, 1, 3, 7, 1, 7, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 4, 2, 4, 5, 1, 5, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 5, 2, 5, 3, 1, 3, BestMazesBlocks.piselliteBricksSlabUp);
 
         Drawer.column(model, 5, 1, 2, walls, roof);
         Drawer.column(model, 7, 1, 2, walls, roof);

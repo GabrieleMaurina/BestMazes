@@ -16,7 +16,6 @@ public class Key extends Item {
         this.type = type;
         this.name = type + "Key";
         setUnlocalizedName(name);
-        //setTextureName(Reference.MOD_ID + ":keys/" + name);
         setTextureName(Reference.MOD_ID + ":keys/key");
         setCreativeTab(BestMazesTabs.bestMazesTab);
     }

@@ -8,8 +8,14 @@ import net.minecraft.init.Blocks;
  * Created by Gabriele on 10/29/2015.
  */
 public class BestMazesBlocks {
-    public static final SpecialBlock stoneBricksSlabDown = new SpecialBlock(Blocks.stone_slab, 5, 3);
-    public static final SpecialBlock stoneBricksSlabUp = new SpecialBlock(Blocks.stone_slab, 13, 3);
+
+    static public Block piselliteBricks = new PiselliteBricks();
+    static private Block piselliteBricksSlab = new PiselliteBricksSlab();
+
+    //public static final SpecialBlock stoneBricksSlabDown = new SpecialBlock(Blocks.stone_slab, 5, 3);
+    //public static final SpecialBlock stoneBricksSlabUp = new SpecialBlock(Blocks.stone_slab, 13, 3);
+    public static final SpecialBlock piselliteBricksSlabDown = new SpecialBlock(BestMazesBlocks.piselliteBricksSlab, 5, 3);
+    public static final SpecialBlock piselliteBricksSlabUp = new SpecialBlock(BestMazesBlocks.piselliteBricksSlab, 13, 3);
     public static final SpecialBlock oakWoodPlanks = new SpecialBlock(Blocks.planks, 0, 3);
     public static final SpecialBlock spruceWoodPlanks = new SpecialBlock(Blocks.planks, 1, 3);
     public static final SpecialBlock britchWoodPlanks = new SpecialBlock(Blocks.planks, 2, 3);
@@ -23,8 +29,9 @@ public class BestMazesBlocks {
     public static final SpecialBlock vineSouth = new Vine(Vine.SOUTH);
     public static final SpecialBlock vineEast = new Vine(Vine.EAST);
     public static final SpecialBlock vineWest = new Vine(Vine.WEST);
-    static public Block piselliteBricks = new PiselliteBricks();
+
     public static void initBlocks(){
         GameRegistry.registerBlock(BestMazesBlocks.piselliteBricks, PiselliteBricks.name);
+        GameRegistry.registerBlock(BestMazesBlocks.piselliteBricksSlab, PiselliteBricksSlab.name);
     }
 }

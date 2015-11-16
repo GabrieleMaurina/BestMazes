@@ -12,11 +12,11 @@ import java.util.Random;
  */
 public class Drawer {
 
-    public static void drawRectangle(World world, int x, int y, int z, int dx, int dz, Block b, Random random){
-        fillParallelepipedon1(world, x, y, z, dx, 1, 1, b, random);
-        fillParallelepipedon1(world, x, y, z + dz - 1, dx, 1, 1, b, random);
-        fillParallelepipedon1(world, x, y, z + 1, 1, 1, dz - 2, b, random);
-        fillParallelepipedon1(world, x + dx - 1, y, z + 1, 1, 1, dz - 2, b, random);
+    public static void drawRectangle(World world, int x, int y, int z, int dx, int dz, Block b){
+        fillParallelepipedon1(world, x, y, z, dx, 1, 1, b);
+        fillParallelepipedon1(world, x, y, z + dz - 1, dx, 1, 1, b);
+        fillParallelepipedon1(world, x, y, z + 1, 1, 1, dz - 2, b);
+        fillParallelepipedon1(world, x + dx - 1, y, z + 1, 1, 1, dz - 2, b);
     }
 
     public static void drawParallelepipedon(Block[][][] model, int x, int y, int z, int x1, int y1, int z1, Block b) {
@@ -43,7 +43,7 @@ public class Drawer {
         fillParallelepipedon(model, x + 1, y + 1, z1, x1 - 1, y1 - 1, z1, b);
     }
 
-    public static void drawParallelepipedon(World world, int x, int y, int z, int x1, int y1, int z1, Block b, Random random) {
+    public static void drawParallelepipedon(World world, int x, int y, int z, int x1, int y1, int z1, Block b) {
         if(x1 < x){
             int tmp = x1;
             x1 = x;
@@ -59,12 +59,12 @@ public class Drawer {
             z1 = z;
             z = tmp;
         }
-        fillParallelepipedon(world, x, y, z, x1, y, z1, b, random);
-        fillParallelepipedon(world, x, y1, z, x1, y1, z1, b, random);
-        fillParallelepipedon(world, x, y + 1, z, x, y1 - 1, z1, b, random);
-        fillParallelepipedon(world, x1, y + 1, z, x1, y1 - 1, z1, b, random);
-        fillParallelepipedon(world, x + 1, y + 1, z, x1 - 1, y1 - 1, z, b, random);
-        fillParallelepipedon(world, x + 1, y + 1, z1, x1 - 1, y1 - 1, z1, b, random);
+        fillParallelepipedon(world, x, y, z, x1, y, z1, b);
+        fillParallelepipedon(world, x, y1, z, x1, y1, z1, b);
+        fillParallelepipedon(world, x, y + 1, z, x, y1 - 1, z1, b);
+        fillParallelepipedon(world, x1, y + 1, z, x1, y1 - 1, z1, b);
+        fillParallelepipedon(world, x + 1, y + 1, z, x1 - 1, y1 - 1, z, b);
+        fillParallelepipedon(world, x + 1, y + 1, z1, x1 - 1, y1 - 1, z1, b);
     }
 
     public static void drawParallelepipedon1(Block[][][] model, int x, int y, int z, int dx, int dy, int dz, Block b) {
@@ -96,7 +96,7 @@ public class Drawer {
         fillParallelepipedon(model, x + 1, y + 1, z1, x1 - 1, y1 - 1, z1, b);
     }
 
-    public static void drawParallelepipedon1(World world, int x, int y, int z, int dx, int dy, int dz, Block b, Random random) {
+    public static void drawParallelepipedon1(World world, int x, int y, int z, int dx, int dy, int dz, Block b) {
         int x1 = x + dx - 1;
         int y1 = y + dy - 1;
         int z1 = z + dz - 1;
@@ -117,12 +117,12 @@ public class Drawer {
             z = tmp;
         }
 
-        fillParallelepipedon(world, x, y, z, x1, y, z1, b, random);
-        fillParallelepipedon(world, x, y1, z, x1, y1, z1, b, random);
-        fillParallelepipedon(world, x, y + 1, z, x, y1 - 1, z1, b, random);
-        fillParallelepipedon(world, x1, y + 1, z, x1, y1 - 1, z1, b, random);
-        fillParallelepipedon(world, x + 1, y + 1, z, x1 - 1, y1 - 1, z, b, random);
-        fillParallelepipedon(world, x + 1, y + 1, z1, x1 - 1, y1 - 1, z1, b, random);
+        fillParallelepipedon(world, x, y, z, x1, y, z1, b);
+        fillParallelepipedon(world, x, y1, z, x1, y1, z1, b);
+        fillParallelepipedon(world, x, y + 1, z, x, y1 - 1, z1, b);
+        fillParallelepipedon(world, x1, y + 1, z, x1, y1 - 1, z1, b);
+        fillParallelepipedon(world, x + 1, y + 1, z, x1 - 1, y1 - 1, z, b);
+        fillParallelepipedon(world, x + 1, y + 1, z1, x1 - 1, y1 - 1, z1, b);
     }
 
     public static void fillParallelepipedon(Block[][][] model, int x, int y, int z, int x1, int y1, int z1, Block b){
@@ -154,7 +154,7 @@ public class Drawer {
         }
     }
 
-    public static void fillParallelepipedon(World world, int x, int y, int z, int x1, int y1, int z1, Block b, Random random){
+    public static void fillParallelepipedon(World world, int x, int y, int z, int x1, int y1, int z1, Block b){
         if(x1 < x){
             int tmp = x1;
             x1 = x;
@@ -177,7 +177,7 @@ public class Drawer {
             {
                 for(int o = z; o < z1 + 1; o++)
                 {
-                    StructureGenerator.setBlock(world, i, e, o, b, random);
+                    StructureGenerator.setBlock(world, i, e, o, b);
                 }
             }
         }
@@ -209,7 +209,7 @@ public class Drawer {
         }
     }
 
-    public static void fillParallelepipedon1(World world, int x, int y, int z, int dx, int dy, int dz, Block b, Random random){
+    public static void fillParallelepipedon1(World world, int x, int y, int z, int dx, int dy, int dz, Block b){
         if(dx < 0){
             x = x + dx + 1;
             dx = dx * (-1);
@@ -229,7 +229,7 @@ public class Drawer {
             {
                 for(int o = z; o < z + dz; o++)
                 {
-                    StructureGenerator.setBlock(world, i, e, o, b, random);
+                    StructureGenerator.setBlock(world, i, e, o, b);
                 }
             }
         }

@@ -35,11 +35,11 @@ public abstract class Minotaur extends EntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(270.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0);
+        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(24.0);
     }
 
     public boolean isAIEnabled() {

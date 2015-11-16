@@ -1,9 +1,6 @@
 package com.mauro.bestmazes.worldgenerators;
 
-import com.mauro.bestmazes.blocks.Chest;
-import com.mauro.bestmazes.blocks.SpecialBlock;
-import com.mauro.bestmazes.blocks.TallGrass;
-import com.mauro.bestmazes.blocks.Vine;
+import com.mauro.bestmazes.blocks.*;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
 import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
@@ -31,13 +28,13 @@ public class StructureGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
         if(chunkX == 0 && chunkZ == 0){
-            ((EndConfiguration)DungeonConfigurations.getConfiguration(DungeonReferences.END)).genFinalRoom(world, 0, 100, 0, random);
+            StructureGenerator.createModel(world, ((EndConfiguration) DungeonConfigurations.getConfiguration(DungeonReferences.END)).genFinalConnection(), 0, 100, 0);
         }
 
         Dungeon.generateDungeon(world, chunkX, chunkZ, random);
     }
 
-    public static void setBlock(World world, int x, int y, int z, Block block, Random random){
+    public static void setBlock(World world, int x, int y, int z, Block block){
 
         world.setBlockToAir(x, y, z);
 
@@ -51,9 +48,9 @@ public class StructureGenerator implements IWorldGenerator {
                 fillChest(world, x, y, z, (Chest) block);
                 world.setBlockMetadataWithNotify(x, y, z, ((Chest) block).dir, 0);
             }
-            else if(Blocks.mob_spawner == block){
-                world.setBlock(x, y, z, block);
-                fillSpawner(world, x, y, z, random);
+            else if(block instanceof Spawner){
+                world.setBlock(x, y, z, Blocks.mob_spawner);
+                fillSpawner(world, x, y, z, (Spawner)block);
             }
             else{
                 world.setBlock(x, y, z, block);
@@ -61,7 +58,7 @@ public class StructureGenerator implements IWorldGenerator {
         }
     }
 
-    public static void createModel(World world, Block[][][] model, int x, int y, int z, Random random){
+    public static void createModel(World world, Block[][][] model, int x, int y, int z){
         ArrayList<int[]> coor = new ArrayList<int[]>();
         ArrayList<Block> blocks = new ArrayList<Block>();
         for(int i = 0; i < model.length; i++){
@@ -77,7 +74,7 @@ public class StructureGenerator implements IWorldGenerator {
                             blocks.add(model[i][e][o]);
                         }
                         else{
-                                setBlock(world, x + i, y + e, z + o, model[i][e][o], random);
+                                setBlock(world, x + i, y + e, z + o, model[i][e][o]);
                         }
                     }
                 }
@@ -85,7 +82,7 @@ public class StructureGenerator implements IWorldGenerator {
         }
         for(int i = 0; i < coor.size(); i++)
         {
-            setBlock(world, x + coor.get(i)[0], y + coor.get(i)[1], z + coor.get(i)[2], blocks.get(i), random);
+            setBlock(world, x + coor.get(i)[0], y + coor.get(i)[1], z + coor.get(i)[2], blocks.get(i));
         }
     }
 
@@ -98,8 +95,8 @@ public class StructureGenerator implements IWorldGenerator {
         }
     }
 
-    public static void fillSpawner(World world, int x, int y, int z, Random random){
+    public static void fillSpawner(World world, int x, int y, int z, Spawner spawner){
         TileEntityMobSpawner tileEntityMobSpawner = (TileEntityMobSpawner) world.getTileEntity(x, y, z);
-        tileEntityMobSpawner.func_145881_a().setEntityName(DungeonHooks.getRandomDungeonMob(random));
+        tileEntityMobSpawner.func_145881_a().setEntityName(spawner.type);
     }
 }

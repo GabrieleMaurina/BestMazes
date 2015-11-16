@@ -88,17 +88,17 @@ public class DesertConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon1(model, 7, 1, 10, 1, 3, 1, walls);
         model[7][1][4] = walls;
 
-        model[7][3][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[7][3][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[7][4][8] = BestMazesBlocks.stoneBricksSlabDown;
+        model[7][3][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[7][3][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[7][4][8] = BestMazesBlocks.piselliteBricksSlabDown;
 
-        model[3][1][4] = BestMazesBlocks.stoneBricksSlabDown;
-        model[4][1][4] = BestMazesBlocks.stoneBricksSlabUp;
-        model[5][2][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[3][1][4] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[4][1][4] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[5][2][4] = BestMazesBlocks.piselliteBricksSlabDown;
 
-        model[11][1][4] = BestMazesBlocks.stoneBricksSlabDown;
-        model[10][1][4] = BestMazesBlocks.stoneBricksSlabUp;
-        model[9][2][4] = BestMazesBlocks.stoneBricksSlabDown;
+        model[11][1][4] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[10][1][4] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[9][2][4] = BestMazesBlocks.piselliteBricksSlabDown;
 
         Drawer.column(model, 4, 1, 7, walls, roof);
         Drawer.column(model, 10, 1, 7, walls, roof);

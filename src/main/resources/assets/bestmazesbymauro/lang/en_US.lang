@@ -14,10 +14,38 @@ item.plainKey.name=Plain Key
 item.swampKey.name=Swamp Key
 item.wideKey.name=Wide Key
 
+item.minotaurIvoryHelmet.name=Minotaur Ivory Helmet
+item.minotaurIvoryChestplate.name=Minotaur Ivory Chestplate
+item.minotaurIvoryLeggins.name=Minotaur Ivory Leggins
+item.minotaurIvoryBoots.name=Minotaur Ivory Boots
+
+
+
 #Blocks
 
 tile.piselliteBricks.name=PiselliteBricks
+tile.piselliteBricksSlab.name=PiselliteBricksSlab
+
+
 
 #Creative Tabs
 
 itemGroup.bestMazesTab=Best Mazes
+
+
+
+#Entities
+
+entity.classicMinotaur.name=Classic Minotaur
+entity.crazyMinotaur.name=Crazy Minotaur
+entity.darkMinotaur.name=Dark Minotaur
+entity.desertMinotaur.name=Desert Minotaur
+entity.expandedMinotaur.name=Expanded Minotaur
+entity.extremeMinotaur.name=Extreme Minotaur
+entity.hellMinotaur.name=Hell Minotaur
+entity.iceMinotaur.name=Ice Minotaur
+entity.narrowMinotaur.name=Narrow Minotaur
+entity.oceanMinotaur.name=Ocean Minotaur
+entity.plainMinotaur.name=Plain Minotaur
+entity.swampMinotaur.name=Swamp Minotaur
+entity.wideMinotaur.name=Wide Minotaur

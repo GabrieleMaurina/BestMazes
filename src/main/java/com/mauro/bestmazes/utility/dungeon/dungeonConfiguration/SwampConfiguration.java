@@ -134,37 +134,37 @@ public class SwampConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon(model, 14, 8, 14, 14, 11, 14, walls);
 
 
-        Drawer.fillParallelepipedon1(model, 7, 7, 4, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 7, 7, 5, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 7, 8, 6, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 7, 4, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 7, 5, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 7, 8, 6, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
 
-        Drawer.fillParallelepipedon1(model, 7, 7, 12, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 7, 7, 11, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 7, 8, 10, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 7, 12, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 7, 11, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 7, 8, 10, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
 
-        Drawer.fillParallelepipedon1(model, 13, 3, 6, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 13, 3, 5, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 13, 4, 4, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 13, 3, 6, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 13, 3, 5, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 13, 4, 4, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
 
-        Drawer.fillParallelepipedon1(model, 1, 3, 10, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 1, 3, 11, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 1, 4, 12, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 1, 3, 10, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 1, 3, 11, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 1, 4, 12, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
 
-        Drawer.fillParallelepipedon1(model, 10, 1, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 11, 1, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 12, 2, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 10, 1, 7, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 11, 1, 7, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 12, 2, 7, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
 
-        Drawer.fillParallelepipedon1(model, 6, 1, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 5, 1, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 4, 2, 7, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 6, 1, 7, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 5, 1, 7, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 4, 2, 7, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
 
-        Drawer.fillParallelepipedon1(model, 12, 5, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 11, 5, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 10, 6, 1, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 12, 5, 1, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 11, 5, 1, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 10, 6, 1, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
 
-        Drawer.fillParallelepipedon1(model, 4, 5, 13, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 5, 5, 13, 1, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 6, 6, 13, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 5, 13, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 5, 5, 13, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 6, 6, 13, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
 
         model[8][9][8] = new Chest(getLoot(random), Chest.NORTH);
 

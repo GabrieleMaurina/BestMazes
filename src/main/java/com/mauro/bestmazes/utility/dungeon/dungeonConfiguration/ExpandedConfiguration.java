@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.ExpandedMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -69,7 +70,7 @@ public class ExpandedConfiguration extends DungeonConfiguration{
 
     public ArrayList<ItemStack> getLoot(Random r){
         ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack helmet = new ItemStack(Items.diamond_helmet, 1);
+        ItemStack helmet = new ItemStack(BestMazesItems.minotaurIvoryHelmet, 1);
         helmet.addEnchantment(Enchantment.respiration, 5);
         loot.add(helmet);
         return loot;
@@ -85,10 +86,10 @@ public class ExpandedConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon(model, 1, 1, 1, 13, 7, 13, content);
         Drawer.drawParallelepipedon(model, 0, 0, 0, 14, 8, 14, walls);
 
-        Drawer.fillParallelepipedon1(model, 3, 1, 3, 9, 1, 9, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 4, 7, 1, 7, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 5, 2, 5, 5, 1, 5, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 6, 2, 6, 3, 1, 3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 3, 1, 3, 9, 1, 9, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 4, 7, 1, 7, BestMazesBlocks.piselliteBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 5, 2, 5, 5, 1, 5, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 6, 2, 6, 3, 1, 3, BestMazesBlocks.piselliteBricksSlabUp);
 
         Drawer.column(model, 5, 1, 2, walls, roof);
         Drawer.column(model, 9, 1, 2, walls, roof);

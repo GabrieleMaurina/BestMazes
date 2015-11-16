@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.ClassicMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
@@ -69,7 +70,7 @@ public class ClassicConfiguration extends DungeonConfiguration{
 
     public ArrayList<ItemStack> getLoot(Random r){
         ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack boots = new ItemStack(Items.diamond_boots, 1);
+        ItemStack boots = new ItemStack(BestMazesItems.minotaurIvoryBoots, 1);
         boots.addEnchantment(Enchantment.featherFalling, 10);
         loot.add(boots);
         return loot;
@@ -85,10 +86,10 @@ public class ClassicConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon(model, 1, 1, 1, 13, 7, 14, content);
         Drawer.drawParallelepipedon(model, 0, 0, 0, 14, 8, 15, walls);
 
-        Drawer.fillParallelepipedon1(model, 3, 1, 14, 9, 1, -6, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 14, 7, 1, -5, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 5, 2, 14, 5, 1, -4, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 6, 2, 14, 3, 1, -3, BestMazesBlocks.stoneBricksSlabUp);
+        Drawer.fillParallelepipedon1(model, 3, 1, 14, 9, 1, -6, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 14, 7, 1, -5, walls);
+        Drawer.fillParallelepipedon1(model, 5, 2, 14, 5, 1, -4, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 6, 2, 14, 3, 1, -3, walls);
 
         Drawer.column(model, 3, 1, 3, walls, roof);
         Drawer.column(model, 3, 1, 6, walls, roof);

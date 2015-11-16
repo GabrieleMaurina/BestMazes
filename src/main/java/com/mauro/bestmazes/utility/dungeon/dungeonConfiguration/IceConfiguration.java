@@ -87,15 +87,15 @@ public class IceConfiguration extends DungeonConfiguration {
         Drawer.drawParallelepipedon(model, 0, 0, 0, 16, 8, 15, walls);
 
         Drawer.fillParallelepipedon1(model, 7, 5, 12, 3, 1, 3, walls);
-        Drawer.fillParallelepipedon1(model, 7, 5, 11, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 6, 4, 10, 5, 1, 1, Blocks.stonebrick);
-        Drawer.fillParallelepipedon1(model, 6, 4, 9, 5, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 5, 3, 8, 7, 1, 1, Blocks.stonebrick);
-        Drawer.fillParallelepipedon1(model, 5, 3, 7, 7, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 2, 6, 9, 1, 1, Blocks.stonebrick);
-        Drawer.fillParallelepipedon1(model, 4, 2, 5, 9, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 3, 1, 4, 11, 1, 1, Blocks.stonebrick);
-        Drawer.fillParallelepipedon1(model, 3, 1, 3, 11, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 5, 11, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 6, 4, 10, 5, 1, 1, BestMazesBlocks.piselliteBricks);
+        Drawer.fillParallelepipedon1(model, 6, 4, 9, 5, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 5, 3, 8, 7, 1, 1, BestMazesBlocks.piselliteBricks);
+        Drawer.fillParallelepipedon1(model, 5, 3, 7, 7, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 2, 6, 9, 1, 1, BestMazesBlocks.piselliteBricks);
+        Drawer.fillParallelepipedon1(model, 4, 2, 5, 9, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 3, 1, 4, 11, 1, 1, BestMazesBlocks.piselliteBricks);
+        Drawer.fillParallelepipedon1(model, 3, 1, 3, 11, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
 
         Drawer.column(model, 2, 1, 7, walls, roof);
         Drawer.column(model, 3, 1, 9, walls, roof);

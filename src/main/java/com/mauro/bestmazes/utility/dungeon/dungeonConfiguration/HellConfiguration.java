@@ -74,17 +74,17 @@ public class HellConfiguration extends DungeonConfiguration{
 
         Drawer.fillParallelepipedon(model, 1, 1, 1, 11, 2, 11, walls);
 
-        Drawer.fillParallelepipedon1(model, 2, 2, 2, 9, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 2, 2, 10, 9, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 2, 2, 3, 1, 1, 7, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 10, 2, 3, 1, 1, 7, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 2, 2, 2, 9, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 2, 2, 10, 9, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 2, 2, 3, 1, 1, 7, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 10, 2, 3, 1, 1, 7, BestMazesBlocks.piselliteBricksSlabDown);
 
         Drawer.fillParallelepipedon1(model, 3, 2, 3, 7, 1, 7, Blocks.air);
 
-        Drawer.fillParallelepipedon1(model, 4, 1, 4, 5, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 8, 5, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 4, 1, 5, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 8, 1, 5, 1, 1, 3, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 4, 5, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 8, 5, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 4, 1, 5, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 8, 1, 5, 1, 1, 3, BestMazesBlocks.piselliteBricksSlabDown);
 
         Drawer.fillParallelepipedon1(model, 5, 1, 5, 3, 1, 3, Blocks.air);
 

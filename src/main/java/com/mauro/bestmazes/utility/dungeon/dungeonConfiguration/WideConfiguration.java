@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.entities.minotaurs.WideMinotaur;
+import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -68,7 +69,7 @@ public class WideConfiguration extends DungeonConfiguration{
 
     public ArrayList<ItemStack> getLoot(Random r){
         ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack leggings = new ItemStack(Items.diamond_leggings, 1);
+        ItemStack leggings = new ItemStack(BestMazesItems.minotaurIvoryLeggings, 1);
         leggings.addEnchantment(Enchantment.protection, 10);
         loot.add(leggings);
         return loot;
@@ -84,45 +85,45 @@ public class WideConfiguration extends DungeonConfiguration{
         Drawer.fillParallelepipedon(model, 1, 1, 1, 15, 10, 15, content);
         Drawer.drawParallelepipedon(model, 0, 0, 0, 16, 11, 16, walls);
 
-        model[4][1][4] = BestMazesBlocks.stoneBricksSlabDown;
-        model[4][1][5] = BestMazesBlocks.stoneBricksSlabUp;
-        model[4][2][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[4][2][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[4][3][8] = BestMazesBlocks.stoneBricksSlabDown;
-        model[4][3][9] = BestMazesBlocks.stoneBricksSlabUp;
-        model[4][4][10] = BestMazesBlocks.stoneBricksSlabDown;
-        model[4][4][11] = BestMazesBlocks.stoneBricksSlabUp;
-        model[4][5][12] = BestMazesBlocks.stoneBricksSlabDown;
+        model[4][1][4] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[4][1][5] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[4][2][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[4][2][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[4][3][8] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[4][3][9] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[4][4][10] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[4][4][11] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[4][5][12] = BestMazesBlocks.piselliteBricksSlabDown;
 
-        model[5][1][4] = BestMazesBlocks.stoneBricksSlabDown;
-        model[5][1][5] = BestMazesBlocks.stoneBricksSlabUp;
-        model[5][2][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[5][2][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[5][3][8] = BestMazesBlocks.stoneBricksSlabDown;
-        model[5][3][9] = BestMazesBlocks.stoneBricksSlabUp;
-        model[5][4][10] = BestMazesBlocks.stoneBricksSlabDown;
-        model[5][4][11] = BestMazesBlocks.stoneBricksSlabUp;
-        model[5][5][12] = BestMazesBlocks.stoneBricksSlabDown;
+        model[5][1][4] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[5][1][5] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[5][2][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[5][2][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[5][3][8] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[5][3][9] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[5][4][10] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[5][4][11] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[5][5][12] = BestMazesBlocks.piselliteBricksSlabDown;
 
-        model[11][1][4] = BestMazesBlocks.stoneBricksSlabDown;
-        model[11][1][5] = BestMazesBlocks.stoneBricksSlabUp;
-        model[11][2][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[11][2][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[11][3][8] = BestMazesBlocks.stoneBricksSlabDown;
-        model[11][3][9] = BestMazesBlocks.stoneBricksSlabUp;
-        model[11][4][10] = BestMazesBlocks.stoneBricksSlabDown;
-        model[11][4][11] = BestMazesBlocks.stoneBricksSlabUp;
-        model[11][5][12] = BestMazesBlocks.stoneBricksSlabDown;
+        model[11][1][4] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[11][1][5] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[11][2][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[11][2][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[11][3][8] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[11][3][9] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[11][4][10] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[11][4][11] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[11][5][12] = BestMazesBlocks.piselliteBricksSlabDown;
 
-        model[12][1][4] = BestMazesBlocks.stoneBricksSlabDown;
-        model[12][1][5] = BestMazesBlocks.stoneBricksSlabUp;
-        model[12][2][6] = BestMazesBlocks.stoneBricksSlabDown;
-        model[12][2][7] = BestMazesBlocks.stoneBricksSlabUp;
-        model[12][3][8] = BestMazesBlocks.stoneBricksSlabDown;
-        model[12][3][9] = BestMazesBlocks.stoneBricksSlabUp;
-        model[12][4][10] = BestMazesBlocks.stoneBricksSlabDown;
-        model[12][4][11] = BestMazesBlocks.stoneBricksSlabUp;
-        model[12][5][12] = BestMazesBlocks.stoneBricksSlabDown;
+        model[12][1][4] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[12][1][5] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[12][2][6] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[12][2][7] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[12][3][8] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[12][3][9] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[12][4][10] = BestMazesBlocks.piselliteBricksSlabDown;
+        model[12][4][11] = BestMazesBlocks.piselliteBricksSlabUp;
+        model[12][5][12] = BestMazesBlocks.piselliteBricksSlabDown;
 
         Drawer.column(model, 2, 1, 4, walls, roof);
         Drawer.column(model, 2, 1, 8, walls, roof);
@@ -145,9 +146,9 @@ public class WideConfiguration extends DungeonConfiguration{
 
         Drawer.column(model, 8, 1, 8, walls, roof);
 
-        Drawer.fillParallelepipedon1(model, 7, 6, 12, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
-        Drawer.fillParallelepipedon1(model, 7, 6, 11, 3, 1, 1, BestMazesBlocks.stoneBricksSlabUp);
-        Drawer.fillParallelepipedon1(model, 7, 7, 10, 3, 1, 1, BestMazesBlocks.stoneBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 6, 12, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
+        Drawer.fillParallelepipedon1(model, 7, 6, 11, 3, 1, 1, walls);
+        Drawer.fillParallelepipedon1(model, 7, 7, 10, 3, 1, 1, BestMazesBlocks.piselliteBricksSlabDown);
 
         Drawer.fillParallelepipedon1(model, 7, 3, 1, 3, 1, 2, walls);
         Drawer.fillParallelepipedon1(model, 7, 1, 2, 1, 2, 1, walls);
