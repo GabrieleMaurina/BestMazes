@@ -71,10 +71,10 @@ public class Dungeon {
         this.random = r;
         this.world = world;
 
+        xEntrance = dC.xStart * 2 + 1;
+
         m = new Maze3D(dC, r);
         maze = genMaze();
-
-        this.xEntrance = dC.xStart * 2 + 1;
 
         if(dC.name.equals(DungeonReferences.END)){
             xStairs = xDungeon - 9;
