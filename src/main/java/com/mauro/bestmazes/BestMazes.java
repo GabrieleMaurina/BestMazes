@@ -4,19 +4,14 @@ package com.mauro.bestmazes;
  * Created by Gabriele on 6/24/2015.
  */
 
-import com.mauro.bestmazes.worldgenerators.BestMazesWorldGenerators;
-import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import com.mauro.bestmazes.proxy.IProxy;
 import com.mauro.bestmazes.reference.Reference;
-import com.mauro.bestmazes.tabs.BestMazesKeysTab;
 import com.mauro.bestmazes.utility.BestMazesInitializer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.creativetab.CreativeTabs;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class BestMazes

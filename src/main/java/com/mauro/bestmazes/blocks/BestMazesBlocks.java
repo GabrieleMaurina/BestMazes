@@ -9,12 +9,15 @@ import net.minecraft.init.Blocks;
  */
 public class BestMazesBlocks {
 
-    static public Block piselliteBricks = new PiselliteBricks();
-    static private Block piselliteBricksSlab = new PiselliteBricksSlab();
+    public static final Block piselliteBricks = new PiselliteBricks();
+    private static final Block piselliteBricksSlab = new PiselliteBricksSlab();
     public static final Block mazeLock = new MazeLock();
+    public static final Spawner skeletonSpawner = new Spawner(Spawner.SKELETON);
+    public static final Spawner spiderSpawner = new Spawner(Spawner.SPIDER);
+    public static final Spawner zombieSpawner = new Spawner(Spawner.ZOMBIE);
 
-    //public static final SpecialBlock stoneBricksSlabDown = new SpecialBlock(Blocks.stone_slab, 5, 3);
-    //public static final SpecialBlock stoneBricksSlabUp = new SpecialBlock(Blocks.stone_slab, 13, 3);
+    public static final SpecialBlock stoneBricksSlabDown = new SpecialBlock(Blocks.stone_slab, 5, 3);
+    public static final SpecialBlock stoneBricksSlabUp = new SpecialBlock(Blocks.stone_slab, 13, 3);
     public static final SpecialBlock piselliteBricksSlabDown = new SpecialBlock(BestMazesBlocks.piselliteBricksSlab, 5, 3);
     public static final SpecialBlock piselliteBricksSlabUp = new SpecialBlock(BestMazesBlocks.piselliteBricksSlab, 13, 3);
     public static final SpecialBlock oakWoodPlanks = new SpecialBlock(Blocks.planks, 0, 3);

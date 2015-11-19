@@ -9,10 +9,10 @@ import net.minecraft.item.Item;
 /**
  * Created by Gabriele on 10/27/2015.
  */
-public class BestMazesKeysTab extends CreativeTabs {
+public class BestMazesTab extends CreativeTabs {
     public static final String name = "bestMazesTab";
 
-    public BestMazesKeysTab(int nextID, String instTab) {
+    public BestMazesTab(int nextID, String instTab) {
         super(nextID,instTab);
     }
 

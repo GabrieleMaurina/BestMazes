@@ -1,5 +1,6 @@
 package com.mauro.bestmazes.blocks;
 
+import com.mauro.bestmazes.BestMazes;
 import com.mauro.bestmazes.items.Key;
 import com.mauro.bestmazes.reference.Reference;
 import com.mauro.bestmazes.tabs.BestMazesTabs;
@@ -78,10 +79,13 @@ public class MazeLock extends BlockContainer{
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         MazeLockTileEntity tileEntity = ((MazeLockTileEntity) world.getTileEntity(x, y, z));
         if (player.isSneaking() && tileEntity.shouldDrop()) {
-            dropBlockAsItem(world, x, y, z, tileEntity.getStackInSlot(0));
+            world.playSound(x, y, z, Reference.MOD_ID + ":lock", 1, 1, true);
+            dropBlockAsItem(world, x, y, z + 1, tileEntity.getStackInSlot(0));
             tileEntity.resetInventory();
+            lockMaze(world, x, y, z);
         }
         else if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof Key && !tileEntity.shouldDrop()) {
+            world.playSound(x, y, z, Reference.MOD_ID + ":unlock", 1, 1, true);
             tileEntity.setInventorySlotContents(0, new ItemStack(player.getCurrentEquippedItem().getItem(), 1));
             player.inventory.consumeInventoryItem(player.getHeldItem().getItem());
             unlockMaze(world, x, y, z);
@@ -89,13 +93,20 @@ public class MazeLock extends BlockContainer{
         return super.onBlockActivated(world, x, y, z, player, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
     }
 
+    private void lockMaze(World world, int x, int y, int z) {
+        int realX = (world.getBlock(x - D_X, y, z) == BestMazesBlocks.mazeLock) ? x - D_X : x;
+        int realY = (world.getBlock(x, y - D_Y, z) == BestMazesBlocks.mazeLock) ? y - D_Y : y;
+        if(!checkKeys(world, realX, realY, z)){
+            closeGates(world, realX + 1, realY + D_Y - 1, z - 1);
+        }
+    }
+
     private void unlockMaze(World world, int x, int y, int z){
 
         int realX = (world.getBlock(x - D_X, y, z) == BestMazesBlocks.mazeLock) ? x - D_X : x;
         int realY = (world.getBlock(x, y - D_Y, z) == BestMazesBlocks.mazeLock) ? y - D_Y : y;
-
         if(checkKeys(world, realX, realY, z)){
-            openGates(world, realX, realY, z);
+            openGates(world, realX + 1, realY + D_Y - 1, z - 1);
         }
 
     }
@@ -103,20 +114,29 @@ public class MazeLock extends BlockContainer{
     private boolean checkKeys(World world, int x, int y, int z){
         Item item;
         Key[] keys = new Key[4];
+        MazeLockTileEntity mLTE;
 
-        item = ((MazeLockTileEntity)world.getTileEntity(x, y, z)).getStackInSlot(0).getItem();
+        mLTE = (MazeLockTileEntity)world.getTileEntity(x, y, z);
+        if(mLTE == null) return false;
+        item = mLTE.getStackInSlot(0).getItem();
         if(item instanceof Key) keys[0] = (Key)item;
         else return false;
 
-        item = ((MazeLockTileEntity)world.getTileEntity(x + D_X, y, z)).getStackInSlot(0).getItem();
+        mLTE = (MazeLockTileEntity)world.getTileEntity(x + D_X, y, z);
+        if(mLTE == null) return false;
+        item = mLTE.getStackInSlot(0).getItem();
         if(item instanceof Key) keys[1] = (Key)item;
         else return false;
 
-        item = ((MazeLockTileEntity)world.getTileEntity(x, y + D_Y, z)).getStackInSlot(0).getItem();
+        mLTE = (MazeLockTileEntity)world.getTileEntity(x, y + D_Y, z);
+        if(mLTE == null) return false;
+        item = mLTE.getStackInSlot(0).getItem();
         if(item instanceof Key) keys[2] = (Key)item;
         else return false;
 
-        item = ((MazeLockTileEntity)world.getTileEntity(x + D_X, y + D_Y, z)).getStackInSlot(0).getItem();
+        mLTE = (MazeLockTileEntity)world.getTileEntity(x + D_X, y + D_Y, z);
+        if(mLTE == null) return false;
+        item = mLTE.getStackInSlot(0).getItem();
         if(item instanceof Key) keys[3] = (Key)item;
         else return false;
 
@@ -134,7 +154,37 @@ public class MazeLock extends BlockContainer{
     }
 
     private void openGates(World world, int x, int y, int z){
-        Drawer.fillParallelepipedon1(world, x + 1, y + D_Y - 1, z - 1, 2, 3, 1, Blocks.air);
+        boolean play = false;
+
+        for(int i = 0; i < 2; i++){
+            for(int e = 0; e < 3; e++){
+                if(world.getBlock(x + i, y + e, z) == BestMazesBlocks.piselliteBricks){
+                    play = true;
+                    world.setBlockToAir(x + i, y + e, z);
+                }
+            }
+        }
+
+        if(play) {
+            world.playSound(x, y + 1, z, Reference.MOD_ID + ":gate", 1, 1, true);
+        }
+    }
+
+    private void closeGates(World world, int x, int y, int z){
+        boolean play = false;
+
+        for(int i = 0; i < 2; i++){
+            for(int e = 0; e < 3; e++){
+                if(world.getBlock(x + i, y + e, z) != BestMazesBlocks.piselliteBricks){
+                    play = true;
+                    StructureGenerator.setBlock(world, x + i, y + e, z, BestMazesBlocks.piselliteBricks);
+                }
+            }
+        }
+
+        if(play) {
+            world.playSound(x, y + 1, z, Reference.MOD_ID + ":gate", 1, 1, true);
+        }
     }
 
     @Override

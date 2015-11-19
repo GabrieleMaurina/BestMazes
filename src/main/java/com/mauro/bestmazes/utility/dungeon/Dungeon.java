@@ -1,10 +1,13 @@
 package com.mauro.bestmazes.utility.dungeon;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
+import com.mauro.bestmazes.blocks.MazeLock;
 import com.mauro.bestmazes.blocks.Spawner;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
-import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.SkyConfiguration;
+import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.EndConfiguration;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 import net.minecraft.block.Block;
@@ -74,11 +77,11 @@ public class Dungeon {
         xEntrance = dC.xStart * 2 + 1;
 
         m = new Maze3D(dC, r);
-        maze = genMaze();
+        maze = genMaze(dC, m, xEntrance, m.ySize - 2, 0, random);
 
         if(dC.name.equals(DungeonReferences.END)){
             xStairs = xDungeon - 9;
-            yStairs = yDungeon + 20;
+            yStairs = yDungeon + 18;
             zStairs = zDungeon - 5;
 
             xMaze = xDungeon - m.getXCoor(xEntrance);
@@ -99,7 +102,7 @@ public class Dungeon {
 
             corridor = genCorridor(4, 5, 4);
 
-            connection = ((SkyConfiguration)dC).genFinalConnection();
+            connection = ((EndConfiguration)dC).genFinalConnection();
         }
         else {
 
@@ -159,13 +162,14 @@ public class Dungeon {
     {
         if(dC.name.equals(DungeonReferences.END))
         {
-            SkyConfiguration eC = (SkyConfiguration) dC;
+            EndConfiguration eC = (EndConfiguration) dC;
             StructureGenerator.createModel(world, maze, xMaze, yMaze, zMaze);
             eC.genFinalEntrance(world, xStairs, yStairs, zStairs);
             eC.genFinalRoom(world, xLootRoom, yLootRoom, zLootRoom, random);
             StructureGenerator.createModel(world, corridor, xCorridor, yCorridor, zCorridor);
             StructureGenerator.createModel(world, corridor, xCorridor, yCorridor, zCorridor - maze[0][0].length - 2);
             StructureGenerator.createModel(world, connection, xConnection, yConnection, zConnection);
+            spawnMinotaur();
         }
         else if(ok)
         {
@@ -236,10 +240,10 @@ public class Dungeon {
         return model;
     }
 
-    private Block[][][] genMaze(){
+    private static Block[][][] genMaze(DungeonConfiguration dC, Maze3D m, int xE, int yE, int zE, Random random){
         m.generate();
 
-        m.m[xEntrance][m.ySize - 2][0] = false;
+        if(xE > 0 && yE > 0 && zE > 0) m.m[xE][yE][zE] = false;
 
         int[][] deltas = null;
 
@@ -267,14 +271,18 @@ public class Dungeon {
             }
         }
 
-        spawners(model);
-        passages(model);
-        lavaWaterNets(model);
+        spawners(dC, model, m, random);
+        passages(dC, model, m, random);
+        lavaWaterNets(dC, model, random);
 
         return model;
     }
 
-    private void lavaWaterNets(Block[][][] model){
+    public static Block[][][] genFinalMaze(DungeonConfiguration dC, Random random){
+        return genMaze(dC, new Maze3D(dC, random), -1, -1, -1, random);
+    }
+
+    private static void lavaWaterNets(DungeonConfiguration dC, Block[][][] model, Random random){
         if(dC.name.equals(DungeonReferences.OCEAN)) return;
 
         for(int i = 1; i < model.length - 1; i++){
@@ -305,7 +313,7 @@ public class Dungeon {
         }
     }
 
-    private void passages(Block[][][] model){
+    private static void passages(DungeonConfiguration dC, Block[][][] model, Maze3D m, Random random){
         for(int i = 0; i < m.m.length; i += 2){
             for(int e = 1; e < m.m[i].length; e += 2){
                 for(int o = 1; o < m.m[i][e].length; o += 2){
@@ -355,7 +363,7 @@ public class Dungeon {
         }
     }
 
-    private void spawners(Block[][][] model){
+    private static void spawners(DungeonConfiguration dC, Block[][][] model, Maze3D m, Random random){
         if(dC.name.equals(DungeonReferences.OCEAN)) return;
         int x = 0;
         int y = 0;
@@ -395,7 +403,7 @@ public class Dungeon {
         }
     }
 
-    private boolean posOK(Block[][][] model, int x, int y, int z){
+    private static boolean posOK(Block[][][] model, int x, int y, int z){
         if(model[x][y][z] == Blocks.air) return false;
         if(x + 1 >= model.length) return false;
         if(y + 1 >= model[0].length) return false;

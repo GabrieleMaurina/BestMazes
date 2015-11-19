@@ -2,6 +2,7 @@ package com.mauro.bestmazes.items;
 
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Created by Gabriele on 10/29/2015.
@@ -22,6 +23,7 @@ public class BestMazesItems {
     static public final Key savannaKey = new Key(DungeonReferences.SAVANNA);
 
     static public final MinotaurIvorySword minotaurIvorySword = new MinotaurIvorySword();
+    static public final MinotaurIvoryPickaxe minotaurIvoryPickaxe = new MinotaurIvoryPickaxe();
 
     public static MinotaurIvoryArmor minotaurIvoryHelmet = new MinotaurIvoryArmor(MinotaurIvoryArmor.HELMET);
     public static MinotaurIvoryArmor minotaurIvoryChestplate = new MinotaurIvoryArmor(MinotaurIvoryArmor.CHESTPLATE);
@@ -44,6 +46,7 @@ public class BestMazesItems {
         GameRegistry.registerItem(savannaKey, savannaKey.name);
 
         GameRegistry.registerItem(minotaurIvorySword, MinotaurIvorySword.name);
+        GameRegistry.registerItem(minotaurIvoryPickaxe, minotaurIvoryPickaxe.name);
 
         GameRegistry.registerItem(minotaurIvoryHelmet, minotaurIvoryHelmet.name);
         GameRegistry.registerItem(minotaurIvoryChestplate, minotaurIvoryChestplate.name);

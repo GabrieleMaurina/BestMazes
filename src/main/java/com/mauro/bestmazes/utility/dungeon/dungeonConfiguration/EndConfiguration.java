@@ -7,9 +7,11 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.Spawner;
-import com.mauro.bestmazes.entities.minotaurs.ForestMinotaur;
+import com.mauro.bestmazes.entities.minotaurs.EndMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.dungeon.Dungeon;
+import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import net.minecraft.block.Block;
@@ -19,7 +21,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.DungeonHooks;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,18 +28,19 @@ import java.util.Random;
 /**
  * Created by Gabriele on 10/21/2015.
  */
-public class SkyConfiguration extends DungeonConfiguration{
+public class EndConfiguration extends DungeonConfiguration{
 
     public Block roof1;
     public double finalRoomSpawnerProb;
+    private Block b1, b2;
 
-    public SkyConfiguration(){
+    public EndConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
         waterProb = 0.001;
         spiderNetProb = 0.001;
         mobProb = 0.01;
-        finalRoomSpawnerProb = 0.3;
+        finalRoomSpawnerProb = 0.5;
         branchesProb = 0.7;
         joinProb = 0.005;
         crazy = false;
@@ -68,9 +70,9 @@ public class SkyConfiguration extends DungeonConfiguration{
         xLootRoom = 22;
         yLootRoom = 1;
 
-        xMinotaurSpawn = 6.5;
-        yMinotaurSpawn = 7.1;
-        zMinotaurSpawn = 9.5;
+        xMinotaurSpawn = 21.5;
+        yMinotaurSpawn = 18.0;
+        zMinotaurSpawn = 21.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 
@@ -86,7 +88,7 @@ public class SkyConfiguration extends DungeonConfiguration{
     }
 
     public DungeonConfiguration clone(){
-        return new SkyConfiguration();
+        return new EndConfiguration();
     }
 
     public Block[][][] genLootRoom(Random random){
@@ -96,11 +98,55 @@ public class SkyConfiguration extends DungeonConfiguration{
     public void genFinalRoom(World world, int x, int y, int z,  Random random){
         genRoomFrame(world, x, y, z);
         genTemple(world, x, y, z, random);
+        genFinalMaze(world, x, y, z, random);
         genStairs(world, x, y, z);
         genLightsRoom(world, x, y, z);
         genEntrance(world, x, y, z);
         genSecretLoot(world, x, y, z, random);
         addSpawners(world, x, y, z, random);
+    }
+
+    private void genFinalMaze(World world, int x, int y, int z, Random random){
+        x += 15;
+        z += 15;
+        FinalConfiguration fC = (FinalConfiguration)DungeonConfigurations.getConfiguration(DungeonReferences.FINAL);
+
+        int xLoot, zLoot;
+
+        if(random.nextBoolean()){
+            fC.xStart = 0;
+            xLoot = fC.xSize - 1;
+        }
+        else{
+            fC.xStart = fC.xSize - 1;
+            xLoot = 0;
+        }
+
+        if(random.nextBoolean()){
+            fC.zStart = 0;
+            zLoot = fC.zSize - 1;
+        }
+        else{
+            fC.zStart = fC.zSize - 1;
+            zLoot = 0;
+        }
+
+        xLoot = xLoot * 2 + 1;
+        zLoot = zLoot * 2 + 1;
+
+        Block[][][] model = Dungeon.genFinalMaze(fC, random);
+        Drawer.fillParallelepipedon1(model, 0, 0, 0, model.length, 1, model[0][0].length, null);
+        Drawer.fillParallelepipedon1(model, 0, 3, 0, model.length, 1, model[0][0].length, null);
+        StructureGenerator.createModel(world, model, x, y, z);
+
+        int dir = Chest.NORTH;
+        if(model[xLoot + 1][1][zLoot] == Blocks.air) dir = Chest.EAST;
+        else if(model[xLoot - 1][1][zLoot] == Blocks.air) dir = Chest.WEST;
+        else if(model[xLoot][1][zLoot + 1] == Blocks.air) dir = Chest.SOUTH;
+
+        StructureGenerator.setBlock(world, x + xLoot, y + 1, z + zLoot, new Chest(fC.getLoot(random), dir));
+
+        StructureGenerator.setBlock(world, x + fC.xStart * 2 + 1, y + 3, z + fC.zStart * 2 + 1, BestMazesBlocks.stoneBricksSlabDown);
     }
 
     @Override
@@ -127,13 +173,18 @@ public class SkyConfiguration extends DungeonConfiguration{
 
         model[2][0][3] = Blocks.torch;
         model[4][0][3] = Blocks.torch;
-        model[3][0][3] = new Chest(getLoot(random), Chest.NORTH);
+
+        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+        loot.add(new ItemStack(Items.bone, 1));
+        loot.add(new ItemStack(Items.baked_potato, 1));
+        loot.add(new ItemStack(Items.flower_pot, 1));
+        model[3][0][3] = new Chest(loot, Chest.NORTH);
 
         return model;
     }
 
     public Minotaur getMinotaur(World world){
-        return new ForestMinotaur(world);
+        return new EndMinotaur(world);
     }
 
     private void genRoomFrame(World world, int x, int y, int z){
@@ -368,54 +419,124 @@ public class SkyConfiguration extends DungeonConfiguration{
     }
 
     private void genSecretLoot(World world, int x, int y, int z, Random random){
-        Chest c = new Chest(getLoot(random), Chest.NORTH);
-        if(random.nextBoolean()){
-            StructureGenerator.setBlock(world, x + 21, y + 1, z + 21, c);
-            Drawer.fillParallelepipedon1(world, x + 21, y + 2, z + 21, 1, 3, 1, Blocks.stonebrick);
-        }
-        else{
-            c.dir = Chest.SOUTH;
-            StructureGenerator.setBlock(world, x + 21, y + 6, z + 1, c);
-            StructureGenerator.setBlock(world, x + 21, y + 7, z + 1, Blocks.stonebrick);
-        }
+        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+        loot.add(new ItemStack(Blocks.diamond_block, 2));
+        loot.add(new ItemStack(Blocks.gold_block, 4));
+        loot.add(new ItemStack(Items.golden_apple, 2, 1));
+        StructureGenerator.setBlock(world, x + 21, y + 6, z + 1, new Chest(loot, Chest.SOUTH));
+        StructureGenerator.setBlock(world, x + 21, y + 7, z + 1, Blocks.stonebrick);
     }
 
     private void addSpawners(World world, int x, int y, int z, Random random){
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 13, y + 15, z + 19, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 13, y + 15, z + 19, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 13, y + 15, z + 23, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 13, y + 15, z + 23, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 29, y + 15, z + 19, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 29, y + 15, z + 19, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 29, y + 15, z + 23, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 29, y + 15, z + 23, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 19, y + 15, z + 13, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 19, y + 15, z + 13, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 23, y + 15, z + 13, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 23, y + 15, z + 13, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 19, y + 15, z + 29, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 19, y + 15, z + 29, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 23, y + 15, z + 29, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 23, y + 15, z + 29, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 15, y + 15, z + 15, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 15, y + 15, z + 15, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 15, y + 15, z + 27, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 15, y + 15, z + 27, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 27, y + 15, z + 15, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 27, y + 15, z + 15, BestMazesBlocks.spiderSpawner);
         }
         if(random.nextDouble() < finalRoomSpawnerProb){
-            StructureGenerator.setBlock(world, x + 27, y + 15, z + 27, new Spawner(DungeonHooks.getRandomDungeonMob(random)));
+            StructureGenerator.setBlock(world, x + 27, y + 15, z + 27, BestMazesBlocks.spiderSpawner);
+        }
+
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 41, y + 2, z + 1, walls);
+        StructureGenerator.setBlock(world, x + 41, y + 3, z + 2, b1);
+        StructureGenerator.setBlock(world, x + 40, y + 3, z + 1, b2);
+        StructureGenerator.setBlock(world, x + 41, y + 3, z + 1, BestMazesBlocks.skeletonSpawner);
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 1, y + 6, z + 1, walls);
+        StructureGenerator.setBlock(world, x + 1, y + 7, z + 2, b1);
+        StructureGenerator.setBlock(world, x + 2, y + 7, z + 1, b2);
+        StructureGenerator.setBlock(world, x + 1, y + 7, z + 1, BestMazesBlocks.skeletonSpawner);
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 1, y + 10, z + 41, walls);
+        StructureGenerator.setBlock(world, x + 1, y + 11, z + 40, b1);
+        StructureGenerator.setBlock(world, x + 2, y + 11, z + 41, b2);
+        StructureGenerator.setBlock(world, x + 1, y + 11, z + 41, BestMazesBlocks.skeletonSpawner);
+
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 1, y + 2, z + 41, walls);
+        StructureGenerator.setBlock(world, x + 1, y + 3, z + 40, b1);
+        StructureGenerator.setBlock(world, x + 2, y + 3, z + 41, b2);
+        StructureGenerator.setBlock(world, x + 1, y + 3, z + 41, BestMazesBlocks.skeletonSpawner);
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 41, y + 6, z + 41, walls);
+        StructureGenerator.setBlock(world, x + 41, y + 7, z + 40, b1);
+        StructureGenerator.setBlock(world, x + 40, y + 7, z + 41, b2);
+        StructureGenerator.setBlock(world, x + 41, y + 7, z + 41, BestMazesBlocks.skeletonSpawner);
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 41, y + 10, z + 1, walls);
+        StructureGenerator.setBlock(world, x + 41, y + 11, z + 2, b1);
+        StructureGenerator.setBlock(world, x + 40, y + 11, z + 1, b2);
+        StructureGenerator.setBlock(world, x + 41, y + 11, z + 1, BestMazesBlocks.skeletonSpawner);
+
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 1, y + 19, z + 1, walls);
+        StructureGenerator.setBlock(world, x + 1, y + 20, z + 2, b1);
+        StructureGenerator.setBlock(world, x + 2, y + 20, z + 1, b2);
+        StructureGenerator.setBlock(world, x + 1, y + 20, z + 1, BestMazesBlocks.skeletonSpawner);
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 1, y + 19, z + 41, walls);
+        StructureGenerator.setBlock(world, x + 1, y + 20, z + 40, b1);
+        StructureGenerator.setBlock(world, x + 2, y + 20, z + 41, b2);
+        StructureGenerator.setBlock(world, x + 1, y + 20, z + 41, BestMazesBlocks.skeletonSpawner);
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 41, y + 19, z + 1, walls);
+        StructureGenerator.setBlock(world, x + 41, y + 20, z + 2, b1);
+        StructureGenerator.setBlock(world, x + 40, y + 20, z + 1, b2);
+        StructureGenerator.setBlock(world, x + 41, y + 20, z + 1, BestMazesBlocks.skeletonSpawner);
+
+        getBlocksSpawner(random);
+        StructureGenerator.setBlock(world, x + 41, y + 19, z + 41, walls);
+        StructureGenerator.setBlock(world, x + 41, y + 20, z + 40, b1);
+        StructureGenerator.setBlock(world, x + 40, y + 20, z + 41, b2);
+        StructureGenerator.setBlock(world, x + 41, y + 20, z + 41, BestMazesBlocks.skeletonSpawner);
+    }
+
+    private void getBlocksSpawner(Random random){
+        if(random.nextBoolean()){
+            b1 = walls;
+            b2 = Blocks.stonebrick;
+        }
+        else{
+            b1 = Blocks.stonebrick;
+            b2 = walls;
         }
     }
 
@@ -489,7 +610,7 @@ public class SkyConfiguration extends DungeonConfiguration{
         genLightsEntrance(world, x, y, z);
     }
 
-    public void emptyEntrance(World world, int x, int y, int z) {
+    private void emptyEntrance(World world, int x, int y, int z) {
         Drawer.fillParallelepipedon1(world, x + 4, y + 6, z + 1, 12, 7, 6, content);
         Drawer.fillParallelepipedon1(world, x + 7, y + 1, z + 1, 6, 5, 6, content);
 

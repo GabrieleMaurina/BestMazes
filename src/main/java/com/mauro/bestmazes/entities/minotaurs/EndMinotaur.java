@@ -18,8 +18,7 @@ public class EndMinotaur extends Minotaur {
 
     public EndMinotaur(World world) {
         super(world);
-        drop = new ItemStack(Items.diamond_sword, 1);
-        drop.addEnchantment(Enchantment.sharpness, 20);
+        drop = new ItemStack(BestMazesItems.minotaurIvoryPickaxe, 1);
     }
 
     @Override

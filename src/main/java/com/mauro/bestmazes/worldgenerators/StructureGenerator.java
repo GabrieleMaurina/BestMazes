@@ -1,7 +1,12 @@
 package com.mauro.bestmazes.worldgenerators;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.mauro.bestmazes.blocks.*;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
+import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
+import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
+import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.EndConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -22,10 +27,6 @@ public class StructureGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-        if(chunkX == 0 && chunkZ == 0){
-            setBlock(world, 0, 100, 0, BestMazesBlocks.mazeLock);
-        }
-
         Dungeon.generateDungeon(world, chunkX, chunkZ, random);
     }
 

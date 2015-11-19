@@ -4,7 +4,6 @@ import com.mauro.bestmazes.BestMazes;
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.entities.BestMazesEntities;
 import com.mauro.bestmazes.items.BestMazesItems;
-import com.mauro.bestmazes.tabs.BestMazesKeysTab;
 import com.mauro.bestmazes.tabs.BestMazesTabs;
 import com.mauro.bestmazes.tileEntities.BestMazesTileEntities;
 import com.mauro.bestmazes.worldgenerators.BestMazesWorldGenerators;
