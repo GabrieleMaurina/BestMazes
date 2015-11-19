@@ -67,11 +67,9 @@ public class JungleConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.jungleHills);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack helmet = new ItemStack(BestMazesItems.minotaurIvoryHelmet, 1);
-        helmet.addEnchantment(Enchantment.respiration, 5);
-        loot.add(helmet);
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        loot.add(new ItemStack(BestMazesItems.minotaurIvoryHelmet, 1));
         return loot;
     }
 

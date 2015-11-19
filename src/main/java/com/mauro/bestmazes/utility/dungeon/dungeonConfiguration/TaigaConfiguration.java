@@ -70,10 +70,9 @@ public class TaigaConfiguration extends DungeonConfiguration {
         biomes.add(BiomeGenBase.megaTaigaHills);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
         ItemStack chestplate = new ItemStack(BestMazesItems.minotaurIvoryChestplate, 1);
-        chestplate.addEnchantment(Enchantment.protection, 10);
         loot.add(chestplate);
         return loot;
     }

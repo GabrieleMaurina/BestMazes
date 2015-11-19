@@ -2,6 +2,7 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
+import com.mauro.bestmazes.blocks.Spawner;
 import com.mauro.bestmazes.entities.minotaurs.RoofedMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
@@ -9,6 +10,7 @@ import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -20,6 +22,11 @@ import java.util.Random;
  * Created by Gabriele on 10/25/2015.
  */
 public class RoofedConfiguration extends DungeonConfiguration {
+    public static final Item[] records = new Item[]{Items.record_11, Items.record_13,
+            Items.record_blocks, Items.record_cat, Items.record_chirp, Items.record_far,
+            Items.record_mall, Items.record_mellohi, Items.record_stal, Items.record_strad,
+            Items.record_wait, Items.record_ward};
+
     public RoofedConfiguration(){
         passageProb = 0.005;
         lavaProb = 0.001;
@@ -63,10 +70,12 @@ public class RoofedConfiguration extends DungeonConfiguration {
         biomes.add(BiomeGenBase.roofedForest);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        loot.add(new ItemStack(Items.diamond, 15));
-        loot.add(new ItemStack(Items.gold_ingot, 35));
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        int n = random.nextInt(5) + 5;
+        for(int i = 0; i < n; i++){
+            loot.add(new ItemStack(records[random.nextInt(records.length)], random.nextInt(2) + 1));
+        }
         return loot;
     }
 

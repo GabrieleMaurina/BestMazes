@@ -56,9 +56,10 @@ public class NetherConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.hell);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        loot.add(new ItemStack(Items.nether_star, 3));
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        loot.add(new ItemStack(Items.nether_star, random.nextInt(2) + 1));
+        loot.add(new ItemStack(Items.ghast_tear, random.nextInt(4) + 1));
         return loot;
     }
 

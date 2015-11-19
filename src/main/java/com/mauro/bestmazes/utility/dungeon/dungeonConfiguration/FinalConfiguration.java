@@ -52,8 +52,8 @@ public class FinalConfiguration extends DungeonConfiguration{
         biomes = new ArrayList<BiomeGenBase>();
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
         ItemStack sword = new ItemStack(BestMazesItems.minotaurIvorySword, 1);
         sword.addEnchantment(Enchantment.sharpness, 10);
         loot.add(sword);

@@ -66,10 +66,9 @@ public class SavannaConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.savannaPlateau);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
         ItemStack leggings = new ItemStack(BestMazesItems.minotaurIvoryLeggings, 1);
-        leggings.addEnchantment(Enchantment.protection, 10);
         loot.add(leggings);
         return loot;
     }

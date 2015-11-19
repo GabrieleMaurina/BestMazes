@@ -66,11 +66,9 @@ public class ForestConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.forestHills);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack boots = new ItemStack(BestMazesItems.minotaurIvoryBoots, 1);
-        boots.addEnchantment(Enchantment.featherFalling, 10);
-        loot.add(boots);
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        loot.add(new ItemStack(BestMazesItems.minotaurIvoryBoots, 1));
         return loot;
     }
 

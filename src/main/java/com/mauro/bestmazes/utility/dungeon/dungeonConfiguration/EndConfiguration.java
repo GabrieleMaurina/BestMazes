@@ -19,8 +19,10 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.ChestGenHooks;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -79,12 +81,8 @@ public class EndConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.sky);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack sword = new ItemStack(Items.diamond_sword, 1);
-        sword.addEnchantment(Enchantment.sharpness, 10);
-        loot.add(sword);
-        return loot;
+    public ArrayList<ItemStack> getLoot(Random random){
+        return super.getLoot(random);
     }
 
     public DungeonConfiguration clone(){
@@ -174,11 +172,7 @@ public class EndConfiguration extends DungeonConfiguration{
         model[2][0][3] = Blocks.torch;
         model[4][0][3] = Blocks.torch;
 
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        loot.add(new ItemStack(Items.bone, 1));
-        loot.add(new ItemStack(Items.baked_potato, 1));
-        loot.add(new ItemStack(Items.flower_pot, 1));
-        model[3][0][3] = new Chest(loot, Chest.NORTH);
+        model[3][0][3] = new Chest(getLoot(random), Chest.NORTH);
 
         return model;
     }
@@ -419,7 +413,7 @@ public class EndConfiguration extends DungeonConfiguration{
     }
 
     private void genSecretLoot(World world, int x, int y, int z, Random random){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> loot = getLoot(random);
         loot.add(new ItemStack(Blocks.diamond_block, 2));
         loot.add(new ItemStack(Blocks.gold_block, 4));
         loot.add(new ItemStack(Items.golden_apple, 2, 1));

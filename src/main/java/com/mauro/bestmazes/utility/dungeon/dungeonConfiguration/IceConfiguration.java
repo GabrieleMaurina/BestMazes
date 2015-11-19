@@ -2,6 +2,7 @@ package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
+import com.mauro.bestmazes.blocks.Spawner;
 import com.mauro.bestmazes.entities.minotaurs.IceMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
@@ -68,11 +69,12 @@ public class IceConfiguration extends DungeonConfiguration {
         biomes.add(BiomeGenBase.coldBeach);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack boots = new ItemStack(Items.diamond_boots, 1);
-        boots.addEnchantment(Enchantment.featherFalling, 10);
-        loot.add(boots);
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        for(int i = 0; i < Spawner.spawnEggsMetaData.length; i++){
+            loot.add(new ItemStack(Blocks.mob_spawner, 1, Spawner.spawnEggsMetaData[i]));
+        }
+
         return loot;
     }
 

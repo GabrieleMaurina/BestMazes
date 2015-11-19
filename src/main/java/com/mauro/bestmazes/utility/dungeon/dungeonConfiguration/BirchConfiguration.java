@@ -4,12 +4,11 @@ import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.BirchMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
-import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -58,11 +57,9 @@ public class BirchConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.birchForestHills);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack sword = new ItemStack(BestMazesItems.minotaurIvorySword, 1);
-        sword.addEnchantment(Enchantment.sharpness, 10);
-        loot.add(sword);
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        loot.add(new ItemStack(Items.experience_bottle, random.nextInt(5) + 5));
         return loot;
     }
 

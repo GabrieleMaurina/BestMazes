@@ -72,11 +72,16 @@ public class SwampConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.swampland);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack boots = new ItemStack(Items.diamond_boots, 1);
-        boots.addEnchantment(Enchantment.featherFalling, 10);
-        loot.add(boots);
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        int n = random.nextInt(5) + 5;
+        int metadata = 0;
+        for(int i = 0; i < n; i++){
+            metadata = random.nextInt(64);
+            metadata += random.nextBoolean() ? 64 : 0;
+            metadata += random.nextBoolean() ? 16384 : 0;
+            loot.add(new ItemStack(Items.potionitem, random.nextInt(2) + 1, metadata));
+        }
         return loot;
     }
 

@@ -1,5 +1,6 @@
 package com.mauro.bestmazes.utility.dungeon.dungeonConfiguration;
 
+import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.PiselliteBricks;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
@@ -62,7 +63,9 @@ public abstract class DungeonConfiguration {
 
     public ArrayList<BiomeGenBase> biomes;
 
-    public abstract ArrayList<ItemStack> getLoot(Random r);
+    public ArrayList<ItemStack> getLoot(Random random){
+        return new ArrayList<ItemStack>(Chest.genDungeonLootItems(random));
+    };
 
     public abstract DungeonConfiguration clone();
 

@@ -4,6 +4,7 @@ import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.entities.minotaurs.DesertMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.items.BestMazesItems;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
@@ -65,10 +66,10 @@ public class DesertConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.desertHills);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack apples = new ItemStack(Items.golden_apple, 10, 1);
-        loot.add(apples);
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        ItemStack sword = new ItemStack(BestMazesItems.minotaurIvorySword, 1);
+        loot.add(sword);
         return loot;
     }
 

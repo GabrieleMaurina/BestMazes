@@ -67,10 +67,10 @@ public class PlainConfiguration extends DungeonConfiguration {
         biomes.add(BiomeGenBase.plains);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        ItemStack saddles = new ItemStack(Items.saddle, 2);
-        ItemStack armors = new ItemStack(Items.diamond_horse_armor, 2);
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        ItemStack saddles = new ItemStack(Items.saddle, random.nextInt(1) + 1);
+        ItemStack armors = new ItemStack(Items.diamond_horse_armor, random.nextInt(1) + 1);
         loot.add(saddles);
         loot.add(armors);
         return loot;

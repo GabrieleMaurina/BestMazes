@@ -62,9 +62,10 @@ public class OceanConfiguration extends DungeonConfiguration{
         biomes.add(BiomeGenBase.deepOcean);
     }
 
-    public ArrayList<ItemStack> getLoot(Random r){
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
-        loot.add(new ItemStack(Items.ender_pearl, 10));
+    public ArrayList<ItemStack> getLoot(Random random){
+        ArrayList<ItemStack> loot = super.getLoot(random);
+        loot.add(new ItemStack(Items.ender_pearl, random.nextInt(5) + 5));
+        loot.add(new ItemStack(Blocks.sponge, random.nextInt(5) + 5));
         return loot;
     }
 
