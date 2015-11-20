@@ -69,8 +69,8 @@ public class PlainConfiguration extends DungeonConfiguration {
 
     public ArrayList<ItemStack> getLoot(Random random){
         ArrayList<ItemStack> loot = super.getLoot(random);
-        ItemStack saddles = new ItemStack(Items.saddle, random.nextInt(1) + 1);
-        ItemStack armors = new ItemStack(Items.diamond_horse_armor, random.nextInt(1) + 1);
+        ItemStack saddles = new ItemStack(Items.saddle, random.nextInt(2) + 1);
+        ItemStack armors = new ItemStack(Items.diamond_horse_armor, random.nextInt(2) + 1);
         loot.add(saddles);
         loot.add(armors);
         return loot;

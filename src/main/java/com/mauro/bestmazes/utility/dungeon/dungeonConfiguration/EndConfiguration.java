@@ -9,20 +9,20 @@ import com.mauro.bestmazes.blocks.Chest;
 import com.mauro.bestmazes.blocks.Spawner;
 import com.mauro.bestmazes.entities.minotaurs.EndMinotaur;
 import com.mauro.bestmazes.entities.minotaurs.Minotaur;
+import com.mauro.bestmazes.utility.Dijkstra;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.Point3D;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
 import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
+import com.mauro.bestmazes.utility.dungeon.Maze3D;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.ChestGenHooks;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -104,46 +104,41 @@ public class EndConfiguration extends DungeonConfiguration{
         addSpawners(world, x, y, z, random);
     }
 
-    private void genFinalMaze(World world, int x, int y, int z, Random random){
+    public void genFinalMaze(World world, int x, int y, int z, Random random){
         x += 15;
         z += 15;
         FinalConfiguration fC = (FinalConfiguration)DungeonConfigurations.getConfiguration(DungeonReferences.FINAL);
 
-        int xLoot, zLoot;
-
         if(random.nextBoolean()){
             fC.xStart = 0;
-            xLoot = fC.xSize - 1;
         }
         else{
             fC.xStart = fC.xSize - 1;
-            xLoot = 0;
         }
 
         if(random.nextBoolean()){
             fC.zStart = 0;
-            zLoot = fC.zSize - 1;
         }
         else{
             fC.zStart = fC.zSize - 1;
-            zLoot = 0;
         }
 
-        xLoot = xLoot * 2 + 1;
-        zLoot = zLoot * 2 + 1;
-
-        Block[][][] model = Dungeon.genFinalMaze(fC, random);
+        Maze3D maze3D = new Maze3D(fC, random);
+        Block[][][] model = Dungeon.genFinalMaze(fC, maze3D, random);
         Drawer.fillParallelepipedon1(model, 0, 0, 0, model.length, 1, model[0][0].length, null);
         Drawer.fillParallelepipedon1(model, 0, 3, 0, model.length, 1, model[0][0].length, null);
         StructureGenerator.createModel(world, model, x, y, z);
 
+        Point3D chestPoint = Dijkstra.getfarthestPoint(maze3D.m, fC.xStart * 2 + 1, fC.yStart * 2 + 1, fC.zStart * 2 + 1);
+
+        System.out.println("###### x: " + chestPoint.x + "  y: " + chestPoint.y + "  z: " + chestPoint.z);
+
         int dir = Chest.NORTH;
-        if(model[xLoot + 1][1][zLoot] == Blocks.air) dir = Chest.EAST;
-        else if(model[xLoot - 1][1][zLoot] == Blocks.air) dir = Chest.WEST;
-        else if(model[xLoot][1][zLoot + 1] == Blocks.air) dir = Chest.SOUTH;
+        if(!maze3D.m[chestPoint.x + 1][chestPoint.y][chestPoint.z]) dir = Chest.EAST;
+        else if(!maze3D.m[chestPoint.x - 1][chestPoint.y][chestPoint.z]) dir = Chest.WEST;
+        else if(!maze3D.m[chestPoint.x][chestPoint.y][chestPoint.z + 1]) dir = Chest.SOUTH;
 
-        StructureGenerator.setBlock(world, x + xLoot, y + 1, z + zLoot, new Chest(fC.getLoot(random), dir));
-
+        StructureGenerator.setBlock(world, x + chestPoint.x, y + chestPoint.y, z + chestPoint.z, new Chest(fC.getLoot(random), dir));
         StructureGenerator.setBlock(world, x + fC.xStart * 2 + 1, y + 3, z + fC.zStart * 2 + 1, BestMazesBlocks.stoneBricksSlabDown);
     }
 

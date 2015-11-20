@@ -3,6 +3,7 @@ package com.mauro.bestmazes.utility.dungeon;
 /**
  * Created by Gabriele on 6/25/2015.
  */
+import com.mauro.bestmazes.utility.Point3D;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 
 import java.util.ArrayList;
@@ -28,19 +29,6 @@ public class Maze3D
     public int xMSize;
     public int yMSize;
     public int zMSize;
-
-    private class Point3D
-    {
-        public int x, y, z;
-
-        public Point3D(int x, int y, int z)
-        {
-            super();
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
-    }
 
     public Maze3D(DungeonConfiguration dC, Random r)
     {

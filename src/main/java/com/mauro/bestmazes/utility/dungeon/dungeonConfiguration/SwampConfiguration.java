@@ -75,7 +75,7 @@ public class SwampConfiguration extends DungeonConfiguration{
     public ArrayList<ItemStack> getLoot(Random random){
         ArrayList<ItemStack> loot = super.getLoot(random);
         int n = random.nextInt(5) + 5;
-        int metadata = 0;
+        int metadata;
         for(int i = 0; i < n; i++){
             metadata = random.nextInt(64);
             metadata += random.nextBoolean() ? 64 : 0;

@@ -64,20 +64,20 @@ public class Dungeon {
         }
     }
 
-    public Dungeon(World world, Random r, int x, int y, int z, DungeonConfiguration dC){
+    public Dungeon(World world, Random random, int x, int y, int z, DungeonConfiguration dC){
         this.dC = dC;
 
         this.xDungeon = x;
         this.yDungeon = y;
         this.zDungeon = z;
 
-        this.random = r;
+        this.random = random;
         this.world = world;
 
         xEntrance = dC.xStart * 2 + 1;
 
-        m = new Maze3D(dC, r);
-        maze = genMaze(dC, m, xEntrance, m.ySize - 2, 0, random);
+        m = new Maze3D(dC, random);
+        maze = genMaze(dC, m, xEntrance, m.ySize - 2, 0, this.random);
 
         if(dC.name.equals(DungeonReferences.END)){
             xStairs = xDungeon - 9;
@@ -130,11 +130,11 @@ public class Dungeon {
             yHut = yStairs + stairs[0].length - 1;
             zHut = zDungeon + dC.zHut;
 
-            lootRoom = dC.genLootRoom(random);
+            lootRoom = dC.genLootRoom(this.random);
 
             corridor = genCorridor(corridorWidth, corridorHeight, corridorLength);
 
-            hut = dC.genEntranceHut(random);
+            hut = dC.genEntranceHut(this.random);
         }
     }
 
@@ -243,7 +243,7 @@ public class Dungeon {
     private static Block[][][] genMaze(DungeonConfiguration dC, Maze3D m, int xE, int yE, int zE, Random random){
         m.generate();
 
-        if(xE > 0 && yE > 0 && zE > 0) m.m[xE][yE][zE] = false;
+        if(xE >= 0 && yE >= 0 && zE >= 0) m.m[xE][yE][zE] = false;
 
         int[][] deltas = null;
 
@@ -278,8 +278,8 @@ public class Dungeon {
         return model;
     }
 
-    public static Block[][][] genFinalMaze(DungeonConfiguration dC, Random random){
-        return genMaze(dC, new Maze3D(dC, random), -1, -1, -1, random);
+    public static Block[][][] genFinalMaze(DungeonConfiguration dC, Maze3D m, Random random){
+        return genMaze(dC, m, -1, -1, -1, random);
     }
 
     private static void lavaWaterNets(DungeonConfiguration dC, Block[][][] model, Random random){

@@ -8,6 +8,7 @@ import com.mauro.bestmazes.entities.minotaurs.Minotaur;
 import com.mauro.bestmazes.utility.Drawer;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -71,10 +72,7 @@ public class IceConfiguration extends DungeonConfiguration {
 
     public ArrayList<ItemStack> getLoot(Random random){
         ArrayList<ItemStack> loot = super.getLoot(random);
-        for(int i = 0; i < Spawner.spawnEggsMetaData.length; i++){
-            loot.add(new ItemStack(Blocks.mob_spawner, 1, Spawner.spawnEggsMetaData[i]));
-        }
-
+        loot.add(new ItemStack(Items.golden_apple, random.nextInt(5) + 5, 1));
         return loot;
     }
 

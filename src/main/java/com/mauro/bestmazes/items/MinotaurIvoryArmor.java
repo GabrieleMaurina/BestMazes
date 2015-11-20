@@ -90,7 +90,7 @@ public class MinotaurIvoryArmor extends ItemArmor implements ISpecialArmor {
         if(source.getEntity() instanceof Minotaur) {
             return new ArmorProperties(0, damageReduceAmount / 23.0, armor.getMaxDamage() + 1 - armor.getItemDamage());
         }
-        return new ArmorProperties(0, damageReduceAmount / 25.5, armor.getMaxDamage() + 1 - armor.getItemDamage());
+        return new ArmorProperties(0, damageReduceAmount / 26.0, armor.getMaxDamage() + 1 - armor.getItemDamage());
     }
 
     @Override

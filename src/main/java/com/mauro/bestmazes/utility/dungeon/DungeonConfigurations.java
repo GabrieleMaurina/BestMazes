@@ -12,8 +12,8 @@ import java.util.Random;
  */
 public class DungeonConfigurations {
 
-    private static final Map<String, DungeonConfiguration> configurations = new HashMap<String, DungeonConfiguration>();
-    private static final Map<BiomeGenBase, DungeonConfiguration> biomConf = new HashMap<BiomeGenBase, DungeonConfiguration>();
+    public static final Map<String, DungeonConfiguration> configurations = new HashMap<String, DungeonConfiguration>();
+    public static final Map<BiomeGenBase, DungeonConfiguration> biomConf = new HashMap<BiomeGenBase, DungeonConfiguration>();
 
     static{
         initConfigurations();

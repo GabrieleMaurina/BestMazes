@@ -24,10 +24,10 @@ public class EndMinotaur extends Minotaur {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0);
         getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0);
         getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0);
         getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25);
-        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(48.0);
     }
 }

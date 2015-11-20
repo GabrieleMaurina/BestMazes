@@ -1,10 +1,12 @@
 package com.mauro.bestmazes.entities.minotaurs;
 
 import com.mauro.bestmazes.items.Key;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -39,7 +41,7 @@ public abstract class Minotaur extends EntityMob {
         getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0);
         getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0);
         getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25);
-        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(24.0);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(36.0);
     }
 
     public boolean isAIEnabled() {
