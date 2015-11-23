@@ -6,7 +6,9 @@ package com.mauro.bestmazes.utility;
 
 public class Point3D
 {
-    public int x, y, z;
+    public int x = 0;
+    public int y = 0;
+    public int z = 0;
 
     public Point3D(int x, int y, int z)
     {
@@ -14,5 +16,19 @@ public class Point3D
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    @Override
+    public int hashCode() {
+        return (x + "#" + y + "#" + z).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Point3D)) {
+            return false;
+        }
+        Point3D p = (Point3D)other;
+        return x == p.x && y == p.y && z == p.z;
     }
 }

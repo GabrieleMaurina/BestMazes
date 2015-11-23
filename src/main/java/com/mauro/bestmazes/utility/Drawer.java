@@ -1,16 +1,23 @@
 package com.mauro.bestmazes.utility;
 
+import com.google.common.collect.Sets;
+import com.mauro.bestmazes.utility.inflatables.Inflatable;
+import com.mauro.bestmazes.utility.inflatables.InflatableSphere;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by Gabriele on 7/1/2015.
  */
 public class Drawer {
+
+    public static final int XY_PLANE = 0;
+    public static final int YZ_PLANE = 1;
+    public static final int ZX_PLANE = 2;
 
     public static void drawRectangle(World world, int x, int y, int z, int dx, int dz, Block b){
         fillParallelepipedon1(world, x, y, z, dx, 1, 1, b);
@@ -235,53 +242,45 @@ public class Drawer {
         }
     }
 
-    public static void line(Block[][][] model, int x1, int y1, int z1, int x2, int y2, int z2, Block b){
-        //model[x1][y1][z1] = b;
-        if(x1 > x2){
-            int tmp = x1;
-            x1 = x2;
-            x2 = tmp;
-        }
-        if(y1 > y2){
-            int tmp = y1;
-            y1 = y2;
-            y2 = tmp;
-        }
-        if(z1 > z2){
-            int tmp = z1;
-            z1 = z2;
-            z2 = tmp;
-        }
+    private static boolean condition(int n1, int n2, int dir){
+        if(dir > 0) return n1 <= n2;
+        else return n1 >= n2;
+    }
 
-        int dx = x2 - x1;
-        int dy = y2 - y1;
-        int dz = z2 - z1;
+    public static void line(World world, int x1, int y1, int z1, int x2, int y2, int z2, Block b){
+        double dX = x2 - x1;
+        double dY = y2 - y1;
+        double dZ = z2 - z1;
 
-        if(dx > dy && dx > dz){
-            double dyx = dy / dx;
-            double dzx = dz / dx;
-            for(int x = x1; x < x2 + 1; x++){
+        int xDir = dX > 0 ? 1 : -1;
+        int yDir = dY > 0 ? 1 : -1;
+        int zDir = dZ > 0 ? 1 : -1;
+
+        if(Math.abs(dX) >= Math.abs(dY) && Math.abs(dX) >= Math.abs(dZ)){
+            double dyx = dY / dX;
+            double dzx = dZ / dX;
+            for(int x = x1; condition(x, x2, xDir); x += xDir){
                 int y = y1 + (int)((x - x1) * dyx);
                 int z = z1 + (int)((x - x1) * dzx);
-                model[x][y][z] = b;
+                StructureGenerator.setBlock(world, x, y, z, b);
             }
         }
-        else if(dy > dx && dy > dz){
-            double dxy = dx / dy;
-            double dzy = dz / dy;
-            for(int y = y1; y < y2 + 1; y++){
+        else if(Math.abs(dY) >= Math.abs(dX) && Math.abs(dY) >= Math.abs(dZ)){
+            double dxy = dX / dY;
+            double dzy = dZ / dY;
+            for(int y = y1; condition(y, y2, yDir); y += yDir){
                 int x = x1 + (int)((y - y1) * dxy);
                 int z = z1 + (int)((y - y1) * dzy);
-                model[x][y][z] = b;
+                StructureGenerator.setBlock(world, x, y, z, b);
             }
         }
-        else if(dz > dx && dz > dy){
-            double dxz = dx / dz;
-            double dyz = dy / dz;
-            for(int z = z1; z < z2 + 1; z++){
+        else if(Math.abs(dZ) >= Math.abs(dX) && Math.abs(dZ) >= Math.abs(dY)){
+            double dxz = dX / dZ;
+            double dyz = dY / dZ;
+            for(int z = z1; condition(z, z2, zDir); z += zDir){
                 int x = x1 + (int)((z - z1) * dxz);
                 int y = y1 + (int)((z - z1) * dyz);
-                model[x][y][z] = b;
+                StructureGenerator.setBlock(world, x, y, z, b);
             }
         }
     }
@@ -337,5 +336,99 @@ public class Drawer {
                 }
             }
         }
+    }
+
+    public static void drawCircle(World world, int x, int y, int z, int radius, int plane, Block b)
+    {
+        int d1 = radius;
+        int d2 = 0;
+        int d = 1 - d1;
+
+        do {
+            if(plane == XY_PLANE){
+                StructureGenerator.setBlock(world, x + d1, y + d2, z, b);
+                StructureGenerator.setBlock(world, x + d1, y - d2, z, b);
+                StructureGenerator.setBlock(world, x - d1, y + d2, z, b);
+                StructureGenerator.setBlock(world, x - d1, y - d2, z, b);
+                StructureGenerator.setBlock(world, x + d2, y + d1, z, b);
+                StructureGenerator.setBlock(world, x + d2, y - d1, z, b);
+                StructureGenerator.setBlock(world, x - d2, y + d1, z, b);
+                StructureGenerator.setBlock(world, x - d2, y - d1, z, b);
+            }
+            else if(plane == YZ_PLANE){
+                StructureGenerator.setBlock(world, x, y + d1, z + d2, b);
+                StructureGenerator.setBlock(world, x, y + d1, z - d2, b);
+                StructureGenerator.setBlock(world, x, y - d1, z + d2, b);
+                StructureGenerator.setBlock(world, x, y - d1, z - d2, b);
+                StructureGenerator.setBlock(world, x, y + d2, z + d1, b);
+                StructureGenerator.setBlock(world, x, y + d2, z - d1, b);
+                StructureGenerator.setBlock(world, x, y - d2, z + d1, b);
+                StructureGenerator.setBlock(world, x, y - d2, z - d1, b);
+            }
+            else if(plane == ZX_PLANE){
+                StructureGenerator.setBlock(world, x + d2, y, z + d1, b);
+                StructureGenerator.setBlock(world, x - d2, y, z + d1, b);
+                StructureGenerator.setBlock(world, x + d2, y, z - d1, b);
+                StructureGenerator.setBlock(world, x - d2, y, z - d1, b);
+                StructureGenerator.setBlock(world, x + d1, y, z + d2, b);
+                StructureGenerator.setBlock(world, x - d1, y, z + d2, b);
+                StructureGenerator.setBlock(world, x + d1, y, z - d2, b);
+                StructureGenerator.setBlock(world, x - d1, y, z - d2, b);
+            }
+
+            d2++;
+            if (d <= 0) {
+                d += 2 * d2 + 1;
+            }
+            else{
+                d1--;
+                d += 2 * (d2 - d1) + 1;
+            }
+        } while (d2 <= d1);
+    }
+
+    public static void fillCircle(World world, int x, int y, int z, int radius, int plane, Block b)
+    {
+        int d1 = radius;
+        int d2 = 0;
+        int d = 1 - d1;
+
+        do {
+            if(plane == XY_PLANE){
+                line(world, x + d1, y + d2, z, x + d1, y - d2, z, b);
+                line(world, x - d1, y + d2, z, x - d1, y - d2, z, b);
+                line(world, x + d2, y + d1, z, x + d2, y - d1, z, b);
+                line(world, x - d2, y + d1, z, x - d2, y - d1, z, b);
+            }
+            else if(plane == YZ_PLANE){
+                line(world, x, y + d1, z + d2, x, y + d1, z - d2, b);
+                line(world, x, y - d1, z + d2, x, y - d1, z - d2, b);
+                line(world, x, y + d2, z + d1, x, y + d2, z - d1, b);
+                line(world, x, y - d2, z + d1, x, y - d2, z - d1, b);
+            }
+            else if(plane == ZX_PLANE){
+                line(world, x + d2, y, z + d1, x - d2, y, z + d1, b);
+                line(world, x + d2, y, z - d1, x - d2, y, z - d1, b);
+                line(world, x + d1, y, z + d2, x - d1, y, z + d2, b);
+                line(world, x + d1, y, z - d2, x - d1, y, z - d2, b);
+            }
+
+            d2++;
+            if (d <= 0) {
+                d += 2 * d2 + 1;
+            }
+            else{
+                d1--;
+                d += 2 * (d2 - d1) + 1;
+            }
+        } while (d2 <= d1);
+    }
+
+    public static void drawSphere(World world, int x, int y, int z, int radius, int internalRadius, Block b) {
+        Inflatable.inflateShape(new InflatableSphere(world, x, y, z, radius, internalRadius, b, false));
+    }
+
+    public static void fillSphere(World world, int x, int y, int z, int radius, Block b) {
+        Inflatable.inflateShape(new InflatableSphere(world, x, y, z, radius, 0, b, true));
     }
 }
