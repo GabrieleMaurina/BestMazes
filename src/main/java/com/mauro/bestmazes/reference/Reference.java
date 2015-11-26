@@ -5,7 +5,7 @@ package com.mauro.bestmazes.reference;
  */
 public class Reference
 {
-    public static final String MOD_ID = "bestmazesbymauro";
+    public static final String MOD_ID = "bestmazesbygabrielemaurina";
     public static final String MOD_NAME = "BestMazes";
     public static final String MOD_VERSION = "1.1";
     public static final String CLIENT_PROXY_CLASS = "com.mauro.bestmazes.proxy.ClientProxy";

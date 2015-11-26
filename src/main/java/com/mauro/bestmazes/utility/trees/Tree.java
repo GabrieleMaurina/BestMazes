@@ -4,53 +4,45 @@ package com.mauro.bestmazes.utility.trees;
  * Created by Gabriele on 11/20/2015.
  */
 
-import com.mauro.bestmazes.blocks.BestMazesBlocks;
 import com.mauro.bestmazes.utility.Drawer;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class Tree
 {
-    private static final double WIDTH = 8;
-    private static final double LENGTH = 10;
-    private static final double SPREAD = Math.PI / 6.0;
-    private static final int SIZE = 5;
-    private static final double CHILD_PROB = 1.0;
-    private static final int N_SONS = 5;
-    private static final double K_WIDTH = 0.85;
-    private static final double K_LENGTH = 0.9;
-
-    private Random rand;
+    private Random random;
     private int size;
     private int nSons;
     private double spread;
-    private double childProb;
-    private double kWidth;
+    private double bonusSpread;
     private double kLength;
     private Node base;
+    private double fatherPull;
 
-    public Tree(double width, double length, double spread, int size, int nSons, double childProb, double kLength, double kWidth, Random rand)
+    public Tree(TreeConfiguration tC, Random random)
     {
-        this.base = new Node(0, 0, 0, width, length, null, 0, 0, 0);
-        this.rand = rand;
-        this.size = size;
-        this.nSons = nSons;
-        this.spread = spread;
-        this.childProb = childProb;
-        this.kLength = kLength;
-        this.kWidth = kWidth;
+        this.base = new Node(0, 0, 0, tC.radius, tC.length, null, 0, 0);
+        this.random = random;
+        this.size = tC.size;
+        this.nSons = tC.nSons;
+        this.spread = tC.spread;
+        this.bonusSpread = tC.bonusSpread;
+        this.kLength = tC.kLength;
+        this.fatherPull = tC.fatherPull;
         addLayer(0, base);
     }
 
     private int sons(int index, Node father)
     {
-        if(index > 0 && rand.nextDouble() < childProb * father.sonsN)
+        if(index == 1)
         {
-            return rand.nextInt(nSons - 2) + 3;
-            //return 4;
+            return nSons;
+        }
+        else if(index > 1)
+        {
+            return random.nextInt(nSons - 2) + 3;
         }
         return 1;
     }
@@ -87,13 +79,13 @@ public class Tree
             double bonus = 0.0;
             if(sons > 1)
             {
-                bonus = Math.PI / 8.0;
+                bonus = bonusSpread;
             }
 
-            double verAng = (index == 0) ? 0 : (rand.nextDouble() * spread + bonus);
+            double verAng = (index == 0) ? 0 : (random.nextDouble() * spread + bonus);
 
             double[] orAng = new double[sons];
-            orAng[0] = norm(rand.nextDouble() * Math.PI * 2.0);
+            orAng[0] = norm(random.nextDouble() * Math.PI * 2.0);
             double delta = Math.PI * 2.0 / sons;
             for(int i = 1; i < orAng.length; i++){
                 orAng[i] = norm(orAng[i - 1] + delta);
@@ -108,59 +100,59 @@ public class Tree
                 double dY = Math.cos(verAng) * father.length;
 
                 //real vector
-                double orLen1 = Math.sin(father.verAng) * dY;
+                double fatherVerAng = father.verAng * fatherPull;
+
+                double orLen1 = Math.sin(fatherVerAng) * dY;
                 double dX1 = Math.cos(father.orAng) * orLen1;
                 double dZ1 = Math.sin(father.orAng) * orLen1;
-                double dY1 = Math.cos(father.verAng) * dY;
+                double dY1 = Math.cos(fatherVerAng) * dY;
 
-                orLen1 = Math.cos(father.verAng) * dX;
+                orLen1 = Math.cos(fatherVerAng) * dX;
                 dX1 += Math.cos(father.orAng) * orLen1;
                 dZ1 += Math.sin(father.orAng) * orLen1;
-                dY1 += -Math.sin(father.verAng) * dX;
+                dY1 += -Math.sin(fatherVerAng) * dX;
 
                 orLen1 = dZ;
                 dX1 += -Math.sin(father.orAng) * orLen1;
                 dZ1 += Math.cos(father.orAng) * orLen1;
                 dY1 += 0.0;
 
-                double verAng1 = norm(Math.asin(Math.sqrt(dX1 * dX1 + dZ1 * dZ1) / father.length)) * (0.7 + rand.nextDouble() * 0.3);
+                double verAng1 = norm(Math.asin(Math.sqrt(dX1 * dX1 + dZ1 * dZ1) / father.length));
                 double orAng1 = norm((dX1 == 0.0 && dZ1 == 0.0) ? 0.0 : Math.atan2(dZ1, dX1));
-
-                orLen1 = Math.sin(verAng1) * father.length;
-                dX1 = Math.cos(orAng1) * orLen;
-                dZ1 = Math.sin(orAng1) * orLen;
-                dY1 = Math.cos(verAng1) * father.length;
 
                 double newX = father.x + dX1;
                 double newY = father.y + dY1;
                 double newZ = father.z + dZ1;
 
-                Node son = new Node(newX, newY, newZ, father.width * kWidth, father.length * kLength, father, (sons > 1 ? 0 : father.sonsN + 1), verAng1, orAng1);
+                int radius = father.radius - 1;
+                radius = radius < 1 ? 1 : radius;
 
+                Node son = new Node(newX, newY, newZ, radius, father.length * kLength, father, verAng1, orAng1);
                 father.sons.add(son);
+
                 addLayer(index + 1, son);
             }
         }
     }
 
-    public static void genTree(World world, int x, int y, int z, Random random)
+    public static void genTree(World world, int x, int y, int z, TreeConfiguration tC, Random random)
     {
-        Tree t = new Tree(WIDTH, LENGTH, SPREAD, SIZE, N_SONS, CHILD_PROB, K_LENGTH, K_WIDTH, random);
-        genBranch(world, null, t.base, x, y, z, Blocks.log);
+        Tree t = new Tree(tC, random);
+        genBranch(world, null, t.base, x, y, z, tC.wood, tC.leaves, tC.leavesSize);
 
     }
 
-    private static void genBranch(World world, Node father, Node son, int x, int y, int z, Block b){
-        if(son.sons.size() == 0){
-            //Drawer.fillSphere(world, (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), 4, Blocks.leaves);
+    private static void genBranch(World world, Node father, Node son, int x, int y, int z, Block wood, Block leaves, int leavesSize){
+        for(Node grandSon : son.sons){
+            genBranch(world, son, grandSon, x, y, z, wood, leaves, leavesSize);
         }
 
-        for(Node grandSon : son.sons){
-            genBranch(world, son, grandSon, x, y, z, b);
+        if(son.sons.size() == 0){
+            Drawer.fillSphere(world, (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), leavesSize, leaves);
         }
 
         if(father != null){
-            Drawer.line(world, (int) (x + father.x), (int) (y + father.y), (int) (z + father.z), (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), b);
+            Drawer.fillCylinder(world, (int) (x + father.x), (int) (y + father.y), (int) (z + father.z), (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), father.radius, wood);
         }
     }
 }

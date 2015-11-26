@@ -29,7 +29,8 @@ item.minotaurIvoryPickaxe.name=Minotaur Ivory Pickaxe
 tile.piselliteBricks.name=Pisellite Bricks
 tile.piselliteBricksSlab.name=Pisellite Bricks Slab
 tile.mazeLock.name=Maze Lock
-
+tile.magicalLeaves.name=Magical Leaves
+tile.magicalSapling.name=Magical Sapling
 
 
 #Creative Tabs

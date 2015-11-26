@@ -1,10 +1,12 @@
 package com.mauro.bestmazes.proxy;
 
 import com.mauro.bestmazes.blocks.BestMazesBlocks;
+import com.mauro.bestmazes.client.models.MinotaurModel1;
 import com.mauro.bestmazes.client.renders.InventoryMazeLockRender;
 import com.mauro.bestmazes.client.renders.MazeLockRender;
 import com.mauro.bestmazes.client.renders.MinotaurRender;
 import com.mauro.bestmazes.client.models.MinotaurModel;
+import com.mauro.bestmazes.client.renders.MinotaurRender1;
 import com.mauro.bestmazes.entities.minotaurs.*;
 import com.mauro.bestmazes.tileEntities.MazeLockTileEntity;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -19,7 +21,7 @@ public class ClientProxy extends CommonProxy{
 
     @Override
     public void registerRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(ForestMinotaur.class, new MinotaurRender(new MinotaurModel(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(ForestMinotaur.class, new MinotaurRender1(new MinotaurModel1(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(BirchMinotaur.class, new MinotaurRender(new MinotaurModel(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(RoofedMinotaur.class, new MinotaurRender(new MinotaurModel(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(DesertMinotaur.class, new MinotaurRender(new MinotaurModel(), 0.5F));

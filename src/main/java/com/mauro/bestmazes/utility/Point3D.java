@@ -31,4 +31,9 @@ public class Point3D
         Point3D p = (Point3D)other;
         return x == p.x && y == p.y && z == p.z;
     }
+
+    @Override
+    public String toString(){
+        return "X: " + x + "  Y: " + y + "   Z: " + z;
+    }
 }

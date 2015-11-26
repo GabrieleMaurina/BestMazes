@@ -2,6 +2,7 @@ package com.mauro.bestmazes.utility;
 
 import com.google.common.collect.Sets;
 import com.mauro.bestmazes.utility.inflatables.Inflatable;
+import com.mauro.bestmazes.utility.inflatables.InflatableCylider;
 import com.mauro.bestmazes.utility.inflatables.InflatableSphere;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import net.minecraft.block.Block;
@@ -431,4 +432,12 @@ public class Drawer {
     public static void fillSphere(World world, int x, int y, int z, int radius, Block b) {
         Inflatable.inflateShape(new InflatableSphere(world, x, y, z, radius, 0, b, true));
     }
+
+    public static void drawCylinder(World world, int x, int y, int z, int x1, int y1, int z1, int radius, int internalRadius, Block b) {
+        Inflatable.inflateShape(new InflatableCylider(world, x, y, z, x1, y1, z1, radius, internalRadius, b, false));
+    }
+
+    public static void fillCylinder(World world, int x, int y, int z, int x1, int y1, int z1, int radius, Block b) {
+        Inflatable.inflateShape(new InflatableCylider(world, x, y, z, x1, y1, z1, radius, 0, b, true));
+}
 }

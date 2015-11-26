@@ -1,14 +1,14 @@
 [{
-  "modid": "bestmazesbymauro",
+  "modid": "bestmazesbygabrielemaurina",
   "name": "BestMazes",
   "description": "New 3D mazes! Different types of mazes, each with different loots",
   "version": "",
-  "credits": "Created by Mauro 'n Armadio",
+  "credits": "Created by Gabriele Maurina n Armadio, textures by Giulia Formolo",
   "logoFile": "logo.png",
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
-  "authorList": [ "Mauro", "ArmaDio"],
+  "authorList": [ "Gabriele Maurina", "ArmaDio"],
   "parent":"",
   "screenshots": ["assets\bestmazesbymauro\screenshots\DesertEntranceHut.png"],
   "dependencies": []

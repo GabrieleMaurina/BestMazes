@@ -11,25 +11,23 @@ public class Node
     public double x = 0.0;
     public double y = 0.0;
     public double z = 0.0;
-    public double width = 0.0;
+    public int radius = 0;
     public double length = 0.0;
     public ArrayList<Node> sons = new ArrayList<Node>();
     public Node father;
-    public int sonsN = 0;
     public double verAng = 0.0;
     public double orAng = 0.0;
 
 
-    public Node(double x, double y, double z, double width, double length, Node father, int sonsProb, double verAng, double orAng)
+    public Node(double x, double y, double z, int radius, double length, Node father, double verAng, double orAng)
     {
         super();
         this.x = x;
         this.y = y;
         this.z = z;
-        this.width = width;
+        this.radius = radius;
         this.length = length;
         this.father = father;
-        this.sonsN = sonsProb;
         this.verAng = verAng;
         this.orAng = orAng;
     }

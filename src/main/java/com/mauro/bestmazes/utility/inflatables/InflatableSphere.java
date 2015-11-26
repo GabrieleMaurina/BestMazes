@@ -34,9 +34,11 @@ public class InflatableSphere extends Inflatable{
 
     @Override
     public boolean elegible(Point3D point) {
-        if(fill) return (int)(Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) + 0.5) == radius;
+        int dist = (int)Math.round(Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z));
+        if(fill){
+            return dist == radius;
+        }
         else{
-            int dist = (int)(Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) + 0.5);
             return  dist <= radius && dist >= internalRadius;
         }
     }

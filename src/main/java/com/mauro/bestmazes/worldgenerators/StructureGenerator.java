@@ -2,12 +2,15 @@ package com.mauro.bestmazes.worldgenerators;
 
 import com.mauro.bestmazes.blocks.*;
 import com.mauro.bestmazes.utility.Drawer;
+import com.mauro.bestmazes.utility.Point3D;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
 import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
 import com.mauro.bestmazes.utility.dungeon.DungeonReferences;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.EndConfiguration;
 import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.FinalConfiguration;
+import com.mauro.bestmazes.utility.inflatables.InflatableCylider;
+import com.mauro.bestmazes.utility.trees.MagicalTreeConfiguration;
 import com.mauro.bestmazes.utility.trees.Tree;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
@@ -31,23 +34,11 @@ public class StructureGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
         if(chunkX == 0 && chunkZ == 0){
-            /*int i = 0;
-            int e = 0;
-            for(Map.Entry<String, DungeonConfiguration> entry : DungeonConfigurations.configurations.entrySet()) {
-                DungeonConfiguration dC = entry.getValue();
-                setBlock(world, i++ * 2, 100, 0, new Chest(dC.getLoot(random), Chest.SOUTH));
-                if(!(dC instanceof EndConfiguration) && !(dC instanceof FinalConfiguration)) {
-                    (new Dungeon(world, random, e++ * 20 - 130, 5, 0, dC)).generate();
-                }
-            }*/
-
-            //Tree.genTree(world, 0, world.getHeightValue(0, 0), 0, random);
-
-            Drawer.fillSphere(world, 0, 100, -10, 10, Blocks.stonebrick);
-            Drawer.drawSphere(world, 20, 150, 30, 50, 50, Blocks.stonebrick);
-            Drawer.drawSphere(world, -20, 110, 10, 10, 5, Blocks.stonebrick);
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Tree.genTree(world, 0, world.getHeightValue(0, 0), 0, new MagicalTreeConfiguration(), random);
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
         }
-        //Dungeon.generateDungeon(world, chunkX, chunkZ, random);
+        Dungeon.generateDungeon(world, chunkX, chunkZ, random);
     }
 
     public static void setBlock(World world, int x, int y, int z, Block block){
