@@ -56,9 +56,9 @@ public class ForestConfiguration extends DungeonConfiguration{
         xLootRoom = 7;
         yLootRoom = 1;
 
-        xMinotaurSpawn = 6.5;
-        yMinotaurSpawn = 1.5;
-        zMinotaurSpawn = 5.5;
+        xMinotaurSpawn = 7.5;
+        yMinotaurSpawn = 3.0;
+        zMinotaurSpawn = 12.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 

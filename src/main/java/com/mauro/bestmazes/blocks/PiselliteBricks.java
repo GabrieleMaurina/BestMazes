@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -33,12 +34,14 @@ public class PiselliteBricks extends Block {
 
     @Override
     public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
-        return player.inventory.getCurrentItem().getItem() instanceof MinotaurIvoryPickaxe ? 0.05F : -1F;
+        Item item = player.inventory.getCurrentItem().getItem();
+        return (item != null && item instanceof MinotaurIvoryPickaxe) ? 0.05F : -1F;
     }
 
     @Override
     public boolean canHarvestBlock(EntityPlayer player, int meta) {
-        return player.inventory.getCurrentItem().getItem() instanceof MinotaurIvoryPickaxe;
+        Item item = player.inventory.getCurrentItem().getItem();
+        return (item != null && item instanceof MinotaurIvoryPickaxe);
     }
 
     @Override

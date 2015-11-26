@@ -55,9 +55,9 @@ public class PlainConfiguration extends DungeonConfiguration {
         xLootRoom = 8;
         yLootRoom = 1;
 
-        xMinotaurSpawn = 7.5;
-        yMinotaurSpawn = 3.0;
-        zMinotaurSpawn = 12.5;
+        xMinotaurSpawn = 8.5;
+        yMinotaurSpawn = 7.0;
+        zMinotaurSpawn = 7.5;
 
         xHut = -4;
         zHut = -4;

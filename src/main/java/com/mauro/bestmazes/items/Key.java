@@ -19,13 +19,7 @@ public class Key extends Item {
         this.type = type;
         this.name = type + "Key";
         setUnlocalizedName(name);
-        setTextureName(Reference.MOD_ID + ":keys/key");
+        setTextureName(Reference.MOD_ID + ":keys/" + type + "Key");
         setCreativeTab(BestMazesTabs.bestMazesTab);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack p_77636_1_)
-    {
-        return true;
     }
 }

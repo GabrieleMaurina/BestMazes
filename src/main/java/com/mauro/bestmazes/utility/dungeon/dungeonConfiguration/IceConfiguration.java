@@ -58,8 +58,8 @@ public class IceConfiguration extends DungeonConfiguration {
         yLootRoom = 1;
 
         xMinotaurSpawn = 8.5;
-        yMinotaurSpawn = 5.0;
-        zMinotaurSpawn = 10.5;
+        yMinotaurSpawn = 6.0;
+        zMinotaurSpawn = 12.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 

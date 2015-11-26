@@ -20,7 +20,7 @@ public abstract class Minotaur extends EntityMob {
 
     public Minotaur(World world){
         super(world);
-        setSize(1.2F, 2.4F);
+        setSize(0.5F, 1.7F);
         tasks.addTask(1, new EntityAISwimming(this));
         tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false));
         tasks.addTask(3, new EntityAIWander(this, 1.0D));

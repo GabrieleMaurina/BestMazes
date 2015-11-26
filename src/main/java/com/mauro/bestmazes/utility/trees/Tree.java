@@ -148,11 +148,11 @@ public class Tree
         }
 
         if(son.sons.size() == 0){
-            Drawer.fillSphere(world, (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), leavesSize, leaves);
+            //Drawer.fillSphere(world, (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), leavesSize, leaves);
         }
 
         if(father != null){
-            Drawer.fillCylinder(world, (int) (x + father.x), (int) (y + father.y), (int) (z + father.z), (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), father.radius, wood);
+            //Drawer.fillCylinder(world, (int) (x + father.x), (int) (y + father.y), (int) (z + father.z), (int) (x + son.x), (int) (y + son.y), (int) (z + son.z), father.radius, wood);
         }
     }
 }

@@ -424,20 +424,4 @@ public class Drawer {
             }
         } while (d2 <= d1);
     }
-
-    public static void drawSphere(World world, int x, int y, int z, int radius, int internalRadius, Block b) {
-        Inflatable.inflateShape(new InflatableSphere(world, x, y, z, radius, internalRadius, b, false));
-    }
-
-    public static void fillSphere(World world, int x, int y, int z, int radius, Block b) {
-        Inflatable.inflateShape(new InflatableSphere(world, x, y, z, radius, 0, b, true));
-    }
-
-    public static void drawCylinder(World world, int x, int y, int z, int x1, int y1, int z1, int radius, int internalRadius, Block b) {
-        Inflatable.inflateShape(new InflatableCylider(world, x, y, z, x1, y1, z1, radius, internalRadius, b, false));
-    }
-
-    public static void fillCylinder(World world, int x, int y, int z, int x1, int y1, int z1, int radius, Block b) {
-        Inflatable.inflateShape(new InflatableCylider(world, x, y, z, x1, y1, z1, radius, 0, b, true));
-}
 }

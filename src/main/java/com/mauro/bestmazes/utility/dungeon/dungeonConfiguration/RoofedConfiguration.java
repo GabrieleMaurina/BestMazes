@@ -61,7 +61,7 @@ public class RoofedConfiguration extends DungeonConfiguration {
         xLootRoom = 7;
         yLootRoom = 1;
 
-        xMinotaurSpawn = 6.5;
+        xMinotaurSpawn = 7.5;
         yMinotaurSpawn = 7.0;
         zMinotaurSpawn = 9.5;
 

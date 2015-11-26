@@ -2,6 +2,7 @@ package com.mauro.bestmazes.utility.inflatables;
 
 import com.google.common.collect.Sets;
 import com.mauro.bestmazes.utility.Point3D;
+import net.minecraft.world.World;
 
 import java.util.Set;
 
@@ -9,25 +10,22 @@ import java.util.Set;
  * Created by Gabriele on 11/21/2015.
  */
 public abstract class Inflatable {
-    public abstract boolean elegible(Point3D point);
-    public abstract void inflate(Point3D point);
-    public abstract Point3D startPoint();
 
-    public static void inflateShape(Inflatable inflatable){
-        Set<Point3D> points = Sets.newHashSet();
-        Set<Point3D> toBeChecked = Sets.newHashSet();
-        Set<Point3D> checked = Sets.newHashSet();
+    protected abstract boolean elegible(Point3D point);
+    protected abstract Point3D startPoint();
+    protected abstract void inflate(World world, int x, int y, int z, Point3D point);
 
-        inflatable.inflate(inflatable.startPoint());
+    public Set<Point3D> points = Sets.newHashSet();
+    private Set<Point3D> toBeChecked = Sets.newHashSet();
+    private Set<Point3D> checked = Sets.newHashSet();
 
-        addPoint(points, inflatable.startPoint(), toBeChecked, checked);
-
+    protected void init(){
+        addPoint(startPoint());
         while(toBeChecked.size() > 0){
             Point3D p = toBeChecked.iterator().next();
             toBeChecked.remove(p);
-            if(inflatable.elegible(p)){
-                inflatable.inflate(p);
-                addPoint(points, p, toBeChecked, checked);
+            if(elegible(p)){
+                addPoint(p);
             }
             else{
                 checked.add(p);
@@ -35,7 +33,7 @@ public abstract class Inflatable {
         }
     }
 
-    private static void addPoint(Set<Point3D> points, Point3D point, Set<Point3D> toBeChecked, Set<Point3D> checked){
+    private void addPoint(Point3D point){
         points.add(point);
         for(int i = -1; i < 2; i++){
             for(int e = -1; e < 2; e++){
@@ -46,6 +44,12 @@ public abstract class Inflatable {
                     }
                 }
             }
+        }
+    }
+
+    public void inflateShape(World world, int x, int y, int z){
+        for(Point3D p : points){
+            inflate(world, x, y, z, new Point3D(p.x, p.y, p.z));
         }
     }
 }

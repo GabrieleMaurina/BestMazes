@@ -48,8 +48,8 @@ public class BirchConfiguration extends DungeonConfiguration{
         yLootRoom = 1;
 
         xMinotaurSpawn = 7.5;
-        yMinotaurSpawn = 1.0;
-        zMinotaurSpawn = 2.0;
+        yMinotaurSpawn = 6.0;
+        zMinotaurSpawn = 6.5;
 
         biomes = new ArrayList<BiomeGenBase>();
 
