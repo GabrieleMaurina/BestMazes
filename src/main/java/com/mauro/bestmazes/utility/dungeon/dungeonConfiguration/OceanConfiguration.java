@@ -31,7 +31,7 @@ public class OceanConfiguration extends DungeonConfiguration{
         roof = Blocks.glowstone;
         content = Blocks.water;
         name = DungeonReferences.OCEAN;
-        prob = 0.003;
+        prob = 0.002;
 
         xStart = 1;
         yStart = 3;

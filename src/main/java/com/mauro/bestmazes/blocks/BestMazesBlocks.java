@@ -17,6 +17,7 @@ public class BestMazesBlocks {
     public static final Spawner zombieSpawner = new Spawner(Spawner.ZOMBIE);
     public static final MagicalSapling magicalSapling = new MagicalSapling();
     public static final MagicalLeaves magicalLeaves = new MagicalLeaves();
+    public static final MagicalTreeCore magicalTreeCore = new MagicalTreeCore();
 
     public static final SpecialBlock stoneBricksSlabDown = new SpecialBlock(Blocks.stone_slab, 5, 3);
     public static final SpecialBlock stoneBricksSlabUp = new SpecialBlock(Blocks.stone_slab, 13, 3);
@@ -42,5 +43,6 @@ public class BestMazesBlocks {
         GameRegistry.registerBlock(mazeLock, MazeLock.name);
         GameRegistry.registerBlock(magicalSapling, MagicalSapling.name);
         GameRegistry.registerBlock(magicalLeaves, MagicalLeaves.name);
+        GameRegistry.registerBlock(magicalTreeCore, MagicalTreeCore.name);
     }
 }

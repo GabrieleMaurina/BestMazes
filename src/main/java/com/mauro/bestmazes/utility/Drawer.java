@@ -1,15 +1,9 @@
 package com.mauro.bestmazes.utility;
 
-import com.google.common.collect.Sets;
-import com.mauro.bestmazes.utility.inflatables.Inflatable;
-import com.mauro.bestmazes.utility.inflatables.InflatableCylider;
-import com.mauro.bestmazes.utility.inflatables.InflatableSphere;
 import com.mauro.bestmazes.worldgenerators.StructureGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-
-import java.util.Set;
 
 /**
  * Created by Gabriele on 7/1/2015.

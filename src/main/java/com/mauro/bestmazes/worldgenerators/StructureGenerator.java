@@ -2,10 +2,6 @@ package com.mauro.bestmazes.worldgenerators;
 
 import com.mauro.bestmazes.blocks.*;
 import com.mauro.bestmazes.utility.dungeon.Dungeon;
-import com.mauro.bestmazes.utility.dungeon.DungeonConfigurations;
-import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.DungeonConfiguration;
-import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.EndConfiguration;
-import com.mauro.bestmazes.utility.dungeon.dungeonConfiguration.FinalConfiguration;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -16,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -28,11 +23,12 @@ public class StructureGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
         if(chunkX == 0 && chunkZ == 0){
-            int i = 0;
+            /*int i = 0;
             for(Map.Entry<String, DungeonConfiguration> entry : DungeonConfigurations.configurations.entrySet()){
                 if(!(entry.getValue() instanceof FinalConfiguration || entry.getValue() instanceof EndConfiguration))
                     new Dungeon(world, random, -100 + (i++) * 20, 5, 0, entry.getValue()).generate();
-            }
+            }*/
+            //Tree.genTree(world, 0, world.getHeightValue(0, 0), 0, new MagicalTreeConfiguration(), random);
         }
         Dungeon.generateDungeon(world, chunkX, chunkZ, random);
     }

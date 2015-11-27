@@ -49,7 +49,7 @@ public abstract class Inflatable {
 
     public void inflateShape(World world, int x, int y, int z){
         for(Point3D p : points){
-            inflate(world, x, y, z, new Point3D(p.x, p.y, p.z));
+            inflate(world, x, y, z, p);
         }
     }
 }

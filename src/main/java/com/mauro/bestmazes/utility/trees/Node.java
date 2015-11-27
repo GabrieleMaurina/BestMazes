@@ -14,12 +14,12 @@ public class Node
     public int radius = 0;
     public double length = 0.0;
     public ArrayList<Node> sons = new ArrayList<Node>();
-    public Node father;
     public double verAng = 0.0;
     public double orAng = 0.0;
+    public boolean built = false;
 
 
-    public Node(double x, double y, double z, int radius, double length, Node father, double verAng, double orAng)
+    public Node(double x, double y, double z, int radius, double length, double verAng, double orAng)
     {
         super();
         this.x = x;
@@ -27,7 +27,6 @@ public class Node
         this.z = z;
         this.radius = radius;
         this.length = length;
-        this.father = father;
         this.verAng = verAng;
         this.orAng = orAng;
     }

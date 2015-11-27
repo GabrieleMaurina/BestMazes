@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 /**
  * Created by Gabriele on 11/21/2015.
  */
-public class InflatableCylider extends Inflatable{
+public class InflatableCylinder extends Inflatable{
     public int dX;
     public int dY;
     public int dZ;
@@ -22,7 +22,7 @@ public class InflatableCylider extends Inflatable{
     private static final boolean FIRST = false;
     private static final boolean SECOND = true;
 
-    public InflatableCylider(int dX, int dY, int dZ, int radius, int internalRadius, Block block){
+    public InflatableCylinder(int dX, int dY, int dZ, int radius, int internalRadius, Block block){
         this.dX = dX;
         this.dY = dY;
         this.dZ = dZ;
@@ -47,14 +47,14 @@ public class InflatableCylider extends Inflatable{
     }
 
     @Override
-    protected Point3D startPoint(){
+    public Point3D startPoint(){
         double verAng = Math.atan2(dY, Math.sqrt(dX * dX + dZ * dZ));
-        double dY = radius * Math.cos(verAng);
+        double y = radius * Math.cos(verAng);
         double orLen = radius * Math.sin(verAng);
         double orAng = Math.atan2(dZ, dX);
-        double dX = orLen * Math.cos(orAng);
-        double dZ = orLen * Math.sin(orAng);
-        return new Point3D((int)dX, (int)dY, (int)dZ);
+        double x = -orLen * Math.cos(orAng);
+        double z = -orLen * Math.sin(orAng);
+        return new Point3D((int)x, (int)y, (int)z);
     }
 
     private double distPointLine(Point3D point){

@@ -12,13 +12,13 @@ public class MagicalTreeConfiguration extends TreeConfiguration {
         radius = 4;
         length = 20.0;
         kLength = 1.0;
-        spread = Math.PI / 6;
-        bonusSpread = Math.PI / 6;
+        spread = Math.PI / 9;
+        bonusSpread = Math.PI / 15;
         size = 4;
         nSons = 5;
-        fatherPull = 0.95;
-        wood = Blocks.log;
-        leaves = BestMazesBlocks.magicalLeaves;
+        fatherPull = 0.9;
         leavesSize = 10;
+        prob = 0.6;
+        leaves = BestMazesBlocks.magicalLeaves;
     }
 }

@@ -11,5 +11,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class BestMazesTileEntities {
     public static void initTileEntities(){
         GameRegistry.registerTileEntity(MazeLockTileEntity.class, MazeLockTileEntity.name);
+        GameRegistry.registerTileEntity(MagicalTreeCoreTileEntity.class, MagicalTreeCoreTileEntity.name);
     }
 }

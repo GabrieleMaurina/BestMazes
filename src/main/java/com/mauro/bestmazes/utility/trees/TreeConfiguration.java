@@ -11,12 +11,13 @@ public abstract class TreeConfiguration {
     public int radius = 1;
     public double length = 10.0;
     public double kLength = 1.0;
-    public double spread = Math.PI / 6;
-    public double bonusSpread = Math.PI / 6;
+    public double spread = Math.PI / 8;
+    public double bonusSpread = Math.PI / 16;
     public int size = 3;
     public int nSons = 4;
     public double fatherPull = 0.5;
     public int leavesSize = 5;
-    public Block wood = Blocks.log;
+    public double prob = 1.0;
     public Block leaves = Blocks.leaves;
+    public Block wood = Blocks.log;
 }
