@@ -1,6 +1,8 @@
 package com.gabrielemaurina.bestmazesbygabrielemaurina.proxy;
 
 import com.gabrielemaurina.bestmazesbygabrielemaurina.blocks.BestMazesBlocks;
+import com.gabrielemaurina.bestmazesbygabrielemaurina.blocks.MazePortal;
+import com.gabrielemaurina.bestmazesbygabrielemaurina.client.renders.MazePortalRender;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.entities.minotaurs.*;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.client.models.MinotaurModel;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.client.renders.InventoryMazeLockRender;
@@ -16,6 +18,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
  * Created by Gabriele on 6/25/2015.
  */
 public class ClientProxy extends CommonProxy{
+    public static MazeLockRender render;
+    public static MazePortalRender mazePortalRender;
 
     @Override
     public void registerRenderers() {
@@ -34,8 +38,11 @@ public class ClientProxy extends CommonProxy{
         RenderingRegistry.registerEntityRenderingHandler(SavannaMinotaur.class, new MinotaurRender(new MinotaurModel(), 0.5F, SavannaMinotaur.type));
         RenderingRegistry.registerEntityRenderingHandler(EndMinotaur.class, new MinotaurRender(new MinotaurModel(), 1.0F, EndMinotaur.type));
 
-        MazeLockRender render = new MazeLockRender();
+        render = new MazeLockRender();
         ClientRegistry.bindTileEntitySpecialRenderer(MazeLockTileEntity.class, render);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BestMazesBlocks.mazeLock), new InventoryMazeLockRender(render, new MazeLockTileEntity()));
+
+        mazePortalRender = new MazePortalRender(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(mazePortalRender);
     }
 }

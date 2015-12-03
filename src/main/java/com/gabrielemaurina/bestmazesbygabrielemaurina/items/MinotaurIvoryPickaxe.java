@@ -2,14 +2,21 @@ package com.gabrielemaurina.bestmazesbygabrielemaurina.items;
 
 import com.gabrielemaurina.bestmazesbygabrielemaurina.blocks.BestMazesBlocks;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.tabs.BestMazesTabs;
+import com.gabrielemaurina.bestmazesbygabrielemaurina.teleporters.MazeTeleporter;
+import com.gabrielemaurina.bestmazesbygabrielemaurina.worldproviders.MazeWorldProvider;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.Set;
@@ -48,10 +55,5 @@ public class MinotaurIvoryPickaxe extends ItemPickaxe {
     @Override
     public float func_150893_a(ItemStack stack, Block block) {
         return effectiveAgainst.contains(block) ? this.efficiencyOnProperMaterial : 0F;
-    }
-
-    @Override
-    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
-        return true;
     }
 }

@@ -135,7 +135,7 @@ public class Dungeon {
         }
     }
 
-    public static boolean available(World world, int x, int y, int z, DungeonConfiguration dC, int xChunk, int zChunk){
+    private static boolean available(World world, int x, int y, int z, DungeonConfiguration dC, int xChunk, int zChunk){
         if(dC.name.equals(DungeonReferences.END)){
             if(xChunk == 0 && zChunk == 2){
                 return true;

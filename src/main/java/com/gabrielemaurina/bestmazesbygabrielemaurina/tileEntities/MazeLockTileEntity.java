@@ -24,6 +24,7 @@ public class MazeLockTileEntity extends TileEntity implements IInventory {
     public static final String name = "mazeLockTileEntity";
     ArrayList<ItemStack> items = new ArrayList<ItemStack>(1);
 
+
     public boolean shouldDrop(){
         return items.get(0).getItem() instanceof Key;
     }

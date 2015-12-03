@@ -2,6 +2,7 @@ package com.gabrielemaurina.bestmazesbygabrielemaurina.utility;
 
 import com.gabrielemaurina.bestmazesbygabrielemaurina.BestMazes;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.blocks.BestMazesBlocks;
+import com.gabrielemaurina.bestmazesbygabrielemaurina.dimensions.BestMazesDimensions;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.entities.BestMazesEntities;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.items.BestMazesItems;
 import com.gabrielemaurina.bestmazesbygabrielemaurina.tabs.BestMazesTabs;
@@ -20,6 +21,7 @@ public class BestMazesInitializer {
         BestMazesBlocks.initBlocks();
         BestMazesEntities.initEntities();
         BestMazesTileEntities.initTileEntities();
+        BestMazesDimensions.initDimesions();
         BestMazes.proxy.registerRenderers();
     }
 }
